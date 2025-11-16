@@ -25,6 +25,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,6 +33,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -66,8 +68,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.lifecycle.lifecycleScope
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+
 import com.halfheart.pocketwalkerlib.BUTTON_CENTER
 import com.halfheart.pocketwalkerlib.BUTTON_LEFT
 import com.halfheart.pocketwalkerlib.BUTTON_RIGHT
@@ -84,7 +91,15 @@ enum class BallTheme {
     PokeBall,
     GreatBall,
     UltraBall,
-    MasterBall
+    MasterBall,
+    LevelBall,
+    LoveBall,
+    NetBall,
+    PremierBall,
+    QuickBall,
+    SafariBall,
+    BeastBall,
+    LuxuryBall
 }
 
 class AppActivity : ComponentActivity()  {
@@ -226,6 +241,13 @@ class AppActivity : ComponentActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         preferences = getSharedPreferences("pokewalker_prefs", Context.MODE_PRIVATE)
+
+        // Enable fullscreen: draw behind system bars and hide status/navigation bars
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val insetsController = WindowInsetsControllerCompat(window, window.decorView)
+        insetsController.hide(WindowInsetsCompat.Type.systemBars())
+        insetsController.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
         val savedRomUri = preferences.getString("rom_uri", null)?.let { Uri.parse(it) }
         val savedTint = preferences.getString("tint", Tint.None.name)
@@ -442,6 +464,7 @@ class AppActivity : ComponentActivity()  {
 //    }
 //
 //    private fun applyContrast(colorValue: Int, contrast: Int): Int {
+//
 //        val clampedContrast = contrast.coerceIn(0, 9)
 //
 //        if (colorValue == 0xCC) {
@@ -483,6 +506,22 @@ class AppActivity : ComponentActivity()  {
 //        val newValue = 128 + adjustedDistance
 //
 //        return newValue.coerceIn(0, 255)
+//    }
+}
+
+fun Bitmap.sampleEdgeColor(top: Boolean): Color {
+    if (width <= 0 || height <= 0) return Color(0xFF000000)
+
+    val y = if (top) 0 else (height - 1).coerceAtLeast(0)
+    val x = (width / 2).coerceIn(0, width - 1)
+
+    val pixel = getPixel(x, y)
+    val a = (pixel ushr 24) and 0xFF
+    val r = (pixel ushr 16) and 0xFF
+    val g = (pixel ushr 8) and 0xFF
+    val b = pixel and 0xFF
+
+    return Color(r, g, b, a)
 }
 
 @Composable
@@ -497,6 +536,8 @@ fun PWApp(
     var filesExpanded by remember { mutableStateOf(true) }
     var appearanceExpanded by remember { mutableStateOf(true) }
     var soundExpanded by remember { mutableStateOf(true) }
+    var cheatsExpanded by remember { mutableStateOf(false) }
+    var debugExpanded by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
     val preferences = remember { context.getSharedPreferences("pokewalker_prefs", Context.MODE_PRIVATE) }
@@ -510,6 +551,42 @@ fun PWApp(
     val greatballBitmap = remember {
         runCatching {
             BitmapFactory.decodeStream(context.assets.open("background-assets/greatball.png"))
+        }.getOrNull()
+    }
+
+    val ultraballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/ultraball.png"))
+        }.getOrNull()
+    }
+
+    val masterballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/masterball.png"))
+        }.getOrNull()
+    }
+
+    val levelballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/levelball.png"))
+        }.getOrNull()
+    }
+
+    val premierballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/premierball.png"))
+        }.getOrNull()
+    }
+
+    val quickballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/quickball.png"))
+        }.getOrNull()
+    }
+
+    val safariballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/safariball.png"))
         }.getOrNull()
     }
 
@@ -534,6 +611,54 @@ fun PWApp(
     val iconMasterballBitmap = remember {
         runCatching {
             BitmapFactory.decodeStream(context.assets.open("background-assets/icon-masterball.png"))
+        }.getOrNull()
+    }
+
+    val iconLevelballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-levelball.png"))
+        }.getOrNull()
+    }
+
+    val iconLoveballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-loveball.png"))
+        }.getOrNull()
+    }
+
+    val iconNetballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-netball.png"))
+        }.getOrNull()
+    }
+
+    val iconPremierballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-premierball.png"))
+        }.getOrNull()
+    }
+
+    val iconQuickballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-quickball.png"))
+        }.getOrNull()
+    }
+
+    val iconSafariballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-safariball.png"))
+        }.getOrNull()
+    }
+
+    val iconBeastballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-beastball.png"))
+        }.getOrNull()
+    }
+
+    val iconLuxuryballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-luxuryball.png"))
         }.getOrNull()
     }
 
@@ -574,6 +699,9 @@ fun PWApp(
     }
     var hapticsStrength by remember {
         mutableStateOf(preferences.getInt("haptics_strength", 2).coerceIn(1, 3))
+    }
+    var sidebarRowSpacingLevel by remember {
+        mutableStateOf(preferences.getInt("sidebar_row_spacing_level", 4).coerceIn(0, 10))
     }
 
     val isLoaded = pokeWalker != null
@@ -625,9 +753,32 @@ fun PWApp(
                 .fillMaxSize()
         ) {
             if (selectedBallTheme != BallTheme.None) {
+                val defaultTop = Color(0xFFD32329)
+                val defaultBottom = Color(0xffdadade)
+
                 val topColor = when (selectedBallTheme) {
+                    BallTheme.UltraBall -> Color(0xFF181414)
+                    BallTheme.SafariBall -> Color(0xFF76BD25)
+                    BallTheme.QuickBall -> Color(0xFF4DA2CA)
+                    BallTheme.PremierBall -> Color(0xFFDBDBDF)
+                    BallTheme.MasterBall -> Color(0xFF6700C0)
+                    BallTheme.LevelBall -> Color(0xFF161616)
                     BallTheme.GreatBall -> Color(0xFF007ED7)
-                    else -> Color(0xFFD32329)
+                    else -> defaultTop
+                }
+
+                val bottomColor = defaultBottom
+
+                val bgBitmap: Bitmap? = when (selectedBallTheme) {
+                    BallTheme.PokeBall -> pokeballBitmap
+                    BallTheme.GreatBall -> greatballBitmap
+                    BallTheme.UltraBall -> ultraballBitmap
+                    BallTheme.MasterBall -> masterballBitmap
+                    BallTheme.LevelBall -> levelballBitmap
+                    BallTheme.PremierBall -> premierballBitmap
+                    BallTheme.QuickBall -> quickballBitmap
+                    BallTheme.SafariBall -> safariballBitmap
+                    else -> null
                 }
 
                 Box(
@@ -643,14 +794,8 @@ fun PWApp(
                         .fillMaxWidth()
                         .fillMaxHeight(0.5f)
                         .align(Alignment.BottomCenter)
-                        .background(Color(0xffdadade))
+                        .background(bottomColor)
                 )
-
-                val bgBitmap: Bitmap? = when (selectedBallTheme) {
-                    BallTheme.PokeBall -> pokeballBitmap
-                    BallTheme.GreatBall -> greatballBitmap
-                    else -> pokeballBitmap
-                }
 
                 bgBitmap?.let { bitmap ->
                     Image(
@@ -720,6 +865,8 @@ fun PWApp(
             Tint.Blue -> Color(0xFF1E1E29)
         }
 
+        val dropdownBackground = sidebarBackground.copy(alpha = 0.92f)
+
         val sidebarShape = RoundedCornerShape(topStart = 0.dp, topEnd = 16.dp, bottomEnd = 16.dp, bottomStart = 0.dp)
 
         Box(
@@ -746,7 +893,8 @@ fun PWApp(
                 modifier = Modifier
                     .fillMaxHeight()
                     .padding(top = 24.dp)
-                    .verticalScroll(scrollState)
+                    .verticalScroll(scrollState),
+                verticalArrangement = Arrangement.spacedBy((sidebarRowSpacingLevel + 2).dp)
             ) {
                 Text(
                     text = "PokePaw",
@@ -775,7 +923,7 @@ fun PWApp(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(start = 8.dp, top = 6.dp, bottom = 6.dp),
+                                .padding(start = 8.dp, top = 4.dp, bottom = 4.dp),
 
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -896,10 +1044,18 @@ fun PWApp(
                     fun ballThemeLabel(theme: BallTheme): String {
                         return when (theme) {
                             BallTheme.None -> "None"
-                            BallTheme.PokeBall -> "Pokéball"
+                            BallTheme.PokeBall -> "Poké Ball"
                             BallTheme.GreatBall -> "Great Ball"
                             BallTheme.UltraBall -> "Ultra Ball"
                             BallTheme.MasterBall -> "Master Ball"
+                            BallTheme.LevelBall -> "Level Ball"
+                            BallTheme.LoveBall -> "Love Ball"
+                            BallTheme.NetBall -> "Net Ball"
+                            BallTheme.PremierBall -> "Premier Ball"
+                            BallTheme.QuickBall -> "Quick Ball"
+                            BallTheme.SafariBall -> "Safari Ball"
+                            BallTheme.BeastBall -> "Beast Ball"
+                            BallTheme.LuxuryBall -> "Luxury Ball"
                         }
                     }
 
@@ -910,6 +1066,14 @@ fun PWApp(
                             BallTheme.GreatBall -> iconGreatballBitmap
                             BallTheme.UltraBall -> iconUltraballBitmap
                             BallTheme.MasterBall -> iconMasterballBitmap
+                            BallTheme.LevelBall -> iconLevelballBitmap
+                            BallTheme.LoveBall -> iconLoveballBitmap
+                            BallTheme.NetBall -> iconNetballBitmap
+                            BallTheme.PremierBall -> iconPremierballBitmap
+                            BallTheme.QuickBall -> iconQuickballBitmap
+                            BallTheme.SafariBall -> iconSafariballBitmap
+                            BallTheme.BeastBall -> iconBeastballBitmap
+                            BallTheme.LuxuryBall -> iconLuxuryballBitmap
                         }
                     }
 
@@ -990,50 +1154,69 @@ fun PWApp(
                                 expanded = ballThemeMenuExpanded,
                                 onDismissRequest = { ballThemeMenuExpanded = false },
                                 modifier = Modifier
-                                    .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
+                                    .width(controlWidth + 32.dp)
+                                    .heightIn(max = 260.dp)
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(dropdownBackground)
                             ) {
-                                @Composable
-                                fun ballThemeItem(theme: BallTheme) {
-                                    DropdownMenuItem(
-                                        text = {
-                                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                                val iconBitmap = ballThemeIcon(theme)
-                                                if (iconBitmap != null) {
-                                                    Image(
-                                                        bitmap = iconBitmap.asImageBitmap(),
-                                                        contentDescription = null,
-                                                        modifier = Modifier.size(18.dp),
-                                                        contentScale = ContentScale.Fit
-                                                    )
-                                                    Text(
-                                                        text = ballThemeLabel(theme),
-                                                        color = Color(0xFFEFEFFF),
-                                                        fontSize = 13.sp,
-                                                        modifier = Modifier
-                                                            .padding(start = 8.dp)
-                                                    )
-                                                } else {
-                                                    Text(
-                                                        text = ballThemeLabel(theme),
-                                                        color = Color(0xFFEFEFFF),
-                                                        fontSize = 13.sp
-                                                    )
-                                                }
-                                            }
-                                        },
-                                        onClick = {
-                                            selectedBallTheme = theme
-                                            preferences.edit().putString("ball_theme", theme.name).apply()
-                                            ballThemeMenuExpanded = false
-                                        }
-                                    )
-                                }
+                                val ballMenuScroll = rememberScrollState()
 
-                                ballThemeItem(BallTheme.None)
-                                ballThemeItem(BallTheme.PokeBall)
-                                ballThemeItem(BallTheme.GreatBall)
-                                ballThemeItem(BallTheme.UltraBall)
-                                ballThemeItem(BallTheme.MasterBall)
+                                Column(
+                                    modifier = Modifier
+                                        .heightIn(max = 260.dp)
+                                        .verticalScroll(ballMenuScroll)
+                                ) {
+                                    @Composable
+                                    fun ballThemeItem(theme: BallTheme) {
+                                        DropdownMenuItem(
+                                            text = {
+                                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                                    val iconBitmap = ballThemeIcon(theme)
+                                                    if (iconBitmap != null) {
+                                                        Image(
+                                                            bitmap = iconBitmap.asImageBitmap(),
+                                                            contentDescription = null,
+                                                            modifier = Modifier.size(18.dp),
+                                                            contentScale = ContentScale.Fit
+                                                        )
+                                                        Text(
+                                                            text = ballThemeLabel(theme),
+                                                            color = Color(0xFFEFEFFF),
+                                                            fontSize = 13.sp,
+                                                            modifier = Modifier
+                                                                .padding(start = 8.dp)
+                                                        )
+                                                    } else {
+                                                        Text(
+                                                            text = ballThemeLabel(theme),
+                                                            color = Color(0xFFEFEFFF),
+                                                            fontSize = 13.sp
+                                                        )
+                                                    }
+                                                }
+                                            },
+                                            onClick = {
+                                                selectedBallTheme = theme
+                                                preferences.edit().putString("ball_theme", theme.name).apply()
+                                                ballThemeMenuExpanded = false
+                                            }
+                                        )
+                                    }
+
+                                    ballThemeItem(BallTheme.None)
+                                    ballThemeItem(BallTheme.PokeBall)
+                                    ballThemeItem(BallTheme.GreatBall)
+                                    ballThemeItem(BallTheme.UltraBall)
+                                    ballThemeItem(BallTheme.MasterBall)
+                                    ballThemeItem(BallTheme.LevelBall)
+                                    ballThemeItem(BallTheme.LoveBall)
+                                    ballThemeItem(BallTheme.NetBall)
+                                    ballThemeItem(BallTheme.PremierBall)
+                                    ballThemeItem(BallTheme.QuickBall)
+                                    ballThemeItem(BallTheme.SafariBall)
+                                    ballThemeItem(BallTheme.BeastBall)
+                                    ballThemeItem(BallTheme.LuxuryBall)
+                                }
                             }
                         }
                     }
@@ -1086,7 +1269,7 @@ fun PWApp(
                                 expanded = tintMenuExpanded,
                                 onDismissRequest = { tintMenuExpanded = false },
                                 modifier = Modifier
-                                    .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
+                                    .background(dropdownBackground, RoundedCornerShape(8.dp))
                             ) {
                                 @Composable
                                 fun tintItem(label: String, tint: Tint) {
@@ -1223,7 +1406,7 @@ fun PWApp(
                                 expanded = shaderMenuExpanded,
                                 onDismissRequest = { shaderMenuExpanded = false },
                                 modifier = Modifier
-                                    .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
+                                    .background(dropdownBackground, RoundedCornerShape(8.dp))
                             ) {
                                 @Composable
                                 fun shaderItem(label: String, option: ShaderOption) {
@@ -1287,7 +1470,7 @@ fun PWApp(
                                 expanded = lcdSizeMenuExpanded,
                                 onDismissRequest = { lcdSizeMenuExpanded = false },
                                 modifier = Modifier
-                                    .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
+                                    .background(dropdownBackground, RoundedCornerShape(8.dp))
                             ) {
                                 DropdownMenuItem(
                                     text = {
@@ -1443,6 +1626,95 @@ fun PWApp(
                                             .clickable {
                                                 hapticsStrength = level
                                                 preferences.edit().putInt("haptics_strength", level).apply()
+                                            }
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Text(
+                    text = (if (cheatsExpanded) "▾ " else "▸ ") + "Cheats",
+                    color = Color(0xFFAAAAFF),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { cheatsExpanded = !cheatsExpanded }
+                        .padding(vertical = 10.dp)
+                )
+
+                if (cheatsExpanded) {
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        Text(
+                            text = "No cheats configured yet",
+                            color = Color(0xFFB0B0C8),
+                            fontSize = 12.sp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
+                        )
+                    }
+                }
+
+                Text(
+                    text = (if (debugExpanded) "▾ " else "▸ ") + "Debug",
+                    color = Color(0xFFAAAAFF),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { debugExpanded = !debugExpanded }
+                        .padding(vertical = 10.dp)
+                )
+
+                if (debugExpanded) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 8.dp, top = 6.dp, bottom = 6.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Row Spacing",
+                            color = Color(0xFFB0B0C8),
+                            fontSize = 12.sp,
+                            modifier = Modifier.weight(1f)
+                        )
+
+                        Box(
+                            modifier = Modifier
+                                .width(controlWidth)
+                                .pointerInput(Unit) {
+                                    detectDragGestures { change, _ ->
+                                        val widthPx = size.width.toFloat().coerceAtLeast(1f)
+                                        val x = change.position.x.coerceIn(0f, widthPx)
+                                        val fraction = x / widthPx
+                                        val newLevel = (fraction * 10).toInt().coerceIn(0, 10)
+                                        sidebarRowSpacingLevel = newLevel
+                                        preferences.edit().putInt("sidebar_row_spacing_level", newLevel).apply()
+                                        change.consume()
+                                    }
+                                }
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                (0..10).forEach { level ->
+                                    Box(
+                                        modifier = Modifier
+                                            .weight(1f)
+                                            .height(6.dp)
+                                            .padding(horizontal = 1.dp)
+                                            .background(
+                                                if (level <= sidebarRowSpacingLevel) Color(0xFFEFEFFF) else Color(0xFF404060),
+                                                RoundedCornerShape(3.dp)
+                                            )
+                                            .clickable {
+                                                sidebarRowSpacingLevel = level
+                                                preferences.edit().putInt("sidebar_row_spacing_level", level).apply()
                                             }
                                     )
                                 }
