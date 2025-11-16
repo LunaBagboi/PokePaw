@@ -61,11 +61,12 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.compose.ui.draw.shadow
 import androidx.lifecycle.lifecycleScope
 import com.halfheart.pocketwalkerlib.BUTTON_CENTER
 import com.halfheart.pocketwalkerlib.BUTTON_LEFT
@@ -162,7 +163,17 @@ class AppActivity : ComponentActivity()  {
 
         val audioEngine = AudioEngine()
         pokeWalker.onAudio { freq: Float, isFullVolume: Boolean ->
-            audioEngine.render(freq, if (isFullVolume) 0.5f else 0.25f, 1.0f)
+            // Read latest sound preferences so changes in the sidebar apply immediately
+            val softChirp = preferences.getBoolean("soft_chirp_enabled", false)
+            val volumeLevel = preferences.getInt("volume_level", 7).coerceIn(1, 10)
+
+            // Map 1..10 to a smooth 0.2..1.0 range
+            val volumeFactor = 0.2f + (volumeLevel - 1) * (0.8f / 9f)
+
+            // Slightly louder base when the device requests full volume
+            val base = if (isFullVolume) 0.8f else 0.5f
+
+            audioEngine.render(freq, base * volumeFactor, 1.0f, soft = softChirp)
         }
 
         thread(priority = Thread.MAX_PRIORITY) {
@@ -553,6 +564,8 @@ fun PWApp(
     var shadeLevel by remember {
         mutableStateOf(preferences.getInt("shade_level", 5).coerceIn(1, 10))
     }
+    var lcdSizeMenuExpanded by remember { mutableStateOf(false) }
+    var selectedLcdSize by remember { mutableStateOf("Small") }
     var softChirpEnabled by remember {
         mutableStateOf(preferences.getBoolean("soft_chirp_enabled", false))
     }
@@ -707,6 +720,8 @@ fun PWApp(
             Tint.Blue -> Color(0xFF1E1E29)
         }
 
+        val sidebarShape = RoundedCornerShape(topStart = 0.dp, topEnd = 16.dp, bottomEnd = 16.dp, bottomStart = 0.dp)
+
         Box(
             modifier = Modifier
                 .fillMaxHeight()
@@ -720,19 +735,28 @@ fun PWApp(
                         }
                     }
                 }
-                .background(sidebarBackground)
-                .border(1.dp, Color(0xFF2A2A3A))
+                .shadow(10.dp, sidebarShape, clip = true)
+                .background(sidebarBackground.copy(alpha = 0.9f), sidebarShape)
+                .border(1.dp, Color(0xFF2A2A3A), sidebarShape)
                 .padding(16.dp)
         ) {
             val scrollState = rememberScrollState()
 
-            Column(modifier = Modifier.fillMaxHeight().verticalScroll(scrollState)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(top = 24.dp)
+                    .verticalScroll(scrollState)
+            ) {
                 Text(
                     text = "PokePaw",
                     color = Color(0xFFF5F5F7),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = 16.dp)
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp)
                 )
 
                 Text(
@@ -1105,7 +1129,59 @@ fun PWApp(
                         }
                     }
 
-                    // Placeholder: Shader dropdown
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 8.dp, top = 6.dp, bottom = 4.dp),
+
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Shade",
+                            color = Color(0xFFB0B0C8),
+                            fontSize = 12.sp,
+                            modifier = Modifier.weight(1f)
+                        )
+
+                        Box(
+                            modifier = Modifier
+                                .width(controlWidth)
+                                .pointerInput(Unit) {
+                                    detectDragGestures { change, _ ->
+                                        val widthPx = size.width.toFloat().coerceAtLeast(1f)
+                                        val x = change.position.x.coerceIn(0f, widthPx)
+                                        val fraction = x / widthPx
+                                        val newLevel = (fraction * 10).toInt().coerceIn(0, 9) + 1
+                                        shadeLevel = newLevel
+                                        preferences.edit().putInt("shade_level", newLevel).apply()
+                                        change.consume()
+                                    }
+                                }
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                (1..10).forEach { level ->
+                                    Box(
+                                        modifier = Modifier
+                                            .weight(1f)
+                                            .height(6.dp)
+                                            .padding(horizontal = 1.dp)
+                                            .background(
+                                                if (level <= shadeLevel) Color(0xFFEFEFFF) else Color(0xFF404060),
+                                                RoundedCornerShape(3.dp)
+                                            )
+                                            .clickable {
+                                                shadeLevel = level
+                                                preferences.edit().putInt("shade_level", level).apply()
+                                            }
+                                    )
+                                }
+                            }
+                        }
+                    }
+
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -1177,12 +1253,12 @@ fun PWApp(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 8.dp, top = 6.dp, bottom = 10.dp),
+                            .padding(start = 8.dp, top = 4.dp, bottom = 10.dp),
 
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Shade",
+                            text = "LCD Size",
                             color = Color(0xFFB0B0C8),
                             fontSize = 12.sp,
                             modifier = Modifier.weight(1f)
@@ -1191,38 +1267,55 @@ fun PWApp(
                         Box(
                             modifier = Modifier
                                 .width(controlWidth)
-                                .pointerInput(Unit) {
-                                    detectDragGestures { change, _ ->
-                                        val widthPx = size.width.toFloat().coerceAtLeast(1f)
-                                        val x = change.position.x.coerceIn(0f, widthPx)
-                                        val fraction = x / widthPx
-                                        val newLevel = (fraction * 10).toInt().coerceIn(0, 9) + 1
-                                        shadeLevel = newLevel
-                                        preferences.edit().putInt("shade_level", newLevel).apply()
-                                        change.consume()
-                                    }
-                                }
+                                .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
+                                .clickable { lcdSizeMenuExpanded = true }
+                                .padding(horizontal = 8.dp, vertical = 6.dp)
                         ) {
                             Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.fillMaxWidth()
                             ) {
-                                (1..10).forEach { level ->
-                                    Box(
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .height(6.dp)
-                                            .padding(horizontal = 1.dp)
-                                            .background(
-                                                if (level <= shadeLevel) Color(0xFFEFEFFF) else Color(0xFF404060),
-                                                RoundedCornerShape(3.dp)
-                                            )
-                                            .clickable {
-                                                shadeLevel = level
-                                                preferences.edit().putInt("shade_level", level).apply()
-                                            }
-                                    )
-                                }
+                                Text(
+                                    text = selectedLcdSize,
+                                    color = Color(0xFFEFEFFF),
+                                    fontSize = 13.sp,
+                                    modifier = Modifier.weight(1f)
+                                )
+                            }
+
+                            DropdownMenu(
+                                expanded = lcdSizeMenuExpanded,
+                                onDismissRequest = { lcdSizeMenuExpanded = false },
+                                modifier = Modifier
+                                    .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
+                            ) {
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(
+                                            text = "Small",
+                                            color = Color(0xFFEFEFFF),
+                                            fontSize = 13.sp
+                                        )
+                                    },
+                                    onClick = {
+                                        selectedLcdSize = "Small"
+                                        lcdSizeMenuExpanded = false
+                                    }
+                                )
+
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(
+                                            text = "Large",
+                                            color = Color(0xFFEFEFFF),
+                                            fontSize = 13.sp
+                                        )
+                                    },
+                                    onClick = {
+                                        selectedLcdSize = "Large"
+                                        lcdSizeMenuExpanded = false
+                                    }
+                                )
                             }
                         }
                     }

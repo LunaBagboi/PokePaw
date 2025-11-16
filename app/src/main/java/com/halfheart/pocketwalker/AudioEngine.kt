@@ -70,7 +70,7 @@ class AudioEngine {
         isInitialized = false
     }
 
-    fun render(frequency: Float, volumeMultiplier: Float = 1.0f, speed: Float = 1.0f) {
+    fun render(frequency: Float, volumeMultiplier: Float = 1.0f, speed: Float = 1.0f, soft: Boolean = false) {
         if (!isInitialized || audioTrack == null) return
 
         if (frequency != lastFreq) {
@@ -105,16 +105,19 @@ class AudioEngine {
 
             for (i in 0 until sampleCount) {
                 val time = (currentPhase + i) / SAMPLE_RATE
-                var sample = 0.0f
-
-                // Generate square wave using odd harmonics (exactly matching original)
-                var h = 1
-                while (h <= maxHarmonic) {
-                    sample += sin(2.0f * PI.toFloat() * frequency * h * time) / h
-                    h += 2
+                val sample = if (soft) {
+                    val s = sin(2.0f * PI.toFloat() * frequency * time)
+                    (s * targetAmplitude * 0.75f)
+                } else {
+                    var acc = 0.0f
+                    var h = 1
+                    while (h <= maxHarmonic) {
+                        acc += sin(2.0f * PI.toFloat() * frequency * h * time) / h
+                        h += 2
+                    }
+                    (acc * 4.0f / PI.toFloat()) * targetAmplitude
                 }
 
-                sample = (sample * 4.0f / PI.toFloat()) * targetAmplitude
                 audioBuffer[i] = sample.coerceIn(-32768.0f, 32767.0f).toInt().toShort()
             }
 
