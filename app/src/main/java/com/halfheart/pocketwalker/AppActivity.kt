@@ -74,6 +74,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import io.github.stanio.xbrz.Xbrz
 
 import com.halfheart.pocketwalkerlib.BUTTON_CENTER
 import com.halfheart.pocketwalkerlib.BUTTON_LEFT
@@ -88,6 +89,7 @@ import kotlin.experimental.xor
 
 enum class BallTheme {
     None,
+    PokePaw,
     PokeBall,
     GreatBall,
     UltraBall,
@@ -173,7 +175,8 @@ class AppActivity : ComponentActivity()  {
         pokeWalker.create(rom, eeprom)
 
         pokeWalker.onDraw { bytes ->
-            canvasBitmap = createBitmap(bytes)
+            val baseBitmap = createBitmap(bytes)
+            canvasBitmap = applyShaderOption(baseBitmap)
         }
 
         val audioEngine = AudioEngine()
@@ -426,6 +429,41 @@ class AppActivity : ComponentActivity()  {
         return bitmap
     }
 
+    private fun getCurrentShaderOption(): ShaderOption {
+        val raw = preferences.getString("shader_option", ShaderOption.None.name)
+        return runCatching { ShaderOption.valueOf(raw ?: ShaderOption.None.name) }
+            .getOrElse { ShaderOption.None }
+    }
+
+    private fun applyShaderOption(bitmap: Bitmap): Bitmap {
+        return when (getCurrentShaderOption()) {
+            ShaderOption.None -> bitmap
+            ShaderOption.Xbrz2x -> scaleBitmapXbrz(bitmap, 2)
+            ShaderOption.Xbrz3x -> scaleBitmapXbrz(bitmap, 3)
+            ShaderOption.Xbrz4x -> scaleBitmapXbrz(bitmap, 4)
+            else -> bitmap
+        }
+    }
+
+    private fun scaleBitmapXbrz(source: Bitmap, scale: Int): Bitmap {
+        if (scale <= 1) return source
+
+        val srcWidth = source.width
+        val srcHeight = source.height
+        val dstWidth = srcWidth * scale
+        val dstHeight = srcHeight * scale
+
+        val srcPixels = IntArray(srcWidth * srcHeight)
+        source.getPixels(srcPixels, 0, srcWidth, 0, 0, srcWidth, srcHeight)
+
+        val hasAlpha = true
+        val dstPixels = Xbrz.scaleImage(scale, hasAlpha, srcPixels, null, srcWidth, srcHeight)
+
+        val scaled = Bitmap.createBitmap(dstWidth, dstHeight, Bitmap.Config.ARGB_8888)
+        scaled.setPixels(dstPixels, 0, dstWidth, 0, 0, dstWidth, dstHeight)
+        return scaled
+    }
+
     //DISABLEDCODE: legacy contrast adjustment logic kept for reference
 //    private fun createBitmapWithContrast(paletteIndices: ByteArray): Bitmap {
 //        val width = 96
@@ -590,6 +628,36 @@ fun PWApp(
         }.getOrNull()
     }
 
+    val pokepawBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/pokepaw.png"))
+        }.getOrNull()
+    }
+
+    val beastballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/beastball.png"))
+        }.getOrNull()
+    }
+
+    val luxuryballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/luxuryball.png"))
+        }.getOrNull()
+    }
+
+    val loveballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/loveball.png"))
+        }.getOrNull()
+    }
+
+    val netballBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/netball.png"))
+        }.getOrNull()
+    }
+
     val iconPokeballBitmap = remember {
         runCatching {
             BitmapFactory.decodeStream(context.assets.open("background-assets/icon-pokeball.png"))
@@ -662,6 +730,12 @@ fun PWApp(
         }.getOrNull()
     }
 
+    val iconPokepawBitmap = remember {
+        runCatching {
+            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-pokepaw.png"))
+        }.getOrNull()
+    }
+
     var selectedTint by remember { mutableStateOf(initialSelectedTint) }
     var tintMenuExpanded by remember { mutableStateOf(false) }
     var sidebarOpen by remember { mutableStateOf(false) }
@@ -671,10 +745,10 @@ fun PWApp(
     var ballThemeMenuExpanded by remember { mutableStateOf(false) }
     var selectedBallTheme by remember {
         mutableStateOf(
-            preferences.getString("ball_theme", BallTheme.PokeBall.name)
+            preferences.getString("ball_theme", BallTheme.PokePaw.name)
                 ?.let { raw ->
-                    runCatching { BallTheme.valueOf(raw) }.getOrElse { BallTheme.PokeBall }
-                } ?: BallTheme.PokeBall
+                    runCatching { BallTheme.valueOf(raw) }.getOrElse { BallTheme.PokePaw }
+                } ?: BallTheme.PokePaw
         )
     }
     var shaderMenuExpanded by remember { mutableStateOf(false) }
@@ -757,6 +831,7 @@ fun PWApp(
                 val defaultBottom = Color(0xffdadade)
 
                 val topColor = when (selectedBallTheme) {
+                    BallTheme.PokePaw -> Color(0xFFC5A068)
                     BallTheme.UltraBall -> Color(0xFF181414)
                     BallTheme.SafariBall -> Color(0xFF76BD25)
                     BallTheme.QuickBall -> Color(0xFF4DA2CA)
@@ -764,12 +839,22 @@ fun PWApp(
                     BallTheme.MasterBall -> Color(0xFF6700C0)
                     BallTheme.LevelBall -> Color(0xFF161616)
                     BallTheme.GreatBall -> Color(0xFF007ED7)
+                    BallTheme.BeastBall -> Color(0xFF203699)
+                    BallTheme.LuxuryBall -> Color(0xFF161616)
+                    BallTheme.LoveBall -> Color(0xFFEC65CC)
+                    BallTheme.NetBall -> Color(0xFF00A5A7)
                     else -> defaultTop
                 }
 
-                val bottomColor = defaultBottom
+                val bottomColor = when (selectedBallTheme) {
+                    BallTheme.BeastBall -> Color(0xFF203699)
+                    BallTheme.LuxuryBall -> Color(0xFF161616)
+                    BallTheme.QuickBall -> Color(0xFF4DA2CA)
+                    else -> defaultBottom
+                }
 
                 val bgBitmap: Bitmap? = when (selectedBallTheme) {
+                    BallTheme.PokePaw -> pokepawBitmap
                     BallTheme.PokeBall -> pokeballBitmap
                     BallTheme.GreatBall -> greatballBitmap
                     BallTheme.UltraBall -> ultraballBitmap
@@ -778,6 +863,10 @@ fun PWApp(
                     BallTheme.PremierBall -> premierballBitmap
                     BallTheme.QuickBall -> quickballBitmap
                     BallTheme.SafariBall -> safariballBitmap
+                    BallTheme.BeastBall -> beastballBitmap
+                    BallTheme.LuxuryBall -> luxuryballBitmap
+                    BallTheme.LoveBall -> loveballBitmap
+                    BallTheme.NetBall -> netballBitmap
                     else -> null
                 }
 
@@ -1044,6 +1133,7 @@ fun PWApp(
                     fun ballThemeLabel(theme: BallTheme): String {
                         return when (theme) {
                             BallTheme.None -> "None"
+                            BallTheme.PokePaw -> "PokéPaw"
                             BallTheme.PokeBall -> "Poké Ball"
                             BallTheme.GreatBall -> "Great Ball"
                             BallTheme.UltraBall -> "Ultra Ball"
@@ -1062,6 +1152,7 @@ fun PWApp(
                     fun ballThemeIcon(theme: BallTheme): Bitmap? {
                         return when (theme) {
                             BallTheme.None -> null
+                            BallTheme.PokePaw -> iconPokepawBitmap
                             BallTheme.PokeBall -> iconPokeballBitmap
                             BallTheme.GreatBall -> iconGreatballBitmap
                             BallTheme.UltraBall -> iconUltraballBitmap
@@ -1393,8 +1484,9 @@ fun PWApp(
                                 Text(
                                     text = when (selectedShader) {
                                         ShaderOption.None -> "None"
-                                        ShaderOption.ScaleFX -> "ScaleFX"
-                                        ShaderOption.Grid -> "Grid"
+                                        ShaderOption.Xbrz2x -> "xBRZ 2x"
+                                        ShaderOption.Xbrz3x -> "xBRZ 3x"
+                                        ShaderOption.Xbrz4x -> "xBRZ 4x"
                                     },
                                     color = Color(0xFFEFEFFF),
                                     fontSize = 13.sp,
@@ -1427,8 +1519,9 @@ fun PWApp(
                                 }
 
                                 shaderItem("None", ShaderOption.None)
-                                shaderItem("ScaleFX", ShaderOption.ScaleFX)
-                                shaderItem("Grid", ShaderOption.Grid)
+                                shaderItem("xBRZ 2x", ShaderOption.Xbrz2x)
+                                shaderItem("xBRZ 3x", ShaderOption.Xbrz3x)
+                                shaderItem("xBRZ 4x", ShaderOption.Xbrz4x)
                             }
                         }
                     }
@@ -1784,6 +1877,7 @@ enum class Tint {
 
 enum class ShaderOption {
     None,
-    ScaleFX,
-    Grid
+    Xbrz2x,
+    Xbrz3x,
+    Xbrz4x
 }

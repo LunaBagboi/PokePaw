@@ -17,7 +17,6 @@ captures/
 *.bin
 *.sav
 *.md
-!/README.md
 @eaDir/
 $RECYCLE.BIN/
 .synology.drive/
@@ -46,3 +45,4 @@ $RECYCLE.BIN/
 local.properties
 
 ResearchData
+#!/README.md

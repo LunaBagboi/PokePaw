@@ -58,4 +58,5 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     
     implementation(project(":pocketwalkerlib"))
+    implementation("io.github.stanio:xbrz-core:1.8.2")
 }
