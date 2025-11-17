@@ -1,4 +1,4 @@
-package com.halfheart.pocketwalker
+package com.bagboi.pokepaw
 
 import AudioEngine
 import android.content.Context
@@ -49,6 +49,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -63,6 +64,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -81,15 +83,16 @@ import com.halfheart.pocketwalkerlib.BUTTON_LEFT
 import com.halfheart.pocketwalkerlib.BUTTON_RIGHT
 import com.halfheart.pocketwalkerlib.PocketWalkerNative
 import com.yourpackage.TcpSocket
+import com.bagboi.pokepaw.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 import java.util.function.Function
 import kotlin.concurrent.thread
 import kotlin.experimental.xor
 
 enum class BallTheme {
     None,
-    PokePaw,
     PokeBall,
     GreatBall,
     UltraBall,
@@ -745,10 +748,10 @@ fun PWApp(
     var ballThemeMenuExpanded by remember { mutableStateOf(false) }
     var selectedBallTheme by remember {
         mutableStateOf(
-            preferences.getString("ball_theme", BallTheme.PokePaw.name)
+            preferences.getString("ball_theme", BallTheme.PokeBall.name)
                 ?.let { raw ->
-                    runCatching { BallTheme.valueOf(raw) }.getOrElse { BallTheme.PokePaw }
-                } ?: BallTheme.PokePaw
+                    runCatching { BallTheme.valueOf(raw) }.getOrElse { BallTheme.PokeBall }
+                } ?: BallTheme.PokeBall
         )
     }
     var shaderMenuExpanded by remember { mutableStateOf(false) }
@@ -831,7 +834,6 @@ fun PWApp(
                 val defaultBottom = Color(0xffdadade)
 
                 val topColor = when (selectedBallTheme) {
-                    BallTheme.PokePaw -> Color(0xFFC5A068)
                     BallTheme.UltraBall -> Color(0xFF181414)
                     BallTheme.SafariBall -> Color(0xFF76BD25)
                     BallTheme.QuickBall -> Color(0xFF4DA2CA)
@@ -854,7 +856,6 @@ fun PWApp(
                 }
 
                 val bgBitmap: Bitmap? = when (selectedBallTheme) {
-                    BallTheme.PokePaw -> pokepawBitmap
                     BallTheme.PokeBall -> pokeballBitmap
                     BallTheme.GreatBall -> greatballBitmap
                     BallTheme.UltraBall -> ultraballBitmap
@@ -1133,7 +1134,6 @@ fun PWApp(
                     fun ballThemeLabel(theme: BallTheme): String {
                         return when (theme) {
                             BallTheme.None -> "None"
-                            BallTheme.PokePaw -> "PokéPaw"
                             BallTheme.PokeBall -> "Poké Ball"
                             BallTheme.GreatBall -> "Great Ball"
                             BallTheme.UltraBall -> "Ultra Ball"
@@ -1152,7 +1152,6 @@ fun PWApp(
                     fun ballThemeIcon(theme: BallTheme): Bitmap? {
                         return when (theme) {
                             BallTheme.None -> null
-                            BallTheme.PokePaw -> iconPokepawBitmap
                             BallTheme.PokeBall -> iconPokeballBitmap
                             BallTheme.GreatBall -> iconGreatballBitmap
                             BallTheme.UltraBall -> iconUltraballBitmap

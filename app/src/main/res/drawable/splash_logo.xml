@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <inset
+            android:drawable="@drawable/logo"
+            android:insetLeft="32dp"
+            android:insetRight="32dp"
+            android:insetTop="32dp"
+            android:insetBottom="32dp" />
+    </item>
+</layer-list>
