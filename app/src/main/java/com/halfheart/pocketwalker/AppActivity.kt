@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -48,6 +49,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -127,7 +129,7 @@ class AppActivity : ComponentActivity()  {
         0x333333
     )
 
-    private val EEPROM_SAVE_FILENAME = "eeprom_save.bin"
+    private val EEPROM_SAVE_FILENAME = "eeprom_pokepal.bin"
 
     private var didInitialize: Boolean = false
 
@@ -204,7 +206,7 @@ class AppActivity : ComponentActivity()  {
         didInitialize = true
     }
 
-    fun initializeTcp() {
+    fun initializeTcp(host: String, port: Int) {
         val socket = TcpSocket()
 
         socket.setOnConnect {
@@ -227,7 +229,7 @@ class AppActivity : ComponentActivity()  {
             socket.send(byteArrayOf(byte))
         }
 
-        socket.connect("10.0.0.123", 8081)
+        socket.connect(host, port)
 
         thread {
             Thread.sleep(3000)
@@ -351,7 +353,12 @@ class AppActivity : ComponentActivity()  {
 
         initializePokeWalkerIfReady()
         if (::pokeWalker.isInitialized) {
-            initializeTcp()
+            val irEnabled = preferences.getBoolean("ir_enabled", false)
+            if (irEnabled) {
+                val irHost = preferences.getString("ir_host", "10.0.0.123") ?: "10.0.0.123"
+                val irPort = preferences.getInt("ir_port", 8081)
+                initializeTcp(irHost, irPort)
+            }
         }
     }
 
@@ -771,6 +778,18 @@ fun PWApp(
     var softChirpEnabled by remember {
         mutableStateOf(preferences.getBoolean("soft_chirp_enabled", false))
     }
+    var disableSleepCheatEnabled by remember {
+        mutableStateOf(preferences.getBoolean("cheat_disable_sleep", false))
+    }
+    var irEnabled by remember {
+        mutableStateOf(preferences.getBoolean("ir_enabled", false))
+    }
+    var irHost by remember {
+        mutableStateOf(preferences.getString("ir_host", "10.0.0.123") ?: "10.0.0.123")
+    }
+    var irPortText by remember {
+        mutableStateOf(preferences.getInt("ir_port", 8081).toString())
+    }
     var volumeLevel by remember {
         mutableStateOf(preferences.getInt("volume_level", 7).coerceIn(1, 10))
     }
@@ -799,6 +818,12 @@ fun PWApp(
         targetValue = if (sidebarOpen) 0.dp else -sidebarWidth,
         label = "sidebarOffsetX"
     )
+
+    LaunchedEffect(pokeWalker) {
+        if (pokeWalker != null) {
+            pokeWalker.setDisableSleep(disableSleepCheatEnabled)
+        }
+    }
 
     Box(
         Modifier
@@ -1180,7 +1205,7 @@ fun PWApp(
                             modifier = Modifier.weight(1f)
                         )
 
-                        Switch(
+                        Checkbox(
                             checked = colorizationEnabled,
                             onCheckedChange = { checked ->
                                 colorizationEnabled = checked
@@ -1621,7 +1646,7 @@ fun PWApp(
                             modifier = Modifier.weight(1f)
                         )
 
-                        Switch(
+                        Checkbox(
                             checked = softChirpEnabled,
                             onCheckedChange = { checked ->
                                 softChirpEnabled = checked
@@ -1726,8 +1751,9 @@ fun PWApp(
                     }
                 }
 
+                // Tweaks section (Cheats + Debug)
                 Text(
-                    text = (if (cheatsExpanded) "▾ " else "▸ ") + "Cheats",
+                    text = (if (cheatsExpanded) "▾ " else "▸ ") + "Tweaks",
                     color = Color(0xFFAAAAFF),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -1739,77 +1765,208 @@ fun PWApp(
 
                 if (cheatsExpanded) {
                     Column(modifier = Modifier.fillMaxWidth()) {
+                        // Cheats subsection
                         Text(
-                            text = "No cheats configured yet",
+                            text = "Cheats",
                             color = Color(0xFFB0B0C8),
                             fontSize = 12.sp,
+                            fontWeight = FontWeight.SemiBold,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
-                        )
-                    }
-                }
-
-                Text(
-                    text = (if (debugExpanded) "▾ " else "▸ ") + "Debug",
-                    color = Color(0xFFAAAAFF),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { debugExpanded = !debugExpanded }
-                        .padding(vertical = 10.dp)
-                )
-
-                if (debugExpanded) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 8.dp, top = 6.dp, bottom = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Row Spacing",
-                            color = Color(0xFFB0B0C8),
-                            fontSize = 12.sp,
-                            modifier = Modifier.weight(1f)
+                                .padding(start = 8.dp, bottom = 4.dp)
                         )
 
                         Box(
                             modifier = Modifier
-                                .width(controlWidth)
-                                .pointerInput(Unit) {
-                                    detectDragGestures { change, _ ->
-                                        val widthPx = size.width.toFloat().coerceAtLeast(1f)
-                                        val x = change.position.x.coerceIn(0f, widthPx)
-                                        val fraction = x / widthPx
-                                        val newLevel = (fraction * 10).toInt().coerceIn(0, 10)
-                                        sidebarRowSpacingLevel = newLevel
-                                        preferences.edit().putInt("sidebar_row_spacing_level", newLevel).apply()
-                                        change.consume()
-                                    }
-                                }
+                                .fillMaxWidth()
+                                .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
+                                .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
+                                .padding(horizontal = 10.dp, vertical = 8.dp)
                         ) {
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                (0..10).forEach { level ->
-                                    Box(
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .height(6.dp)
-                                            .padding(horizontal = 1.dp)
-                                            .background(
-                                                if (level <= sidebarRowSpacingLevel) Color(0xFFEFEFFF) else Color(0xFF404060),
-                                                RoundedCornerShape(3.dp)
-                                            )
-                                            .clickable {
-                                                sidebarRowSpacingLevel = level
-                                                preferences.edit().putInt("sidebar_row_spacing_level", level).apply()
-                                            }
+                                Column(
+                                    modifier = Modifier.weight(1f)
+                                ) {
+                                    Text(
+                                        text = "Always Awake",
+                                        color = Color(0xFFB0B0C8),
+                                        fontSize = 12.sp
+                                    )
+                                    Text(
+                                        text = "Prevents the emulator and LCD from going to sleep.",
+                                        color = Color(0xFF8080A0),
+                                        fontSize = 11.sp
                                     )
                                 }
+
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(22.dp)
+                                            .background(Color(0xFF15152A), RoundedCornerShape(6.dp))
+                                            .border(1.dp, Color(0xFF505070), RoundedCornerShape(6.dp)),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Checkbox(
+                                            checked = disableSleepCheatEnabled,
+                                            onCheckedChange = { checked ->
+                                                disableSleepCheatEnabled = checked
+                                                preferences.edit().putBoolean("cheat_disable_sleep", checked).apply()
+                                                pokeWalker?.setDisableSleep(checked)
+                                            },
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                    }
+
+                                    Spacer(modifier = Modifier.width(8.dp))
+
+                                    Box(
+                                        modifier = Modifier
+                                            .size(24.dp)
+                                            .background(Color(0xFF15152A), RoundedCornerShape(6.dp))
+                                            .border(1.dp, Color(0xFF505070), RoundedCornerShape(6.dp))
+                                            .clickable { },
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Text(
+                                            text = "⚙",
+                                            color = Color(0xFFB0B0C8),
+                                            fontSize = 12.sp
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
+                        // Debug subsection
+                        Text(
+                            text = (if (debugExpanded) "▾ " else "▸ ") + " Debug",
+                            color = Color(0xFFB0B0C8),
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { debugExpanded = !debugExpanded }
+                                .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
+                        )
+
+                        if (debugExpanded) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
+                                    .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
+                                    .padding(horizontal = 10.dp, vertical = 8.dp)
+                            ) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Column(
+                                        modifier = Modifier.weight(1f)
+                                    ) {
+                                        Text(
+                                            text = "IR TCP Bridge",
+                                            color = Color(0xFFB0B0C8),
+                                            fontSize = 12.sp
+                                        )
+                                        Text(
+                                            text = "Forward SCI3 IR data over TCP.",
+                                            color = Color(0xFF8080A0),
+                                            fontSize = 11.sp
+                                        )
+                                    }
+
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Box(
+                                            modifier = Modifier
+                                                .size(22.dp)
+                                                .background(Color(0xFF15152A), RoundedCornerShape(6.dp))
+                                                .border(1.dp, Color(0xFF505070), RoundedCornerShape(6.dp)),
+                                            contentAlignment = Alignment.Center
+                                        ) {
+                                            Checkbox(
+                                                checked = irEnabled,
+                                                onCheckedChange = { checked ->
+                                                    irEnabled = checked
+                                                    preferences.edit().putBoolean("ir_enabled", checked).apply()
+                                                },
+                                                modifier = Modifier.size(18.dp)
+                                            )
+                                        }
+
+                                        Spacer(modifier = Modifier.width(8.dp))
+
+                                        Box(
+                                            modifier = Modifier
+                                                .size(24.dp)
+                                                .background(Color(0xFF15152A), RoundedCornerShape(6.dp))
+                                                .border(1.dp, Color(0xFF505070), RoundedCornerShape(6.dp))
+                                                .clickable { },
+                                            contentAlignment = Alignment.Center
+                                        ) {
+                                            Text(
+                                                text = "⚙",
+                                                color = Color(0xFFB0B0C8),
+                                                fontSize = 12.sp
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 8.dp, top = 4.dp, bottom = 4.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "IR Host",
+                                    color = Color(0xFFB0B0C8),
+                                    fontSize = 12.sp,
+                                    modifier = Modifier.weight(1f)
+                                )
+
+                                TextField(
+                                    value = irHost,
+                                    onValueChange = { value ->
+                                        irHost = value
+                                        preferences.edit().putString("ir_host", value).apply()
+                                    },
+                                    modifier = Modifier.width(controlWidth)
+                                )
+                            }
+
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 8.dp, top = 4.dp, bottom = 10.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "IR Port",
+                                    color = Color(0xFFB0B0C8),
+                                    fontSize = 12.sp,
+                                    modifier = Modifier.weight(1f)
+                                )
+
+                                TextField(
+                                    value = irPortText,
+                                    onValueChange = { value ->
+                                        irPortText = value
+                                        val parsed = value.toIntOrNull() ?: 8081
+                                        preferences.edit().putInt("ir_port", parsed).apply()
+                                    },
+                                    modifier = Modifier.width(controlWidth)
+                                )
                             }
                         }
                     }

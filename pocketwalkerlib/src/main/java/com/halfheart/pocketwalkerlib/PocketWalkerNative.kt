@@ -27,6 +27,8 @@ class PocketWalkerNative {
 
     external fun setAccelerationData(x: Float, y: Float, z: Float)
 
+    external fun setDisableSleep(disable: Boolean)
+
     companion object {
         init {
             System.loadLibrary("pocketwalkerlib")

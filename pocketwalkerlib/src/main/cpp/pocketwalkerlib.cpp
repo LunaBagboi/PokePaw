@@ -2,6 +2,7 @@
 #include "PocketWalkerState.h"
 #include "KotlinCallback.h"
 #include <android/log.h>
+#include "SleepConfig.h"
 
 class CallbackManager {
 private:
@@ -211,4 +212,11 @@ Java_com_halfheart_pocketwalkerlib_PocketWalkerNative_setAccelerationData(JNIEnv
     auto emulator = PocketWalkerState::Emulator();
 
     //emulator->SetAccelerationData(x, y, z);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_halfheart_pocketwalkerlib_PocketWalkerNative_setDisableSleep(JNIEnv *env, jobject thiz,
+                                                                      jboolean disable) {
+    g_disableSleep = (disable == JNI_TRUE);
 }

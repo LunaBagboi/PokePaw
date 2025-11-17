@@ -16,7 +16,9 @@ file(GLOB_RECURSE POCKETWALKER_SRC
 )
 
 add_library(${CMAKE_PROJECT_NAME} SHARED
-        pocketwalkerlib.cpp ${POCKETWALKER_SRC})
+        pocketwalkerlib.cpp
+        SleepConfig.cpp
+        ${POCKETWALKER_SRC})
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
         android

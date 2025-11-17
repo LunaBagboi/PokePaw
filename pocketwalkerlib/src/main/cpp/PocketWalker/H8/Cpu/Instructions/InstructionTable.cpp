@@ -3,6 +3,7 @@
 #include <format>
 #include <stdexcept>
 #include <print>
+#include <android/log.h>
 
 #include "../Components/Opcode.h"
 #include "../Cpu.h"
@@ -1352,11 +1353,24 @@ InstructionTable::InstructionTable() :
                          "SLEEP",
                          2,
                          1,
-                         [](Cpu* cpu)
-                         {
-                             cpu->sleeping = true;
-                         }
-                     ));
+                        [](Cpu* cpu)
+                        {
+                            static uint32_t sleepLogCounter = 0;
+                            constexpr uint32_t logInterval = 32; // log every 32nd SLEEP
+
+                            const bool shouldLog = (sleepLogCounter++ % logInterval) == 0;
+
+                            if (shouldLog)
+                            {
+                                __android_log_print(ANDROID_LOG_DEBUG,
+                                                    "pokepaw-sleep",
+                                                    "SLEEP instruction putting CPU to sleep at PC=0x%04X",
+                                                    cpu->registers->pc);
+                            }
+
+                            cpu->sleeping = true;
+                        }
+                    ));
 
     aHaL_bH.Register(0xA, 0x0, Instruction(
                          "INC.B Rd",

@@ -1,6 +1,7 @@
 #include "PokeWalker.h"
 
 #include "../H8/Ssu/Ssu.h"
+#include "../../SleepConfig.h"
 
 PokeWalker::PokeWalker(uint8_t* ramBuffer, uint8_t* eepromBuffer) : H8300H(ramBuffer)
 {
@@ -100,6 +101,16 @@ void PokeWalker::SetupAddressHandlers() const
         if (cpu->ram->ReadShort(0xF78E) == 0)
         {
             cpu->ram->WriteShort(0xF78E, 1000);
+        }
+
+        return Continue;
+    });
+
+    board->cpu->OnAddress(0x7944, [](Cpu* cpu)
+    {
+        if (g_disableSleep)
+        {
+            cpu->flags->zero = false;
         }
 
         return Continue;

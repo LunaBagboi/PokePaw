@@ -1,9 +1,11 @@
 #include "Lcd.h"
 
 #include <print>
+#include <android/log.h>
 
 #include "LcdData.h"
 #include "../../../H8/Ssu/Ssu.h"
+#include "../../../../SleepConfig.h"
 
 void Lcd::Transmit(Ssu* ssu)
 {
@@ -37,10 +39,22 @@ void Lcd::Transmit(Ssu* ssu)
             }
             else if (command == 0xA9)
             {
+                if (!powerSaveMode)
+                {
+                    __android_log_print(ANDROID_LOG_DEBUG,
+                                        "pokepaw-sleep",
+                                        "LCD entering power-save mode via command 0xA9");
+                }
                 powerSaveMode = true;
             }
             else if (command == 0xE1)
             {
+                if (powerSaveMode)
+                {
+                    __android_log_print(ANDROID_LOG_DEBUG,
+                                        "pokepaw-sleep",
+                                        "LCD exiting power-save mode via command 0xE1");
+                }
                 powerSaveMode = false;
             }
             break;
