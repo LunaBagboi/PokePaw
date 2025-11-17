@@ -78,7 +78,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import io.github.stanio.xbrz.Xbrz
+import com.bagboi.pokepaw.ShaderOption
+import com.bagboi.pokepaw.applyShaderOption
+import com.bagboi.pokepaw.getCurrentShaderOption
+import com.bagboi.pokepaw.PWLcd
+import com.bagboi.pokepaw.BallTheme
+import com.bagboi.pokepaw.BallThemeBackground
+import com.bagboi.pokepaw.ballThemeIcon
+import com.bagboi.pokepaw.ballThemeLabel
+import com.bagboi.pokepaw.Tint
+import com.bagboi.pokepaw.tintPalette
+import com.bagboi.pokepaw.tintLcdBackground
+import com.bagboi.pokepaw.tintSidebarBackground
+import com.bagboi.pokepaw.tintLabelFor
+import com.bagboi.pokepaw.tintColorsFor
 
 import com.halfheart.pocketwalkerlib.BUTTON_CENTER
 import com.halfheart.pocketwalkerlib.BUTTON_LEFT
@@ -92,22 +105,6 @@ import kotlinx.coroutines.launch
 import java.util.function.Function
 import kotlin.concurrent.thread
 import kotlin.experimental.xor
-
-enum class BallTheme {
-    None,
-    PokeBall,
-    GreatBall,
-    UltraBall,
-    MasterBall,
-    LevelBall,
-    LoveBall,
-    NetBall,
-    PremierBall,
-    QuickBall,
-    SafariBall,
-    BeastBall,
-    LuxuryBall
-}
 
 class AppActivity : ComponentActivity()  {
     private var canvasBitmap by mutableStateOf<Bitmap?>(null)
@@ -134,38 +131,7 @@ class AppActivity : ComponentActivity()  {
     private var didInitialize: Boolean = false
 
     private fun setTint(tint: Tint) {
-        palette = when (tint) {
-            Tint.None -> intArrayOf(
-                0xCCCCCC,
-                0x999999,
-                0x666666,
-                0x333333
-            )
-            Tint.SGB -> intArrayOf(
-                0xFFEFFF,
-                0xF7B58C,
-                0x84739C,
-                0x181101
-            )
-            Tint.Green -> intArrayOf(
-                0xE0F8D0,
-                0x88C070,
-                0x346856,
-                0x081820
-            )
-            Tint.Red -> intArrayOf(
-                0xFFF4F4,
-                0xF2B2B2,
-                0xD46A6A,
-                0x3C1212
-            )
-            Tint.Blue -> intArrayOf(
-                0xF5F5F7,
-                0x8787A1,
-                0x58588A,
-                0x1E1E29
-            )
-        }
+        palette = tintPalette(tint)
     }
 
     fun initializePokeWalkerIfReady() {
@@ -181,7 +147,7 @@ class AppActivity : ComponentActivity()  {
 
         pokeWalker.onDraw { bytes ->
             val baseBitmap = createBitmap(bytes)
-            canvasBitmap = applyShaderOption(baseBitmap)
+            canvasBitmap = applyCurrentShaderOption(baseBitmap)
         }
 
         val audioEngine = AudioEngine()
@@ -439,40 +405,11 @@ class AppActivity : ComponentActivity()  {
         return bitmap
     }
 
-    private fun getCurrentShaderOption(): ShaderOption {
-        val raw = preferences.getString("shader_option", ShaderOption.None.name)
-        return runCatching { ShaderOption.valueOf(raw ?: ShaderOption.None.name) }
-            .getOrElse { ShaderOption.None }
+    private fun applyCurrentShaderOption(bitmap: Bitmap): Bitmap {
+        val option = getCurrentShaderOption(preferences)
+        return applyShaderOption(bitmap, option)
     }
 
-    private fun applyShaderOption(bitmap: Bitmap): Bitmap {
-        return when (getCurrentShaderOption()) {
-            ShaderOption.None -> bitmap
-            ShaderOption.Xbrz2x -> scaleBitmapXbrz(bitmap, 2)
-            ShaderOption.Xbrz3x -> scaleBitmapXbrz(bitmap, 3)
-            ShaderOption.Xbrz4x -> scaleBitmapXbrz(bitmap, 4)
-            else -> bitmap
-        }
-    }
-
-    private fun scaleBitmapXbrz(source: Bitmap, scale: Int): Bitmap {
-        if (scale <= 1) return source
-
-        val srcWidth = source.width
-        val srcHeight = source.height
-        val dstWidth = srcWidth * scale
-        val dstHeight = srcHeight * scale
-
-        val srcPixels = IntArray(srcWidth * srcHeight)
-        source.getPixels(srcPixels, 0, srcWidth, 0, 0, srcWidth, srcHeight)
-
-        val hasAlpha = true
-        val dstPixels = Xbrz.scaleImage(scale, hasAlpha, srcPixels, null, srcWidth, srcHeight)
-
-        val scaled = Bitmap.createBitmap(dstWidth, dstHeight, Bitmap.Config.ARGB_8888)
-        scaled.setPixels(dstPixels, 0, dstWidth, 0, 0, dstWidth, dstHeight)
-        return scaled
-    }
 
     //DISABLEDCODE: legacy contrast adjustment logic kept for reference
 //    private fun createBitmapWithContrast(paletteIndices: ByteArray): Bitmap {
@@ -590,161 +527,8 @@ fun PWApp(
     val context = LocalContext.current
     val preferences = remember { context.getSharedPreferences("pokewalker_prefs", Context.MODE_PRIVATE) }
 
-    val pokeballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/pokeball.png"))
-        }.getOrNull()
-    }
-
-    val greatballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/greatball.png"))
-        }.getOrNull()
-    }
-
-    val ultraballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/ultraball.png"))
-        }.getOrNull()
-    }
-
-    val masterballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/masterball.png"))
-        }.getOrNull()
-    }
-
-    val levelballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/levelball.png"))
-        }.getOrNull()
-    }
-
-    val premierballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/premierball.png"))
-        }.getOrNull()
-    }
-
-    val quickballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/quickball.png"))
-        }.getOrNull()
-    }
-
-    val safariballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/safariball.png"))
-        }.getOrNull()
-    }
-
-    val pokepawBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/pokepaw.png"))
-        }.getOrNull()
-    }
-
-    val beastballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/beastball.png"))
-        }.getOrNull()
-    }
-
-    val luxuryballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/luxuryball.png"))
-        }.getOrNull()
-    }
-
-    val loveballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/loveball.png"))
-        }.getOrNull()
-    }
-
-    val netballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/netball.png"))
-        }.getOrNull()
-    }
-
-    val iconPokeballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-pokeball.png"))
-        }.getOrNull()
-    }
-
-    val iconGreatballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-greatball.png"))
-        }.getOrNull()
-    }
-
-    val iconUltraballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-ultraball.png"))
-        }.getOrNull()
-    }
-
-    val iconMasterballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-masterball.png"))
-        }.getOrNull()
-    }
-
-    val iconLevelballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-levelball.png"))
-        }.getOrNull()
-    }
-
-    val iconLoveballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-loveball.png"))
-        }.getOrNull()
-    }
-
-    val iconNetballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-netball.png"))
-        }.getOrNull()
-    }
-
-    val iconPremierballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-premierball.png"))
-        }.getOrNull()
-    }
-
-    val iconQuickballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-quickball.png"))
-        }.getOrNull()
-    }
-
-    val iconSafariballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-safariball.png"))
-        }.getOrNull()
-    }
-
-    val iconBeastballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-beastball.png"))
-        }.getOrNull()
-    }
-
-    val iconLuxuryballBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-luxuryball.png"))
-        }.getOrNull()
-    }
-
-    val iconPokepawBitmap = remember {
-        runCatching {
-            BitmapFactory.decodeStream(context.assets.open("background-assets/icon-pokepaw.png"))
-        }.getOrNull()
-    }
+    val ballBackgroundBitmaps = rememberBallBackgroundBitmaps()
+    val ballIconBitmaps = rememberBallIconBitmaps()
 
     var selectedTint by remember { mutableStateOf(initialSelectedTint) }
     var tintMenuExpanded by remember { mutableStateOf(false) }
@@ -805,13 +589,7 @@ fun PWApp(
     val controlWidth = 140.dp
 
     // Lightest color of each tint palette, used for the bezel directly behind the LCD
-    val lcdBackground = when (selectedTint) {
-        Tint.None -> Color(0xFFCCCCCC)
-        Tint.SGB -> Color(0xFFFFEFFF)
-        Tint.Green -> Color(0xFFE0F8D0)
-        Tint.Red -> Color(0xFFFFF4F4)
-        Tint.Blue -> Color(0xFFF5F5F7)
-    }
+    val lcdBackground = tintLcdBackground(selectedTint)
 
     val sidebarWidth = 260.dp
     val sidebarOffsetX by animateDpAsState(
@@ -854,107 +632,19 @@ fun PWApp(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            if (selectedBallTheme != BallTheme.None) {
-                val defaultTop = Color(0xFFD32329)
-                val defaultBottom = Color(0xffdadade)
+            BallThemeBackground(
+                selectedBallTheme = selectedBallTheme,
+                bitmaps = ballBackgroundBitmaps,
+                modifier = Modifier.fillMaxSize()
+            )
 
-                val topColor = when (selectedBallTheme) {
-                    BallTheme.UltraBall -> Color(0xFF181414)
-                    BallTheme.SafariBall -> Color(0xFF76BD25)
-                    BallTheme.QuickBall -> Color(0xFF4DA2CA)
-                    BallTheme.PremierBall -> Color(0xFFDBDBDF)
-                    BallTheme.MasterBall -> Color(0xFF6700C0)
-                    BallTheme.LevelBall -> Color(0xFF161616)
-                    BallTheme.GreatBall -> Color(0xFF007ED7)
-                    BallTheme.BeastBall -> Color(0xFF203699)
-                    BallTheme.LuxuryBall -> Color(0xFF161616)
-                    BallTheme.LoveBall -> Color(0xFFEC65CC)
-                    BallTheme.NetBall -> Color(0xFF00A5A7)
-                    else -> defaultTop
-                }
-
-                val bottomColor = when (selectedBallTheme) {
-                    BallTheme.BeastBall -> Color(0xFF203699)
-                    BallTheme.LuxuryBall -> Color(0xFF161616)
-                    BallTheme.QuickBall -> Color(0xFF4DA2CA)
-                    else -> defaultBottom
-                }
-
-                val bgBitmap: Bitmap? = when (selectedBallTheme) {
-                    BallTheme.PokeBall -> pokeballBitmap
-                    BallTheme.GreatBall -> greatballBitmap
-                    BallTheme.UltraBall -> ultraballBitmap
-                    BallTheme.MasterBall -> masterballBitmap
-                    BallTheme.LevelBall -> levelballBitmap
-                    BallTheme.PremierBall -> premierballBitmap
-                    BallTheme.QuickBall -> quickballBitmap
-                    BallTheme.SafariBall -> safariballBitmap
-                    BallTheme.BeastBall -> beastballBitmap
-                    BallTheme.LuxuryBall -> luxuryballBitmap
-                    BallTheme.LoveBall -> loveballBitmap
-                    BallTheme.NetBall -> netballBitmap
-                    else -> null
-                }
-
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.5f)
-                        .align(Alignment.TopCenter)
-                        .background(topColor)
-                )
-
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.5f)
-                        .align(Alignment.BottomCenter)
-                        .background(bottomColor)
-                )
-
-                bgBitmap?.let { bitmap ->
-                    Image(
-                        bitmap = bitmap.asImageBitmap(),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .fillMaxWidth(),
-                        contentScale = ContentScale.Crop,
-                        filterQuality = FilterQuality.Low
-                    )
-                }
-            }
-
-            Box(
-                Modifier
+            PWLcd(
+                canvasBitmap = canvasBitmap,
+                lcdBackground = lcdBackground,
+                modifier = Modifier
                     .align(Alignment.Center)
                     .padding(bottom = 16.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size((96 * 2.5 + 32 + 16).dp, (64 * 2.5 + 32 + 16).dp)
-                        .background(lcdBackground, shape = RoundedCornerShape(16.dp))
-                        .align(Alignment.Center)
-                        .border(
-                            width = 8.dp,
-                            color = Color(0xFF1B1B1B),
-                            shape = RoundedCornerShape(16.dp)
-                        )
-                        .padding(16.dp)
-                ) {
-                    canvasBitmap?.let { bitmap ->
-                        Image(
-                            bitmap = bitmap.asImageBitmap(),
-                            contentDescription = "Pokewalker Display",
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .align(Alignment.Center),
-                            contentScale = ContentScale.Fit,
-                            filterQuality = FilterQuality.None
-                        )
-                    }
-                }
-            }
+            )
 
             PWButton(
                 pokeWalker, BUTTON_CENTER, size = 46, top = 260,
@@ -972,13 +662,7 @@ fun PWApp(
 
         // Sidebar uses the darkest tone of the currently selected tint palette so it visually
         // matches the active tint.
-        val sidebarBackground = when (selectedTint) {
-            Tint.None -> Color(0xFF111119)
-            Tint.SGB -> Color(0xFF181101)
-            Tint.Green -> Color(0xFF081820)
-            Tint.Red -> Color(0xFF3C1212)
-            Tint.Blue -> Color(0xFF1E1E29)
-        }
+        val sidebarBackground = tintSidebarBackground(selectedTint)
 
         val dropdownBackground = sidebarBackground.copy(alpha = 0.92f)
 
@@ -1022,1018 +706,98 @@ fun PWApp(
                         .padding(bottom = 16.dp)
                 )
 
-                Text(
-                    text = (if (filesExpanded) "▾ " else "▸ ") + "Files",
-                    color = Color(0xFFAAAAFF),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { filesExpanded = !filesExpanded }
-                        .padding(vertical = 10.dp)
+                FilesSection(
+                    filesExpanded = filesExpanded,
+                    onFilesExpandedChange = { filesExpanded = !filesExpanded },
+                    isLoaded = isLoaded,
+                    onLoadRom = onLoadRom,
+                    onLoadEeprom = onLoadEeprom
                 )
 
-                if (filesExpanded) {
-                    Column(modifier = Modifier.fillMaxWidth()) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 8.dp, top = 4.dp, bottom = 4.dp),
-
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = "ROM",
-                                color = Color(0xFFCBCBE5),
-                                fontSize = 13.sp,
-                                modifier = Modifier.weight(1f)
-                            )
-
-                            if (isLoaded) {
-                                Checkbox(
-                                    checked = true,
-                                    onCheckedChange = null,
-                                    modifier = Modifier
-                                        .padding(start = 8.dp)
-                                )
-                            } else {
-                                Button(
-                                    onClick = onLoadRom,
-                                    modifier = Modifier
-                                        .padding(start = 8.dp)
-                                ) {
-                                    Text("Select")
-                                }
-                            }
-                        }
-
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 8.dp, top = 6.dp, bottom = 10.dp),
-
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = "EEPROM",
-                                color = Color(0xFFCBCBE5),
-                                fontSize = 13.sp,
-                                modifier = Modifier.weight(1f)
-                            )
-
-                            if (isLoaded) {
-                                Checkbox(
-                                    checked = true,
-                                    onCheckedChange = null,
-                                    modifier = Modifier
-                                        .padding(start = 8.dp)
-                                )
-                            } else {
-                                Button(
-                                    onClick = onLoadEeprom,
-                                    modifier = Modifier
-                                        .padding(start = 8.dp)
-                                ) {
-                                    Text("Select")
-                                }
-                            }
-                        }
-                    }
-                }
-
-                Text(
-                    text = (if (appearanceExpanded) "▾ " else "▸ ") + "Appearance",
-                    color = Color(0xFFAAAAFF),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { appearanceExpanded = !appearanceExpanded }
-                        .padding(vertical = 10.dp)
+                AppearanceSection(
+                    appearanceExpanded = appearanceExpanded,
+                    onAppearanceExpandedChange = { appearanceExpanded = !appearanceExpanded },
+                    selectedBallTheme = selectedBallTheme,
+                    onSelectedBallThemeChange = { theme ->
+                        selectedBallTheme = theme
+                        preferences.edit().putString("ball_theme", theme.name).apply()
+                    },
+                    ballIconBitmaps = ballIconBitmaps,
+                    selectedTint = selectedTint,
+                    onTintSelected = { tint ->
+                        selectedTint = tint
+                        onTintSelected(tint)
+                        preferences.edit().putString("tint", tint.name).apply()
+                    },
+                    selectedShader = selectedShader,
+                    onSelectedShaderChange = { option ->
+                        selectedShader = option
+                        preferences.edit().putString("shader_option", option.name).apply()
+                    },
+                    shadeLevel = shadeLevel,
+                    onShadeLevelChange = { level ->
+                        shadeLevel = level
+                        preferences.edit().putInt("shade_level", level).apply()
+                    },
+                    selectedLcdSize = selectedLcdSize,
+                    onSelectedLcdSizeChange = { size ->
+                        selectedLcdSize = size
+                    },
+                    controlWidth = controlWidth,
+                    dropdownBackground = dropdownBackground
                 )
 
-                if (appearanceExpanded) {
-                    val tintLabel = when (selectedTint) {
-                        Tint.None -> "None"
-                        Tint.SGB -> "SGB"
-                        Tint.Green -> "Green"
-                        Tint.Red -> "Red"
-                        Tint.Blue -> "Blue"
-                    }
-
-                    fun tintColors(tint: Tint): List<Color> {
-                        return when (tint) {
-                            Tint.None -> listOf(
-                                Color(0xFFCCCCCC),
-                                Color(0xFF999999),
-                                Color(0xFF666666),
-                                Color(0xFF333333)
-                            )
-                            Tint.SGB -> listOf(
-                                Color(0xFFFFEFFF),
-                                Color(0xFFF7B58C),
-                                Color(0xFF84739C),
-                                Color(0xFF181101)
-                            )
-                            Tint.Green -> listOf(
-                                Color(0xFFE0F8D0),
-                                Color(0xFF88C070),
-                                Color(0xFF346856),
-                                Color(0xFF081820)
-                            )
-                            Tint.Red -> listOf(
-                                Color(0xFFFFF4F4),
-                                Color(0xFFF2B2B2),
-                                Color(0xFFD46A6A),
-                                Color(0xFF3C1212)
-                            )
-                            Tint.Blue -> listOf(
-                                Color(0xFFF5F5F7),
-                                Color(0xFF8787A1),
-                                Color(0xFF58588A),
-                                Color(0xFF1E1E29)
-                            )
-                        }
-                    }
-
-                    fun ballThemeLabel(theme: BallTheme): String {
-                        return when (theme) {
-                            BallTheme.None -> "None"
-                            BallTheme.PokeBall -> "Poké Ball"
-                            BallTheme.GreatBall -> "Great Ball"
-                            BallTheme.UltraBall -> "Ultra Ball"
-                            BallTheme.MasterBall -> "Master Ball"
-                            BallTheme.LevelBall -> "Level Ball"
-                            BallTheme.LoveBall -> "Love Ball"
-                            BallTheme.NetBall -> "Net Ball"
-                            BallTheme.PremierBall -> "Premier Ball"
-                            BallTheme.QuickBall -> "Quick Ball"
-                            BallTheme.SafariBall -> "Safari Ball"
-                            BallTheme.BeastBall -> "Beast Ball"
-                            BallTheme.LuxuryBall -> "Luxury Ball"
-                        }
-                    }
-
-                    fun ballThemeIcon(theme: BallTheme): Bitmap? {
-                        return when (theme) {
-                            BallTheme.None -> null
-                            BallTheme.PokeBall -> iconPokeballBitmap
-                            BallTheme.GreatBall -> iconGreatballBitmap
-                            BallTheme.UltraBall -> iconUltraballBitmap
-                            BallTheme.MasterBall -> iconMasterballBitmap
-                            BallTheme.LevelBall -> iconLevelballBitmap
-                            BallTheme.LoveBall -> iconLoveballBitmap
-                            BallTheme.NetBall -> iconNetballBitmap
-                            BallTheme.PremierBall -> iconPremierballBitmap
-                            BallTheme.QuickBall -> iconQuickballBitmap
-                            BallTheme.SafariBall -> iconSafariballBitmap
-                            BallTheme.BeastBall -> iconBeastballBitmap
-                            BallTheme.LuxuryBall -> iconLuxuryballBitmap
-                        }
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 8.dp, top = 6.dp, bottom = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Colorization",
-                            color = Color(0xFFB0B0C8),
-                            fontSize = 12.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-
-                        Checkbox(
-                            checked = colorizationEnabled,
-                            onCheckedChange = { checked ->
-                                colorizationEnabled = checked
-                                preferences.edit().putBoolean("colorization_enabled", checked).apply()
-                            }
-                        )
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 8.dp, top = 4.dp, bottom = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Ball Theme",
-                            color = Color(0xFFB0B0C8),
-                            fontSize = 12.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-
-                        Box(
-                            modifier = Modifier
-                                .width(controlWidth)
-                                .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
-                                .clickable { ballThemeMenuExpanded = true }
-                                .padding(horizontal = 8.dp, vertical = 6.dp)
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                val iconBitmap = ballThemeIcon(selectedBallTheme)
-
-                                if (iconBitmap != null) {
-                                    Image(
-                                        bitmap = iconBitmap.asImageBitmap(),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(18.dp),
-                                        contentScale = ContentScale.Fit
-                                    )
-                                    Text(
-                                        text = ballThemeLabel(selectedBallTheme),
-                                        color = Color(0xFFEFEFFF),
-                                        fontSize = 13.sp,
-                                        modifier = Modifier
-                                            .padding(start = 8.dp)
-                                            .weight(1f)
-                                    )
-                                } else {
-                                    Text(
-                                        text = ballThemeLabel(selectedBallTheme),
-                                        color = Color(0xFFEFEFFF),
-                                        fontSize = 13.sp,
-                                        modifier = Modifier.weight(1f)
-                                    )
-                                }
-                            }
-
-                            DropdownMenu(
-                                expanded = ballThemeMenuExpanded,
-                                onDismissRequest = { ballThemeMenuExpanded = false },
-                                modifier = Modifier
-                                    .width(controlWidth + 32.dp)
-                                    .heightIn(max = 260.dp)
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .background(dropdownBackground)
-                            ) {
-                                val ballMenuScroll = rememberScrollState()
-
-                                Column(
-                                    modifier = Modifier
-                                        .heightIn(max = 260.dp)
-                                        .verticalScroll(ballMenuScroll)
-                                ) {
-                                    @Composable
-                                    fun ballThemeItem(theme: BallTheme) {
-                                        DropdownMenuItem(
-                                            text = {
-                                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                                    val iconBitmap = ballThemeIcon(theme)
-                                                    if (iconBitmap != null) {
-                                                        Image(
-                                                            bitmap = iconBitmap.asImageBitmap(),
-                                                            contentDescription = null,
-                                                            modifier = Modifier.size(18.dp),
-                                                            contentScale = ContentScale.Fit
-                                                        )
-                                                        Text(
-                                                            text = ballThemeLabel(theme),
-                                                            color = Color(0xFFEFEFFF),
-                                                            fontSize = 13.sp,
-                                                            modifier = Modifier
-                                                                .padding(start = 8.dp)
-                                                        )
-                                                    } else {
-                                                        Text(
-                                                            text = ballThemeLabel(theme),
-                                                            color = Color(0xFFEFEFFF),
-                                                            fontSize = 13.sp
-                                                        )
-                                                    }
-                                                }
-                                            },
-                                            onClick = {
-                                                selectedBallTheme = theme
-                                                preferences.edit().putString("ball_theme", theme.name).apply()
-                                                ballThemeMenuExpanded = false
-                                            }
-                                        )
-                                    }
-
-                                    ballThemeItem(BallTheme.None)
-                                    ballThemeItem(BallTheme.PokeBall)
-                                    ballThemeItem(BallTheme.GreatBall)
-                                    ballThemeItem(BallTheme.UltraBall)
-                                    ballThemeItem(BallTheme.MasterBall)
-                                    ballThemeItem(BallTheme.LevelBall)
-                                    ballThemeItem(BallTheme.LoveBall)
-                                    ballThemeItem(BallTheme.NetBall)
-                                    ballThemeItem(BallTheme.PremierBall)
-                                    ballThemeItem(BallTheme.QuickBall)
-                                    ballThemeItem(BallTheme.SafariBall)
-                                    ballThemeItem(BallTheme.BeastBall)
-                                    ballThemeItem(BallTheme.LuxuryBall)
-                                }
-                            }
-                        }
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 8.dp, top = 4.dp, bottom = 4.dp),
-
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Tint",
-                            color = Color(0xFFB0B0C8),
-                            fontSize = 12.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-
-                        Box(
-                            modifier = Modifier
-                                .width(controlWidth)
-                                .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
-                                .clickable { tintMenuExpanded = true }
-                                .padding(horizontal = 8.dp, vertical = 6.dp)
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Text(
-                                    text = tintLabel,
-                                    color = Color(0xFFEFEFFF),
-                                    fontSize = 13.sp,
-                                    modifier = Modifier.weight(1f)
-                                )
-
-                                Row {
-                                    tintColors(selectedTint).forEach { color ->
-                                        Box(
-                                            modifier = Modifier
-                                                .size(10.dp)
-                                                .background(color, RoundedCornerShape(2.dp))
-                                                .padding(end = 2.dp)
-                                        )
-                                    }
-                                }
-                            }
-
-                            DropdownMenu(
-                                expanded = tintMenuExpanded,
-                                onDismissRequest = { tintMenuExpanded = false },
-                                modifier = Modifier
-                                    .background(dropdownBackground, RoundedCornerShape(8.dp))
-                            ) {
-                                @Composable
-                                fun tintItem(label: String, tint: Tint) {
-                                    DropdownMenuItem(
-                                        text = {
-                                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                                Text(
-                                                    text = label,
-                                                    color = Color(0xFFEFEFFF),
-                                                    fontSize = 13.sp,
-                                                    modifier = Modifier.weight(1f)
-                                                )
-
-                                                Row {
-                                                    tintColors(tint).forEach { color ->
-                                                        Box(
-                                                            modifier = Modifier
-                                                                .size(10.dp)
-                                                                .background(color, RoundedCornerShape(2.dp))
-                                                                .padding(end = 2.dp)
-                                                        )
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        onClick = {
-                                            selectedTint = tint
-                                            onTintSelected(tint)
-                                            tintMenuExpanded = false
-                                        }
-                                    )
-                                }
-
-                                tintItem("None", Tint.None)
-                                tintItem("SGB", Tint.SGB)
-                                tintItem("Green", Tint.Green)
-                                tintItem("Red", Tint.Red)
-                                tintItem("Blue", Tint.Blue)
-                            }
-                        }
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 8.dp, top = 6.dp, bottom = 4.dp),
-
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Shade",
-                            color = Color(0xFFB0B0C8),
-                            fontSize = 12.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-
-                        Box(
-                            modifier = Modifier
-                                .width(controlWidth)
-                                .pointerInput(Unit) {
-                                    detectDragGestures { change, _ ->
-                                        val widthPx = size.width.toFloat().coerceAtLeast(1f)
-                                        val x = change.position.x.coerceIn(0f, widthPx)
-                                        val fraction = x / widthPx
-                                        val newLevel = (fraction * 10).toInt().coerceIn(0, 9) + 1
-                                        shadeLevel = newLevel
-                                        preferences.edit().putInt("shade_level", newLevel).apply()
-                                        change.consume()
-                                    }
-                                }
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                (1..10).forEach { level ->
-                                    Box(
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .height(6.dp)
-                                            .padding(horizontal = 1.dp)
-                                            .background(
-                                                if (level <= shadeLevel) Color(0xFFEFEFFF) else Color(0xFF404060),
-                                                RoundedCornerShape(3.dp)
-                                            )
-                                            .clickable {
-                                                shadeLevel = level
-                                                preferences.edit().putInt("shade_level", level).apply()
-                                            }
-                                    )
-                                }
-                            }
-                        }
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 8.dp, top = 4.dp, bottom = 4.dp),
-
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Shader",
-                            color = Color(0xFFB0B0C8),
-                            fontSize = 12.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-
-                        Box(
-                            modifier = Modifier
-                                .width(controlWidth)
-                                .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
-                                .clickable { shaderMenuExpanded = true }
-                                .padding(horizontal = 8.dp, vertical = 6.dp)
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Text(
-                                    text = when (selectedShader) {
-                                        ShaderOption.None -> "None"
-                                        ShaderOption.Xbrz2x -> "xBRZ 2x"
-                                        ShaderOption.Xbrz3x -> "xBRZ 3x"
-                                        ShaderOption.Xbrz4x -> "xBRZ 4x"
-                                    },
-                                    color = Color(0xFFEFEFFF),
-                                    fontSize = 13.sp,
-                                    modifier = Modifier.weight(1f)
-                                )
-                            }
-
-                            DropdownMenu(
-                                expanded = shaderMenuExpanded,
-                                onDismissRequest = { shaderMenuExpanded = false },
-                                modifier = Modifier
-                                    .background(dropdownBackground, RoundedCornerShape(8.dp))
-                            ) {
-                                @Composable
-                                fun shaderItem(label: String, option: ShaderOption) {
-                                    DropdownMenuItem(
-                                        text = {
-                                            Text(
-                                                text = label,
-                                                color = Color(0xFFEFEFFF),
-                                                fontSize = 13.sp
-                                            )
-                                        },
-                                        onClick = {
-                                            selectedShader = option
-                                            preferences.edit().putString("shader_option", option.name).apply()
-                                            shaderMenuExpanded = false
-                                        }
-                                    )
-                                }
-
-                                shaderItem("None", ShaderOption.None)
-                                shaderItem("xBRZ 2x", ShaderOption.Xbrz2x)
-                                shaderItem("xBRZ 3x", ShaderOption.Xbrz3x)
-                                shaderItem("xBRZ 4x", ShaderOption.Xbrz4x)
-                            }
-                        }
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 8.dp, top = 4.dp, bottom = 10.dp),
-
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "LCD Size",
-                            color = Color(0xFFB0B0C8),
-                            fontSize = 12.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-
-                        Box(
-                            modifier = Modifier
-                                .width(controlWidth)
-                                .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
-                                .clickable { lcdSizeMenuExpanded = true }
-                                .padding(horizontal = 8.dp, vertical = 6.dp)
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Text(
-                                    text = selectedLcdSize,
-                                    color = Color(0xFFEFEFFF),
-                                    fontSize = 13.sp,
-                                    modifier = Modifier.weight(1f)
-                                )
-                            }
-
-                            DropdownMenu(
-                                expanded = lcdSizeMenuExpanded,
-                                onDismissRequest = { lcdSizeMenuExpanded = false },
-                                modifier = Modifier
-                                    .background(dropdownBackground, RoundedCornerShape(8.dp))
-                            ) {
-                                DropdownMenuItem(
-                                    text = {
-                                        Text(
-                                            text = "Small",
-                                            color = Color(0xFFEFEFFF),
-                                            fontSize = 13.sp
-                                        )
-                                    },
-                                    onClick = {
-                                        selectedLcdSize = "Small"
-                                        lcdSizeMenuExpanded = false
-                                    }
-                                )
-
-                                DropdownMenuItem(
-                                    text = {
-                                        Text(
-                                            text = "Large",
-                                            color = Color(0xFFEFEFFF),
-                                            fontSize = 13.sp
-                                        )
-                                    },
-                                    onClick = {
-                                        selectedLcdSize = "Large"
-                                        lcdSizeMenuExpanded = false
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
-
-                Text(
-                    text = (if (soundExpanded) "▾ " else "▸ ") + "Sound",
-                    color = Color(0xFFAAAAFF),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { soundExpanded = !soundExpanded }
-                        .padding(vertical = 10.dp)
+                SoundSection(
+                    soundExpanded = soundExpanded,
+                    onSoundExpandedChange = { soundExpanded = !soundExpanded },
+                    softChirpEnabled = softChirpEnabled,
+                    onSoftChirpEnabledChange = { checked ->
+                        softChirpEnabled = checked
+                        preferences.edit().putBoolean("soft_chirp_enabled", checked).apply()
+                    },
+                    volumeLevel = volumeLevel,
+                    onVolumeLevelChange = { level ->
+                        volumeLevel = level
+                        preferences.edit().putInt("volume_level", level).apply()
+                    },
+                    hapticsStrength = hapticsStrength,
+                    onHapticsStrengthChange = { level ->
+                        hapticsStrength = level
+                        preferences.edit().putInt("haptics_strength", level).apply()
+                    },
+                    controlWidth = controlWidth
                 )
 
-                if (soundExpanded) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 8.dp, top = 6.dp, bottom = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Soft Chirp",
-                            color = Color(0xFFB0B0C8),
-                            fontSize = 12.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-
-                        Checkbox(
-                            checked = softChirpEnabled,
-                            onCheckedChange = { checked ->
-                                softChirpEnabled = checked
-                                preferences.edit().putBoolean("soft_chirp_enabled", checked).apply()
-                            }
-                        )
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 8.dp, top = 4.dp, bottom = 4.dp),
-
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Volume",
-                            color = Color(0xFFB0B0C8),
-                            fontSize = 12.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-
-                        Box(
-                            modifier = Modifier
-                                .width(controlWidth)
-                                .pointerInput(Unit) {
-                                    detectDragGestures { change, _ ->
-                                        val widthPx = size.width.toFloat().coerceAtLeast(1f)
-                                        val x = change.position.x.coerceIn(0f, widthPx)
-                                        val fraction = x / widthPx
-                                        val newLevel = (fraction * 10).toInt().coerceIn(0, 9) + 1
-                                        volumeLevel = newLevel
-                                        preferences.edit().putInt("volume_level", newLevel).apply()
-                                        change.consume()
-                                    }
-                                }
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                (1..10).forEach { level ->
-                                    Box(
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .height(6.dp)
-                                            .padding(horizontal = 1.dp)
-                                            .background(
-                                                if (level <= volumeLevel) Color(0xFFEFEFFF) else Color(0xFF404060),
-                                                RoundedCornerShape(3.dp)
-                                            )
-                                            .clickable {
-                                                volumeLevel = level
-                                                preferences.edit().putInt("volume_level", level).apply()
-                                            }
-                                    )
-                                }
-                            }
-                        }
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 8.dp, top = 4.dp, bottom = 10.dp),
-
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Haptics Strength",
-                            color = Color(0xFFB0B0C8),
-                            fontSize = 12.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-
-                        Box(
-                            modifier = Modifier
-                                .width(controlWidth)
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                (1..3).forEach { level ->
-                                    Box(
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .height(6.dp)
-                                            .padding(horizontal = 2.dp)
-                                            .background(
-                                                if (level <= hapticsStrength) Color(0xFFEFEFFF) else Color(0xFF404060),
-                                                RoundedCornerShape(3.dp)
-                                            )
-                                            .clickable {
-                                                hapticsStrength = level
-                                                preferences.edit().putInt("haptics_strength", level).apply()
-                                            }
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Tweaks section (Cheats + Debug)
-                Text(
-                    text = (if (cheatsExpanded) "▾ " else "▸ ") + "Tweaks",
-                    color = Color(0xFFAAAAFF),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { cheatsExpanded = !cheatsExpanded }
-                        .padding(vertical = 10.dp)
+                TweaksSection(
+                    cheatsExpanded = cheatsExpanded,
+                    onCheatsExpandedChange = { cheatsExpanded = !cheatsExpanded },
+                    debugExpanded = debugExpanded,
+                    onDebugExpandedChange = { debugExpanded = !debugExpanded },
+                    disableSleepCheatEnabled = disableSleepCheatEnabled,
+                    onDisableSleepCheatChange = { checked ->
+                        disableSleepCheatEnabled = checked
+                        preferences.edit().putBoolean("cheat_disable_sleep", checked).apply()
+                        pokeWalker?.setDisableSleep(checked)
+                    },
+                    irEnabled = irEnabled,
+                    onIrEnabledChange = { checked ->
+                        irEnabled = checked
+                        preferences.edit().putBoolean("ir_enabled", checked).apply()
+                    },
+                    irHost = irHost,
+                    onIrHostChange = { value ->
+                        irHost = value
+                        preferences.edit().putString("ir_host", value).apply()
+                    },
+                    irPortText = irPortText,
+                    onIrPortTextChange = { value ->
+                        irPortText = value
+                        val parsed = value.toIntOrNull() ?: 8081
+                        preferences.edit().putInt("ir_port", parsed).apply()
+                    },
+                    controlWidth = controlWidth
                 )
-
-                if (cheatsExpanded) {
-                    Column(modifier = Modifier.fillMaxWidth()) {
-                        // Cheats subsection
-                        Text(
-                            text = "Cheats",
-                            color = Color(0xFFB0B0C8),
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 8.dp, bottom = 4.dp)
-                        )
-
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
-                                .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
-                                .padding(horizontal = 10.dp, vertical = 8.dp)
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Column(
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Text(
-                                        text = "Always Awake",
-                                        color = Color(0xFFB0B0C8),
-                                        fontSize = 12.sp
-                                    )
-                                    Text(
-                                        text = "Prevents the emulator and LCD from going to sleep.",
-                                        color = Color(0xFF8080A0),
-                                        fontSize = 11.sp
-                                    )
-                                }
-
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Box(
-                                        modifier = Modifier
-                                            .size(22.dp)
-                                            .background(Color(0xFF15152A), RoundedCornerShape(6.dp))
-                                            .border(1.dp, Color(0xFF505070), RoundedCornerShape(6.dp)),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Checkbox(
-                                            checked = disableSleepCheatEnabled,
-                                            onCheckedChange = { checked ->
-                                                disableSleepCheatEnabled = checked
-                                                preferences.edit().putBoolean("cheat_disable_sleep", checked).apply()
-                                                pokeWalker?.setDisableSleep(checked)
-                                            },
-                                            modifier = Modifier.size(18.dp)
-                                        )
-                                    }
-
-                                    Spacer(modifier = Modifier.width(8.dp))
-
-                                    Box(
-                                        modifier = Modifier
-                                            .size(24.dp)
-                                            .background(Color(0xFF15152A), RoundedCornerShape(6.dp))
-                                            .border(1.dp, Color(0xFF505070), RoundedCornerShape(6.dp))
-                                            .clickable { },
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Text(
-                                            text = "⚙",
-                                            color = Color(0xFFB0B0C8),
-                                            fontSize = 12.sp
-                                        )
-                                    }
-                                }
-                            }
-                        }
-
-                        // Debug subsection
-                        Text(
-                            text = (if (debugExpanded) "▾ " else "▸ ") + " Debug",
-                            color = Color(0xFFB0B0C8),
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { debugExpanded = !debugExpanded }
-                                .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
-                        )
-
-                        if (debugExpanded) {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
-                                    .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
-                                    .padding(horizontal = 10.dp, vertical = 8.dp)
-                            ) {
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Column(
-                                        modifier = Modifier.weight(1f)
-                                    ) {
-                                        Text(
-                                            text = "IR TCP Bridge",
-                                            color = Color(0xFFB0B0C8),
-                                            fontSize = 12.sp
-                                        )
-                                        Text(
-                                            text = "Forward SCI3 IR data over TCP.",
-                                            color = Color(0xFF8080A0),
-                                            fontSize = 11.sp
-                                        )
-                                    }
-
-                                    Row(
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        Box(
-                                            modifier = Modifier
-                                                .size(22.dp)
-                                                .background(Color(0xFF15152A), RoundedCornerShape(6.dp))
-                                                .border(1.dp, Color(0xFF505070), RoundedCornerShape(6.dp)),
-                                            contentAlignment = Alignment.Center
-                                        ) {
-                                            Checkbox(
-                                                checked = irEnabled,
-                                                onCheckedChange = { checked ->
-                                                    irEnabled = checked
-                                                    preferences.edit().putBoolean("ir_enabled", checked).apply()
-                                                },
-                                                modifier = Modifier.size(18.dp)
-                                            )
-                                        }
-
-                                        Spacer(modifier = Modifier.width(8.dp))
-
-                                        Box(
-                                            modifier = Modifier
-                                                .size(24.dp)
-                                                .background(Color(0xFF15152A), RoundedCornerShape(6.dp))
-                                                .border(1.dp, Color(0xFF505070), RoundedCornerShape(6.dp))
-                                                .clickable { },
-                                            contentAlignment = Alignment.Center
-                                        ) {
-                                            Text(
-                                                text = "⚙",
-                                                color = Color(0xFFB0B0C8),
-                                                fontSize = 12.sp
-                                            )
-                                        }
-                                    }
-                                }
-                            }
-
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(start = 8.dp, top = 4.dp, bottom = 4.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Text(
-                                    text = "IR Host",
-                                    color = Color(0xFFB0B0C8),
-                                    fontSize = 12.sp,
-                                    modifier = Modifier.weight(1f)
-                                )
-
-                                TextField(
-                                    value = irHost,
-                                    onValueChange = { value ->
-                                        irHost = value
-                                        preferences.edit().putString("ir_host", value).apply()
-                                    },
-                                    modifier = Modifier.width(controlWidth)
-                                )
-                            }
-
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(start = 8.dp, top = 4.dp, bottom = 10.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Text(
-                                    text = "IR Port",
-                                    color = Color(0xFFB0B0C8),
-                                    fontSize = 12.sp,
-                                    modifier = Modifier.weight(1f)
-                                )
-
-                                TextField(
-                                    value = irPortText,
-                                    onValueChange = { value ->
-                                        irPortText = value
-                                        val parsed = value.toIntOrNull() ?: 8081
-                                        preferences.edit().putInt("ir_port", parsed).apply()
-                                    },
-                                    modifier = Modifier.width(controlWidth)
-                                )
-                            }
-                        }
-                    }
-                }
             }
         }
     }
-}
-
-@Composable
-fun PWButton(
-    pokeWalker: PocketWalkerNative?,
-    button: Int,
-    size: Int = 32,
-    top: Int = 0,
-    bottom: Int = 0,
-    start: Int = 0,
-    end: Int = 0,
-    modifier: Modifier = Modifier
-) {
-    var isPressed by remember { mutableStateOf(false) }
-
-    val buttonOutlineColor = Color(0xFFCFCFCF)
-    val buttonColor = Color(0xFFF3F3F3)
-    val pressedButtonColor = Color(0xFFDFDFDF)
-
-    val hapticFeedback = LocalHapticFeedback.current
-
-    Box(
-        modifier = modifier
-            .padding(top = top.dp, bottom = bottom.dp, start = start.dp, end = end.dp)
-            .pointerInput(Unit) {
-                detectTapGestures(
-                    onPress = { offset ->
-                        isPressed = true
-                        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
-                        pokeWalker?.press(button)
-                        tryAwaitRelease()
-                        isPressed = false
-                        delay(100) // allow time for read to catch up, while still having button down time
-                        pokeWalker?.release(button)
-                    }
-                )
-            }
-    ) {
-        Box(
-            modifier = Modifier
-                .size(size.dp)
-                .background(if (isPressed) pressedButtonColor else buttonColor, CircleShape)
-                .border(BorderStroke(2.dp, buttonOutlineColor), CircleShape)
-                .align(Alignment.Center)
-
-        )
-    }
-}
-
-enum class Tint {
-    None,
-    SGB,
-    Green,
-    Red,
-    Blue
-}
-
-enum class ShaderOption {
-    None,
-    Xbrz2x,
-    Xbrz3x,
-    Xbrz4x
 }
