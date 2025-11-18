@@ -63,6 +63,8 @@ public:
 
     uint16_t GetCurrentWatts() const;
 
+    void AdjustWatts(int16_t delta) const;
+
 private:
     void SetupAddressHandlers() const;
 

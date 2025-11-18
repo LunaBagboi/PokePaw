@@ -225,6 +225,18 @@ Java_com_halfheart_pocketwalkerlib_PocketWalkerNative_getCurrentWatts(JNIEnv *en
 }
 
 extern "C"
+JNIEXPORT void JNICALL
+Java_com_halfheart_pocketwalkerlib_PocketWalkerNative_adjustWatts(JNIEnv *env, jobject thiz,
+                                                                  jint delta) {
+    auto emulator = PocketWalkerState::Emulator();
+    if (!emulator) {
+        return;
+    }
+
+    emulator->AdjustWatts(static_cast<int16_t>(delta));
+}
+
+extern "C"
 JNIEXPORT jintArray JNICALL
 Java_com_halfheart_pocketwalkerlib_PocketWalkerNative_getWalkerVariantInfo(JNIEnv *env, jobject thiz) {
     auto emulator = PocketWalkerState::Emulator();

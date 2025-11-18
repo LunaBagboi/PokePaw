@@ -95,24 +95,6 @@ uint8_t* PokeWalker::GetEepromBuffer() const
 
 void PokeWalker::SetupAddressHandlers() const
 {
-    // add watts
-    board->cpu->OnAddress(0x9A4E, [](Cpu* cpu)
-    {
-        if (cpu->ram->ReadShort(0xF78E) == 0)
-        {
-            cpu->ram->WriteShort(0xF78E, 1000);
-        }
-
-        return Continue;
-    });
-
-    board->cpu->OnAddress(0x7944, [](Cpu* cpu)
-    {
-        if (g_disableSleep)
-        {
-            cpu->flags->zero = false;
-        }
-
         return Continue;
     });
 

@@ -1099,6 +1099,9 @@ fun PWApp(
                         preferences.edit().putBoolean("cheat_disable_sleep", checked).apply()
                         pokeWalker?.setDisableSleep(checked)
                     },
+                    onAdjustWatts = { delta ->
+                        pokeWalker?.adjustWatts(delta)
+                    },
                     irEnabled = irEnabled,
                     onIrEnabledChange = { checked ->
                         irEnabled = checked

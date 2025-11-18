@@ -265,19 +265,31 @@ uint16_t PokeWalker::GetCurrentWatts() const
     return watts;
 }
 
+void PokeWalker::AdjustWatts(const int16_t delta) const
+{
+    if (!board || !board->ram)
+    {
+        return;
+    }
+
+    const uint16_t wattsAddr = 0xF78E;
+    const uint16_t currentWatts = board->ram->ReadShort(wattsAddr);
+
+    int32_t newWatts = static_cast<int32_t>(currentWatts) + static_cast<int32_t>(delta);
+    if (newWatts < 0)
+    {
+        newWatts = 0;
+    }
+    else if (newWatts > 9999)
+    {
+        newWatts = 9999;
+    }
+
+    board->ram->WriteShort(wattsAddr, static_cast<uint16_t>(newWatts));
+}
+
 void PokeWalker::SetupAddressHandlers() const
 {
-    // add watts
-    board->cpu->OnAddress(0x9A4E, [](Cpu* cpu)
-    {
-        if (cpu->ram->ReadShort(0xF78E) == 0)
-        {
-            cpu->ram->WriteShort(0xF78E, 1000);
-        }
-
-        return Continue;
-    });
-
     // prevent firmware sleep when the Power Saving Cheat is enabled
     board->cpu->OnAddress(0x7944, [](Cpu* cpu)
     {

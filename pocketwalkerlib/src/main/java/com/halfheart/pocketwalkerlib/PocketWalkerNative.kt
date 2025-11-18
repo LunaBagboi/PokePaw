@@ -45,6 +45,8 @@ class PocketWalkerNative {
 
     external fun getCurrentWatts(): Int
 
+    external fun adjustWatts(delta: Int)
+
     companion object {
         init {
             System.loadLibrary("pocketwalkerlib")
