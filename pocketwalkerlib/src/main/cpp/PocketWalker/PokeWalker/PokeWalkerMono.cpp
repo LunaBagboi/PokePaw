@@ -95,41 +95,38 @@ uint8_t* PokeWalker::GetEepromBuffer() const
 
 void PokeWalker::SetupAddressHandlers() const
 {
+    // prevent firmware sleep when the Power Saving Cheat is enabled
+    board->cpu->OnAddress(0x7944, [](Cpu* cpu)
+    {
+        if (g_disableSleep)
+        {
+            cpu->flags->zero = false;
+        }
+
         return Continue;
     });
-
-    // cleanup input
-    /*board->cpu->OnAddress(0x9C3E, [](Cpu* cpu)
-    {
-        if (cpu->ram->ReadByte(0xFFDE) != 0)
-        {
-            cpu->ram->WriteByte(0xFFDE, 0);
-        }
-        
-        return Continue;
-    });*/
 
     // factory tests
     board->cpu->OnAddress(0x336, [](Cpu* cpu)
     {
         cpu->registers->pc += 4;
-            
-        return SkipInstruction; 
+
+        return SkipInstruction;
     });
 
     // accelerometer sleep TODO proper interrupt?
     board->cpu->OnAddress(0x7700, [](Cpu* cpu)
     {
         cpu->registers->pc += 2;
-            
-        return SkipInstruction; 
+
+        return SkipInstruction;
     });
 
     // hacky ir fix
     board->cpu->OnAddress(0x8EE, [](Cpu* cpu)
     {
         cpu->registers->pc += 2;
-            
-        return SkipInstruction; 
+
+        return SkipInstruction;
     });
 }

@@ -4,12 +4,15 @@
 #include <cstdint>
 #include <string>
 #include <unordered_map>
+#include <memory>
 
 #include "../../../H8/IO/IOComponent.h"
 #include "../../../H8/Memory/Memory.h"
 #include "../../../Utilities/EventHandler.h"
 
 class Memory;
+
+class LcdBackend; // internal implementation detail
 
 class Lcd : public IOComponent
 {
@@ -38,10 +41,7 @@ public:
 
     EventHandler<FirmwareDrawEventArgs> OnFirmwareDraw;
 
-    Lcd()
-    {
-        memory = new Memory(0x3200);
-    }
+    explicit Lcd(bool useMonoBackend = false);
     
     void Transmit(Ssu* ssu) override;
     void Tick() override;
@@ -74,10 +74,10 @@ public:
     // These values are treated as 0xRRGGBB and combined with an opaque alpha
     // channel when writing into the ARGB color buffer.
     static constexpr std::array<uint32_t, 4> PALETTE = {
-        0xffffff,  // index 0: lightest
-        0x8787a1,
-        0x58588a,
-        0x1e1e29   // index 3: darkest
+        0xb7b8b0,  // index 0: lightest (#b7b8b0)
+        0x808173,  // index 1: (#808173)
+        0x666559,  // index 2: (#666559)
+        0x1f1a17   // index 3: darkest (#1f1a17)
     };
     static constexpr size_t TICKS = 4;
 
@@ -106,4 +106,15 @@ private:
     uint8_t walkerFrameIndex = 0;
     uint32_t lastWalkerHash = 0;
     bool hasWalkerHash = false;
+
+    // Which backend implementation is currently active (mono or color).
+    bool useMonoBackend = false;
+
+    // Backend strategy for the actual LCD logic (color, mono, etc.).
+    std::unique_ptr<LcdBackend> backend;
+
+    // Allow backend implementations to manipulate internal state directly.
+    friend class LcdBackend;
+    friend class LcdColorBackend;
+    friend class LcdMonoBackend;
 };

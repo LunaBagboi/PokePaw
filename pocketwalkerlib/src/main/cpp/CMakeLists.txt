@@ -15,6 +15,12 @@ file(GLOB_RECURSE POCKETWALKER_SRC
         "PocketWalker/*.h"
 )
 
+# Exclude the old PokeWalkerMono.cpp entry point which duplicated
+# the main PokeWalker implementation. The mono LCD behavior now
+# lives behind the Lcd backend interface, so LcdMono.cpp can be
+# compiled safely without duplicate symbols.
+list(FILTER POCKETWALKER_SRC EXCLUDE REGEX ".*PokeWalkerMono\\.cpp$")
+
 add_library(${CMAKE_PROJECT_NAME} SHARED
         pocketwalkerlib.cpp
         SleepConfig.cpp

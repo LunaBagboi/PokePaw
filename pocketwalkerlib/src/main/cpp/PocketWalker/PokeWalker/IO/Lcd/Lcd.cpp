@@ -1,9 +1,55 @@
 #include "Lcd.h"
 
 #include <print>
+#include <cstring>
 
 #include "LcdData.h"
 #include "../../../H8/Ssu/Ssu.h"
+
+// Backend interface and color implementation
+
+class LcdBackend
+{
+public:
+    virtual ~LcdBackend() = default;
+    virtual void Transmit(Lcd* lcd, Ssu* ssu) = 0;
+    virtual bool CanExecute(Lcd* lcd, Ssu* ssu) = 0;
+    virtual void Tick(Lcd* lcd) = 0;
+};
+
+class LcdColorBackend : public LcdBackend
+{
+public:
+    void Transmit(Lcd* lcd, Ssu* ssu) override;
+    bool CanExecute(Lcd* lcd, Ssu* ssu) override;
+    void Tick(Lcd* lcd) override;
+};
+
+// Mono backend: emulates the original grayscale LCD behavior without
+// any color sprite overlay. Derived from the legacy LcdMono.cpp
+// implementation.
+class LcdMonoBackend : public LcdBackend
+{
+public:
+    void Transmit(Lcd* lcd, Ssu* ssu) override;
+    bool CanExecute(Lcd* lcd, Ssu* ssu) override;
+    void Tick(Lcd* lcd) override;
+};
+
+Lcd::Lcd(bool useMono)
+{
+    memory = new Memory(0x3200);
+    useMonoBackend = useMono;
+
+    if (useMonoBackend)
+    {
+        backend = std::make_unique<LcdMonoBackend>();
+    }
+    else
+    {
+        backend = std::make_unique<LcdColorBackend>();
+    }
+}
 
 void Lcd::SetTestSprite(const uint32_t* pixels, const size_t count, const uint8_t width, const uint8_t height)
 {
@@ -56,56 +102,58 @@ void Lcd::ClearColorQueue()
     colorDrawQueue.clear();
 }
 
-void Lcd::Transmit(Ssu* ssu)
+// LcdColorBackend implementation
+
+void LcdColorBackend::Transmit(Lcd* lcd, Ssu* ssu)
 {
     uint8_t command = ssu->transmit;
-    switch (state) {
-    case Waiting:
+    switch (lcd->state) {
+    case Lcd::Waiting:
         {
             if (command <= 0xF) // low column
             {
-                column &= 0xF0;
-                column |= command & 0xF;
-                offset = 0;
+                lcd->column &= 0xF0;
+                lcd->column |= command & 0xF;
+                lcd->offset = 0;
             }
             else if (command >= 0x10 && command <= 0x17) // high column
             {
-                column &= 0xF;
-                column |= (command & 0b111) << 4;
-                offset = 0;
+                lcd->column &= 0xF;
+                lcd->column |= (command & 0b111) << 4;
+                lcd->offset = 0;
             }
             else if (command >= 0x40 && command <= 0x43)
             {
-                state = PageOffset;
+                lcd->state = Lcd::PageOffset;
             }
             else if (command >= 0xB0 && command <= 0xBF) // page
             {
-                page = command & 0xF;
+                lcd->page = command & 0xF;
             }
             else if (command == 0x81)
             {
-                state = Contrast;
+                lcd->state = Lcd::Contrast;
             }
             else if (command == 0xA9)
             {
-                powerSaveMode = true;
+                lcd->powerSaveMode = true;
             }
             else if (command == 0xE1)
             {
-                powerSaveMode = false;
+                lcd->powerSaveMode = false;
             }
             break;
         }
-    case Contrast:
+    case Lcd::Contrast:
         {
-            contrast = command;
-            state = Waiting;
+            lcd->contrast = command;
+            lcd->state = Lcd::Waiting;
             break;
         }
-    case PageOffset:
+    case Lcd::PageOffset:
         {
-            pageOffset = command / 8;
-            state = Waiting;
+            lcd->pageOffset = command / 8;
+            lcd->state = Lcd::Waiting;
             break;
         }
     }
@@ -114,51 +162,51 @@ void Lcd::Transmit(Ssu* ssu)
     ssu->status |= SsuFlags::Status::TRANSMIT_END;
 }
 
-bool Lcd::CanExecute(Ssu* ssu)
+bool LcdColorBackend::CanExecute(Lcd* /*lcd*/, Ssu* ssu)
 {
     return !(ssu->GetPort(Ssu::Port::PORT_1) & Ssu::PIN_1);
 }
 
-void Lcd::Tick()
+void LcdColorBackend::Tick(Lcd* lcd)
 {
-    constexpr size_t bufferSize = WIDTH * HEIGHT;
+    constexpr size_t bufferSize = Lcd::WIDTH * Lcd::HEIGHT;
     std::vector<uint8_t> paletteIndices(bufferSize);
 
-    if (!powerSaveMode)
+    if (!lcd->powerSaveMode)
     {
         // 1. Base grayscale render pass (also fills palette index buffer for LCD mono mode)
-        for (uint8_t y = 0; y < HEIGHT; y++)
+        for (uint8_t y = 0; y < Lcd::HEIGHT; y++)
         {
             const int bitOffset = y % 8;
-            const int pixelPage = y / 8 + pageOffset;
-            const int pixelPageOffset = pixelPage * TOTAL_COLUMNS * COLUMN_SIZE;
+            const int pixelPage = y / 8 + lcd->pageOffset;
+            const int pixelPageOffset = pixelPage * Lcd::TOTAL_COLUMNS * Lcd::COLUMN_SIZE;
 
-            for (uint8_t x = 0; x < WIDTH; x++)
+            for (uint8_t x = 0; x < Lcd::WIDTH; x++)
             {
-                const int baseIndex = COLUMN_SIZE * x + pixelPageOffset;
-                const uint8_t firstByte = memory->ReadByte(baseIndex);
-                const uint8_t secondByte = memory->ReadByte(baseIndex + 1);
+                const int baseIndex = Lcd::COLUMN_SIZE * x + pixelPageOffset;
+                const uint8_t firstByte = lcd->memory->ReadByte(baseIndex);
+                const uint8_t secondByte = lcd->memory->ReadByte(baseIndex + 1);
                 const uint8_t firstBit = (firstByte >> bitOffset) & 1;
                 const uint8_t secondBit = (secondByte >> bitOffset) & 1;
                 const uint8_t paletteIndex = (firstBit << 1) | secondBit;
 
-                paletteIndices[y * WIDTH + x] = paletteIndex;
+                paletteIndices[y * Lcd::WIDTH + x] = paletteIndex;
 
-                const uint32_t rgb = PALETTE[paletteIndex] & 0x00FFFFFFu;
-                colorBuffer[y * WIDTH + x] = 0xFF000000u | rgb;
+                const uint32_t rgb = Lcd::PALETTE[paletteIndex] & 0x00FFFFFFu;
+                lcd->colorBuffer[y * Lcd::WIDTH + x] = 0xFF000000u | rgb;
             }
         }
 
         // 2. Color sprite overlay pass (only affects colorBuffer for full color renderer)
-        for (const auto& command : colorDrawQueue)
+        for (const auto& command : lcd->colorDrawQueue)
         {
-            const auto it = colorSprites.find(command.spriteId);
-            if (it == colorSprites.end())
+            const auto it = lcd->colorSprites.find(command.spriteId);
+            if (it == lcd->colorSprites.end())
             {
                 continue;
             }
 
-            const SpriteData& sprite = it->second;
+            const Lcd::SpriteData& sprite = it->second;
             if (sprite.pixels.empty() || sprite.width == 0 || sprite.height == 0)
             {
                 continue;
@@ -177,7 +225,7 @@ void Lcd::Tick()
                     const int destX = command.x + sx;
                     const int destY = command.y + sy;
 
-                    if (destX < WIDTH && destY < HEIGHT)
+                    if (destX < Lcd::WIDTH && destY < Lcd::HEIGHT)
                     {
                         // For the main walker sprite, we drive the animation frame
                         // from the internal walkerFrameIndex so that the colored
@@ -185,7 +233,7 @@ void Lcd::Tick()
                         uint8_t effectiveFrameIndex = command.frameIndex;
                         if (isWalker)
                         {
-                            effectiveFrameIndex = walkerFrameIndex;
+                            effectiveFrameIndex = lcd->walkerFrameIndex;
                         }
 
                         const size_t spriteRow = static_cast<size_t>(effectiveFrameIndex) * frameHeight + static_cast<size_t>(sy);
@@ -204,7 +252,7 @@ void Lcd::Tick()
                                 // show through.
                                 if (alpha > 0)
                                 {
-                                    colorBuffer[destY * WIDTH + destX] = spritePixel;
+                                    lcd->colorBuffer[destY * Lcd::WIDTH + destX] = spritePixel;
                                 }
                                 else
                                 {
@@ -212,14 +260,14 @@ void Lcd::Tick()
                                     // fall back to the lightest LCD background shade
                                     // (index 0) so the area behind the walker matches
                                     // the normal screen "paper".
-                                    const uint32_t bgRgb = PALETTE[0] & 0x00FFFFFFu;
-                                    colorBuffer[destY * WIDTH + destX] = 0xFF000000u | bgRgb;
+                                    const uint32_t bgRgb = Lcd::PALETTE[0] & 0x00FFFFFFu;
+                                    lcd->colorBuffer[destY * Lcd::WIDTH + destX] = 0xFF000000u | bgRgb;
                                 }
                             }
                             else if (alpha > 0)
                             {
                                 // For other sprites, keep the usual alpha-over behavior.
-                                colorBuffer[destY * WIDTH + destX] = spritePixel;
+                                lcd->colorBuffer[destY * Lcd::WIDTH + destX] = spritePixel;
                             }
                         }
                     }
@@ -229,15 +277,136 @@ void Lcd::Tick()
     }
     else
     {
-        const uint32_t rgb = PALETTE[0] & 0x00FFFFFFu;
+        const uint32_t rgb = Lcd::PALETTE[0] & 0x00FFFFFFu;
         const uint32_t argb = 0xFF000000u | rgb;
         for (size_t i = 0; i < bufferSize; ++i) {
-            colorBuffer[i] = argb;
+            lcd->colorBuffer[i] = argb;
             paletteIndices[i] = 0;
         }
     }
 
-    OnDraw(paletteIndices.data());
+    lcd->OnDraw(paletteIndices.data());
 
-    ClearColorQueue();
+    lcd->ClearColorQueue();
+}
+
+// LcdMonoBackend implementation (legacy mono behavior)
+
+void LcdMonoBackend::Transmit(Lcd* lcd, Ssu* ssu)
+{
+    uint8_t command = ssu->transmit;
+    switch (lcd->state) {
+    case Lcd::Waiting:
+        {
+            if (command <= 0xF) // low column
+            {
+                lcd->column &= 0xF0;
+                lcd->column |= command & 0xF;
+                lcd->offset = 0;
+            }
+            else if (command >= 0x10 && command <= 0x17) // high column
+            {
+                lcd->column &= 0xF;
+                lcd->column |= (command & 0b111) << 4;
+                lcd->offset = 0;
+            }
+            else if (command >= 0x40 && command <= 0x43)
+            {
+                lcd->state = Lcd::PageOffset;
+            }
+            else if (command >= 0xB0 && command <= 0xBF) // page
+            {
+                lcd->page = command & 0xF;
+            }
+            else if (command == 0x81)
+            {
+                lcd->state = Lcd::Contrast;
+            }
+            else if (command == 0xA9)
+            {
+                lcd->powerSaveMode = true;
+            }
+            else if (command == 0xE1)
+            {
+                lcd->powerSaveMode = false;
+            }
+            break;
+        }
+    case Lcd::Contrast:
+        {
+            lcd->contrast = command;
+            lcd->state = Lcd::Waiting;
+            break;
+        }
+    case Lcd::PageOffset:
+        {
+            lcd->pageOffset = command / 8;
+            lcd->state = Lcd::Waiting;
+            break;
+        }
+    }
+
+    ssu->status |= SsuFlags::Status::TRANSMIT_EMPTY;
+    ssu->status |= SsuFlags::Status::TRANSMIT_END;
+}
+
+bool LcdMonoBackend::CanExecute(Lcd* /*lcd*/, Ssu* ssu)
+{
+    // TODO create larger component for handling multiple pins
+    return !(ssu->GetPort(Ssu::Port::PORT_1) & Ssu::PIN_1);
+}
+
+void LcdMonoBackend::Tick(Lcd* lcd)
+{
+    constexpr size_t bufferSize = Lcd::WIDTH * Lcd::HEIGHT;
+    const auto buffer = new uint8_t[bufferSize]();
+
+    if (!lcd->powerSaveMode)
+    {
+        for (uint8_t y = 0; y < Lcd::HEIGHT; y++)
+        {
+            const int bitOffset = y % 8;
+            const int pixelPage = y / 8 + lcd->pageOffset;
+            const int pixelPageOffset = pixelPage * Lcd::TOTAL_COLUMNS * Lcd::COLUMN_SIZE;
+
+            for (uint8_t x = 0; x < Lcd::WIDTH; x++)
+            {
+                const int baseIndex = Lcd::COLUMN_SIZE * x + pixelPageOffset;
+
+                const uint8_t firstByte = lcd->memory->ReadByte(baseIndex);
+                const uint8_t secondByte = lcd->memory->ReadByte(baseIndex + 1);
+
+                const uint8_t firstBit = (firstByte >> bitOffset) & 1;
+                const uint8_t secondBit = (secondByte >> bitOffset) & 1;
+
+                const uint8_t paletteIndex = (firstBit << 1) | secondBit;
+
+                const int bufferIndex = y * Lcd::WIDTH + x;
+                buffer[bufferIndex] = paletteIndex;
+            }
+        }
+    }
+    else
+    {
+        std::memset(buffer, 0, bufferSize); // Fill with palette index 0 for power save mode
+    }
+
+    lcd->OnDraw(buffer);
+}
+
+// Lcd public API delegates
+
+void Lcd::Transmit(Ssu* ssu)
+{
+    backend->Transmit(this, ssu);
+}
+
+bool Lcd::CanExecute(Ssu* ssu)
+{
+    return backend->CanExecute(this, ssu);
+}
+
+void Lcd::Tick()
+{
+    backend->Tick(this);
 }
