@@ -43,7 +43,10 @@ $RECYCLE.BIN/
 .externalNativeBuild
 .cxx
 local.properties
+Debug
 
+pokemon-shiny-icon-sprites
+pokemon-shiny-sprites
 font.ttf
 ResearchData
 #!/README.md

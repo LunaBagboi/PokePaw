@@ -1,0 +1,4064 @@
+{
+	"6_000": {
+		"name": "Bulbasaur",
+		"dex": "001",
+		"gender": "all",
+		"file": "Spr_4pw_001"
+	},
+	"6_001": {
+		"name": "Ivysaur",
+		"dex": "002",
+		"gender": "all",
+		"file": "Spr_4pw_002"
+	},
+	"6_002": {
+		"name": "Venusaur",
+		"dex": "003",
+		"gender": "male",
+		"file": "Spr_4pw_003_m"
+	},
+	"6_003": {
+		"name": "Charmander",
+		"dex": "004",
+		"gender": "all",
+		"file": "Spr_4pw_004"
+	},
+	"6_004": {
+		"name": "Charmeleon",
+		"dex": "005",
+		"gender": "all",
+		"file": "Spr_4pw_005"
+	},
+	"6_005": {
+		"name": "Charizard",
+		"dex": "006",
+		"gender": "all",
+		"file": "Spr_4pw_006"
+	},
+	"6_006": {
+		"name": "Squirtle",
+		"dex": "007",
+		"gender": "all",
+		"file": "Spr_4pw_007"
+	},
+	"6_007": {
+		"name": "Wartortle",
+		"dex": "008",
+		"gender": "all",
+		"file": "Spr_4pw_008"
+	},
+	"6_008": {
+		"name": "Blastoise",
+		"dex": "009",
+		"gender": "all",
+		"file": "Spr_4pw_009"
+	},
+	"6_009": {
+		"name": "Caterpie",
+		"dex": "010",
+		"gender": "all",
+		"file": "Spr_4pw_010"
+	},
+	"6_010": {
+		"name": "Metapod",
+		"dex": "011",
+		"gender": "all",
+		"file": "Spr_4pw_011"
+	},
+	"6_011": {
+		"name": "Butterfree",
+		"dex": "012",
+		"gender": "male",
+		"file": "Spr_4pw_012_m"
+	},
+	"6_012": {
+		"name": "Weedle",
+		"dex": "013",
+		"gender": "all",
+		"file": "Spr_4pw_013"
+	},
+	"6_013": {
+		"name": "Kakuna",
+		"dex": "014",
+		"gender": "all",
+		"file": "Spr_4pw_014"
+	},
+	"6_014": {
+		"name": "Beedrill",
+		"dex": "015",
+		"gender": "all",
+		"file": "Spr_4pw_015"
+	},
+	"6_015": {
+		"name": "Pidgey",
+		"dex": "016",
+		"gender": "all",
+		"file": "Spr_4pw_016"
+	},
+	"6_016": {
+		"name": "Pidgeotto",
+		"dex": "017",
+		"gender": "all",
+		"file": "Spr_4pw_017"
+	},
+	"6_017": {
+		"name": "Pidgeot",
+		"dex": "018",
+		"gender": "all",
+		"file": "Spr_4pw_018"
+	},
+	"6_018": {
+		"name": "Rattata",
+		"dex": "019",
+		"gender": "male",
+		"file": "Spr_4pw_019_m"
+	},
+	"6_019": {
+		"name": "Raticate",
+		"dex": "020",
+		"gender": "male",
+		"file": "Spr_4pw_020_m"
+	},
+	"6_020": {
+		"name": "Spearow",
+		"dex": "021",
+		"gender": "all",
+		"file": "Spr_4pw_021"
+	},
+	"6_021": {
+		"name": "Fearow",
+		"dex": "022",
+		"gender": "all",
+		"file": "Spr_4pw_022"
+	},
+	"6_022": {
+		"name": "Ekans",
+		"dex": "023",
+		"gender": "all",
+		"file": "Spr_4pw_023"
+	},
+	"6_023": {
+		"name": "Arbok",
+		"dex": "024",
+		"gender": "all",
+		"file": "Spr_4pw_024"
+	},
+	"6_024": {
+		"name": "Pikachu",
+		"dex": "025",
+		"gender": "male",
+		"file": "Spr_4pw_025_m"
+	},
+	"6_025": {
+		"name": "Raichu",
+		"dex": "026",
+		"gender": "male",
+		"file": "Spr_4pw_026_m"
+	},
+	"6_026": {
+		"name": "Sandshrew",
+		"dex": "027",
+		"gender": "all",
+		"file": "Spr_4pw_027"
+	},
+	"6_027": {
+		"name": "Sandslash",
+		"dex": "028",
+		"gender": "all",
+		"file": "Spr_4pw_028"
+	},
+	"6_028": {
+		"name": "Nidoran♀",
+		"dex": "029",
+		"gender": "all",
+		"file": "Spr_4pw_029"
+	},
+	"6_029": {
+		"name": "Nidorina",
+		"dex": "030",
+		"gender": "all",
+		"file": "Spr_4pw_030"
+	},
+	"6_030": {
+		"name": "Nidoqueen",
+		"dex": "031",
+		"gender": "all",
+		"file": "Spr_4pw_031"
+	},
+	"6_031": {
+		"name": "Nidoran♂",
+		"dex": "032",
+		"gender": "all",
+		"file": "Spr_4pw_032"
+	},
+	"6_032": {
+		"name": "Nidorino",
+		"dex": "033",
+		"gender": "all",
+		"file": "Spr_4pw_033"
+	},
+	"6_033": {
+		"name": "Nidoking",
+		"dex": "034",
+		"gender": "all",
+		"file": "Spr_4pw_034"
+	},
+	"6_034": {
+		"name": "Clefairy",
+		"dex": "035",
+		"gender": "all",
+		"file": "Spr_4pw_035"
+	},
+	"6_035": {
+		"name": "Clefable",
+		"dex": "036",
+		"gender": "all",
+		"file": "Spr_4pw_036"
+	},
+	"6_036": {
+		"name": "Vulpix",
+		"dex": "037",
+		"gender": "all",
+		"file": "Spr_4pw_037"
+	},
+	"6_037": {
+		"name": "Ninetales",
+		"dex": "038",
+		"gender": "all",
+		"file": "Spr_4pw_038"
+	},
+	"6_038": {
+		"name": "Jigglypuff",
+		"dex": "039",
+		"gender": "all",
+		"file": "Spr_4pw_039"
+	},
+	"6_039": {
+		"name": "Wigglytuff",
+		"dex": "040",
+		"gender": "all",
+		"file": "Spr_4pw_040"
+	},
+	"6_040": {
+		"name": "Zubat",
+		"dex": "041",
+		"gender": "male",
+		"file": "Spr_4pw_041_m"
+	},
+	"6_041": {
+		"name": "Golbat",
+		"dex": "042",
+		"gender": "male",
+		"file": "Spr_4pw_042_m"
+	},
+	"6_042": {
+		"name": "Oddish",
+		"dex": "043",
+		"gender": "all",
+		"file": "Spr_4pw_043"
+	},
+	"6_043": {
+		"name": "Gloom",
+		"dex": "044",
+		"gender": "male",
+		"file": "Spr_4pw_044_m"
+	},
+	"6_044": {
+		"name": "Vileplume",
+		"dex": "045",
+		"gender": "male",
+		"file": "Spr_4pw_045_m"
+	},
+	"6_045": {
+		"name": "Paras",
+		"dex": "046",
+		"gender": "all",
+		"file": "Spr_4pw_046"
+	},
+	"6_046": {
+		"name": "Parasect",
+		"dex": "047",
+		"gender": "all",
+		"file": "Spr_4pw_047"
+	},
+	"6_047": {
+		"name": "Venonat",
+		"dex": "048",
+		"gender": "all",
+		"file": "Spr_4pw_048"
+	},
+	"6_048": {
+		"name": "Venomoth",
+		"dex": "049",
+		"gender": "all",
+		"file": "Spr_4pw_049"
+	},
+	"6_049": {
+		"name": "Diglett",
+		"dex": "050",
+		"gender": "all",
+		"file": "Spr_4pw_050"
+	},
+	"6_050": {
+		"name": "Dugtrio",
+		"dex": "051",
+		"gender": "all",
+		"file": "Spr_4pw_051"
+	},
+	"6_051": {
+		"name": "Meowth",
+		"dex": "052",
+		"gender": "all",
+		"file": "Spr_4pw_052"
+	},
+	"6_052": {
+		"name": "Persian",
+		"dex": "053",
+		"gender": "all",
+		"file": "Spr_4pw_053"
+	},
+	"6_053": {
+		"name": "Psyduck",
+		"dex": "054",
+		"gender": "all",
+		"file": "Spr_4pw_054"
+	},
+	"6_054": {
+		"name": "Golduck",
+		"dex": "055",
+		"gender": "all",
+		"file": "Spr_4pw_055"
+	},
+	"6_055": {
+		"name": "Mankey",
+		"dex": "056",
+		"gender": "all",
+		"file": "Spr_4pw_056"
+	},
+	"6_056": {
+		"name": "Primeape",
+		"dex": "057",
+		"gender": "all",
+		"file": "Spr_4pw_057"
+	},
+	"6_057": {
+		"name": "Growlithe",
+		"dex": "058",
+		"gender": "all",
+		"file": "Spr_4pw_058"
+	},
+	"6_058": {
+		"name": "Arcanine",
+		"dex": "059",
+		"gender": "all",
+		"file": "Spr_4pw_059"
+	},
+	"6_059": {
+		"name": "Poliwag",
+		"dex": "060",
+		"gender": "all",
+		"file": "Spr_4pw_060"
+	},
+	"6_060": {
+		"name": "Poliwhirl",
+		"dex": "061",
+		"gender": "all",
+		"file": "Spr_4pw_061"
+	},
+	"6_061": {
+		"name": "Poliwrath",
+		"dex": "062",
+		"gender": "all",
+		"file": "Spr_4pw_062"
+	},
+	"6_062": {
+		"name": "Abra",
+		"dex": "063",
+		"gender": "all",
+		"file": "Spr_4pw_063"
+	},
+	"6_063": {
+		"name": "Kadabra",
+		"dex": "064",
+		"gender": "male",
+		"file": "Spr_4pw_064_m"
+	},
+	"6_064": {
+		"name": "Alakazam",
+		"dex": "065",
+		"gender": "male",
+		"file": "Spr_4pw_065_m"
+	},
+	"6_065": {
+		"name": "Machop",
+		"dex": "066",
+		"gender": "all",
+		"file": "Spr_4pw_066"
+	},
+	"6_066": {
+		"name": "Machoke",
+		"dex": "067",
+		"gender": "all",
+		"file": "Spr_4pw_067"
+	},
+	"6_067": {
+		"name": "Machamp",
+		"dex": "068",
+		"gender": "all",
+		"file": "Spr_4pw_068"
+	},
+	"6_068": {
+		"name": "Bellsprout",
+		"dex": "069",
+		"gender": "all",
+		"file": "Spr_4pw_069"
+	},
+	"6_069": {
+		"name": "Weepinbell",
+		"dex": "070",
+		"gender": "all",
+		"file": "Spr_4pw_070"
+	},
+	"6_070": {
+		"name": "Victreebel",
+		"dex": "071",
+		"gender": "all",
+		"file": "Spr_4pw_071"
+	},
+	"6_071": {
+		"name": "Tentacool",
+		"dex": "072",
+		"gender": "all",
+		"file": "Spr_4pw_072"
+	},
+	"6_072": {
+		"name": "Tentacruel",
+		"dex": "073",
+		"gender": "all",
+		"file": "Spr_4pw_073"
+	},
+	"6_073": {
+		"name": "Geodude",
+		"dex": "074",
+		"gender": "all",
+		"file": "Spr_4pw_074"
+	},
+	"6_074": {
+		"name": "Graveler",
+		"dex": "075",
+		"gender": "all",
+		"file": "Spr_4pw_075"
+	},
+	"6_075": {
+		"name": "Golem",
+		"dex": "076",
+		"gender": "all",
+		"file": "Spr_4pw_076"
+	},
+	"6_076": {
+		"name": "Ponyta",
+		"dex": "077",
+		"gender": "all",
+		"file": "Spr_4pw_077"
+	},
+	"6_077": {
+		"name": "Rapidash",
+		"dex": "078",
+		"gender": "all",
+		"file": "Spr_4pw_078"
+	},
+	"6_078": {
+		"name": "Slowpoke",
+		"dex": "079",
+		"gender": "all",
+		"file": "Spr_4pw_079"
+	},
+	"6_079": {
+		"name": "Slowbro",
+		"dex": "080",
+		"gender": "all",
+		"file": "Spr_4pw_080"
+	},
+	"6_080": {
+		"name": "Magnemite",
+		"dex": "081",
+		"gender": "all",
+		"file": "Spr_4pw_081"
+	},
+	"6_081": {
+		"name": "Magneton",
+		"dex": "082",
+		"gender": "all",
+		"file": "Spr_4pw_082"
+	},
+	"6_082": {
+		"name": "Farfetch'd",
+		"dex": "083",
+		"gender": "all",
+		"file": "Spr_4pw_083"
+	},
+	"6_083": {
+		"name": "Doduo",
+		"dex": "084",
+		"gender": "male",
+		"file": "Spr_4pw_084_m"
+	},
+	"6_084": {
+		"name": "Dodrio",
+		"dex": "085",
+		"gender": "male",
+		"file": "Spr_4pw_085_m"
+	},
+	"6_085": {
+		"name": "Seel",
+		"dex": "086",
+		"gender": "all",
+		"file": "Spr_4pw_086"
+	},
+	"6_086": {
+		"name": "Dewgong",
+		"dex": "087",
+		"gender": "all",
+		"file": "Spr_4pw_087"
+	},
+	"6_087": {
+		"name": "Grimer",
+		"dex": "088",
+		"gender": "all",
+		"file": "Spr_4pw_088"
+	},
+	"6_088": {
+		"name": "Muk",
+		"dex": "089",
+		"gender": "all",
+		"file": "Spr_4pw_089"
+	},
+	"6_089": {
+		"name": "Shellder",
+		"dex": "090",
+		"gender": "all",
+		"file": "Spr_4pw_090"
+	},
+	"6_090": {
+		"name": "Cloyster",
+		"dex": "091",
+		"gender": "all",
+		"file": "Spr_4pw_091"
+	},
+	"6_091": {
+		"name": "Gastly",
+		"dex": "092",
+		"gender": "all",
+		"file": "Spr_4pw_092"
+	},
+	"6_092": {
+		"name": "Haunter",
+		"dex": "093",
+		"gender": "all",
+		"file": "Spr_4pw_093"
+	},
+	"6_093": {
+		"name": "Gengar",
+		"dex": "094",
+		"gender": "all",
+		"file": "Spr_4pw_094"
+	},
+	"6_094": {
+		"name": "Onix",
+		"dex": "095",
+		"gender": "all",
+		"file": "Spr_4pw_095"
+	},
+	"6_095": {
+		"name": "Drowzee",
+		"dex": "096",
+		"gender": "all",
+		"file": "Spr_4pw_096"
+	},
+	"6_096": {
+		"name": "Hypno",
+		"dex": "097",
+		"gender": "male",
+		"file": "Spr_4pw_097_m"
+	},
+	"6_097": {
+		"name": "Krabby",
+		"dex": "098",
+		"gender": "all",
+		"file": "Spr_4pw_098"
+	},
+	"6_098": {
+		"name": "Kingler",
+		"dex": "099",
+		"gender": "all",
+		"file": "Spr_4pw_099"
+	},
+	"6_099": {
+		"name": "Voltorb",
+		"dex": "100",
+		"gender": "all",
+		"file": "Spr_4pw_100"
+	},
+	"6_100": {
+		"name": "Electrode",
+		"dex": "101",
+		"gender": "all",
+		"file": "Spr_4pw_101"
+	},
+	"6_101": {
+		"name": "Exeggcute",
+		"dex": "102",
+		"gender": "all",
+		"file": "Spr_4pw_102"
+	},
+	"6_102": {
+		"name": "Exeggutor",
+		"dex": "103",
+		"gender": "all",
+		"file": "Spr_4pw_103"
+	},
+	"6_103": {
+		"name": "Cubone",
+		"dex": "104",
+		"gender": "all",
+		"file": "Spr_4pw_104"
+	},
+	"6_104": {
+		"name": "Marowak",
+		"dex": "105",
+		"gender": "all",
+		"file": "Spr_4pw_105"
+	},
+	"6_105": {
+		"name": "Hitmonlee",
+		"dex": "106",
+		"gender": "all",
+		"file": "Spr_4pw_106"
+	},
+	"6_106": {
+		"name": "Hitmonchan",
+		"dex": "107",
+		"gender": "all",
+		"file": "Spr_4pw_107"
+	},
+	"6_107": {
+		"name": "Lickitung",
+		"dex": "108",
+		"gender": "all",
+		"file": "Spr_4pw_108"
+	},
+	"6_108": {
+		"name": "Koffing",
+		"dex": "109",
+		"gender": "all",
+		"file": "Spr_4pw_109"
+	},
+	"6_109": {
+		"name": "Weezing",
+		"dex": "110",
+		"gender": "all",
+		"file": "Spr_4pw_110"
+	},
+	"6_110": {
+		"name": "Rhyhorn",
+		"dex": "111",
+		"gender": "male",
+		"file": "Spr_4pw_111_m"
+	},
+	"6_111": {
+		"name": "Rhydon",
+		"dex": "112",
+		"gender": "male",
+		"file": "Spr_4pw_112_m"
+	},
+	"6_112": {
+		"name": "Chansey",
+		"dex": "113",
+		"gender": "all",
+		"file": "Spr_4pw_113"
+	},
+	"6_113": {
+		"name": "Tangela",
+		"dex": "114",
+		"gender": "all",
+		"file": "Spr_4pw_114"
+	},
+	"6_114": {
+		"name": "Kangaskhan",
+		"dex": "115",
+		"gender": "all",
+		"file": "Spr_4pw_115"
+	},
+	"6_115": {
+		"name": "Horsea",
+		"dex": "116",
+		"gender": "all",
+		"file": "Spr_4pw_116"
+	},
+	"6_116": {
+		"name": "Seadra",
+		"dex": "117",
+		"gender": "all",
+		"file": "Spr_4pw_117"
+	},
+	"6_117": {
+		"name": "Goldeen",
+		"dex": "118",
+		"gender": "male",
+		"file": "Spr_4pw_118_m"
+	},
+	"6_118": {
+		"name": "Seaking",
+		"dex": "119",
+		"gender": "male",
+		"file": "Spr_4pw_119_m"
+	},
+	"6_119": {
+		"name": "Staryu",
+		"dex": "120",
+		"gender": "all",
+		"file": "Spr_4pw_120"
+	},
+	"6_120": {
+		"name": "Starmie",
+		"dex": "121",
+		"gender": "all",
+		"file": "Spr_4pw_121"
+	},
+	"6_121": {
+		"name": "Mr. Mime",
+		"dex": "122",
+		"gender": "all",
+		"file": "Spr_4pw_122"
+	},
+	"6_122": {
+		"name": "Scyther",
+		"dex": "123",
+		"gender": "male",
+		"file": "Spr_4pw_123_m"
+	},
+	"6_123": {
+		"name": "Jynx",
+		"dex": "124",
+		"gender": "all",
+		"file": "Spr_4pw_124"
+	},
+	"6_124": {
+		"name": "Electabuzz",
+		"dex": "125",
+		"gender": "all",
+		"file": "Spr_4pw_125"
+	},
+	"6_125": {
+		"name": "Magmar",
+		"dex": "126",
+		"gender": "all",
+		"file": "Spr_4pw_126"
+	},
+	"6_126": {
+		"name": "Pinsir",
+		"dex": "127",
+		"gender": "all",
+		"file": "Spr_4pw_127"
+	},
+	"6_127": {
+		"name": "Tauros",
+		"dex": "128",
+		"gender": "all",
+		"file": "Spr_4pw_128"
+	},
+	"6_128": {
+		"name": "Magikarp",
+		"dex": "129",
+		"gender": "male",
+		"file": "Spr_4pw_129_m"
+	},
+	"6_129": {
+		"name": "Gyarados",
+		"dex": "130",
+		"gender": "male",
+		"file": "Spr_4pw_130_m"
+	},
+	"6_130": {
+		"name": "Lapras",
+		"dex": "131",
+		"gender": "all",
+		"file": "Spr_4pw_131"
+	},
+	"6_131": {
+		"name": "Ditto",
+		"dex": "132",
+		"gender": "all",
+		"file": "Spr_4pw_132"
+	},
+	"6_132": {
+		"name": "Eevee",
+		"dex": "133",
+		"gender": "all",
+		"file": "Spr_4pw_133"
+	},
+	"6_133": {
+		"name": "Vaporeon",
+		"dex": "134",
+		"gender": "all",
+		"file": "Spr_4pw_134"
+	},
+	"6_134": {
+		"name": "Jolteon",
+		"dex": "135",
+		"gender": "all",
+		"file": "Spr_4pw_135"
+	},
+	"6_135": {
+		"name": "Flareon",
+		"dex": "136",
+		"gender": "all",
+		"file": "Spr_4pw_136"
+	},
+	"6_136": {
+		"name": "Porygon",
+		"dex": "137",
+		"gender": "all",
+		"file": "Spr_4pw_137"
+	},
+	"6_137": {
+		"name": "Omanyte",
+		"dex": "138",
+		"gender": "all",
+		"file": "Spr_4pw_138"
+	},
+	"6_138": {
+		"name": "Omastar",
+		"dex": "139",
+		"gender": "all",
+		"file": "Spr_4pw_139"
+	},
+	"6_139": {
+		"name": "Kabuto",
+		"dex": "140",
+		"gender": "all",
+		"file": "Spr_4pw_140"
+	},
+	"6_140": {
+		"name": "Kabutops",
+		"dex": "141",
+		"gender": "all",
+		"file": "Spr_4pw_141"
+	},
+	"6_141": {
+		"name": "Aerodactyl",
+		"dex": "142",
+		"gender": "all",
+		"file": "Spr_4pw_142"
+	},
+	"6_142": {
+		"name": "Snorlax",
+		"dex": "143",
+		"gender": "all",
+		"file": "Spr_4pw_143"
+	},
+	"6_143": {
+		"name": "Articuno",
+		"dex": "144",
+		"gender": "all",
+		"file": "Spr_4pw_144"
+	},
+	"6_144": {
+		"name": "Zapdos",
+		"dex": "145",
+		"gender": "all",
+		"file": "Spr_4pw_145"
+	},
+	"6_145": {
+		"name": "Moltres",
+		"dex": "146",
+		"gender": "all",
+		"file": "Spr_4pw_146"
+	},
+	"6_146": {
+		"name": "Dratini",
+		"dex": "147",
+		"gender": "all",
+		"file": "Spr_4pw_147"
+	},
+	"6_147": {
+		"name": "Dragonair",
+		"dex": "148",
+		"gender": "all",
+		"file": "Spr_4pw_148"
+	},
+	"6_148": {
+		"name": "Dragonite",
+		"dex": "149",
+		"gender": "all",
+		"file": "Spr_4pw_149"
+	},
+	"6_149": {
+		"name": "Mewtwo",
+		"dex": "150",
+		"gender": "all",
+		"file": "Spr_4pw_150"
+	},
+	"6_150": {
+		"name": "Mew",
+		"dex": "151",
+		"gender": "all",
+		"file": "Spr_4pw_151"
+	},
+	"6_151": {
+		"name": "Chikorita",
+		"dex": "152",
+		"gender": "all",
+		"file": "Spr_4pw_152"
+	},
+	"6_152": {
+		"name": "Bayleef",
+		"dex": "153",
+		"gender": "all",
+		"file": "Spr_4pw_153"
+	},
+	"6_153": {
+		"name": "Meganium",
+		"dex": "154",
+		"gender": "male",
+		"file": "Spr_4pw_154_m"
+	},
+	"6_154": {
+		"name": "Cyndaquil",
+		"dex": "155",
+		"gender": "all",
+		"file": "Spr_4pw_155"
+	},
+	"6_155": {
+		"name": "Quilava",
+		"dex": "156",
+		"gender": "all",
+		"file": "Spr_4pw_156"
+	},
+	"6_156": {
+		"name": "Typhlosion",
+		"dex": "157",
+		"gender": "all",
+		"file": "Spr_4pw_157"
+	},
+	"6_157": {
+		"name": "Totodile",
+		"dex": "158",
+		"gender": "all",
+		"file": "Spr_4pw_158"
+	},
+	"6_158": {
+		"name": "Croconaw",
+		"dex": "159",
+		"gender": "all",
+		"file": "Spr_4pw_159"
+	},
+	"6_159": {
+		"name": "Feraligatr",
+		"dex": "160",
+		"gender": "all",
+		"file": "Spr_4pw_160"
+	},
+	"6_160": {
+		"name": "Sentret",
+		"dex": "161",
+		"gender": "all",
+		"file": "Spr_4pw_161"
+	},
+	"6_161": {
+		"name": "Furret",
+		"dex": "162",
+		"gender": "all",
+		"file": "Spr_4pw_162"
+	},
+	"6_162": {
+		"name": "Hoothoot",
+		"dex": "163",
+		"gender": "all",
+		"file": "Spr_4pw_163"
+	},
+	"6_163": {
+		"name": "Noctowl",
+		"dex": "164",
+		"gender": "all",
+		"file": "Spr_4pw_164"
+	},
+	"6_164": {
+		"name": "Ledyba",
+		"dex": "165",
+		"gender": "male",
+		"file": "Spr_4pw_165_m"
+	},
+	"6_165": {
+		"name": "Ledian",
+		"dex": "166",
+		"gender": "male",
+		"file": "Spr_4pw_166_m"
+	},
+	"6_166": {
+		"name": "Spinarak",
+		"dex": "167",
+		"gender": "all",
+		"file": "Spr_4pw_167"
+	},
+	"6_167": {
+		"name": "Ariados",
+		"dex": "168",
+		"gender": "all",
+		"file": "Spr_4pw_168"
+	},
+	"6_168": {
+		"name": "Crobat",
+		"dex": "169",
+		"gender": "all",
+		"file": "Spr_4pw_169"
+	},
+	"6_169": {
+		"name": "Chinchou",
+		"dex": "170",
+		"gender": "all",
+		"file": "Spr_4pw_170"
+	},
+	"6_170": {
+		"name": "Lanturn",
+		"dex": "171",
+		"gender": "all",
+		"file": "Spr_4pw_171"
+	},
+	"6_171": {
+		"name": "Pichu",
+		"dex": "172",
+		"gender": "all",
+		"file": "Spr_4pw_172"
+	},
+	"6_172": {
+		"name": "Cleffa",
+		"dex": "173",
+		"gender": "all",
+		"file": "Spr_4pw_173"
+	},
+	"6_173": {
+		"name": "Igglybuff",
+		"dex": "174",
+		"gender": "all",
+		"file": "Spr_4pw_174"
+	},
+	"6_174": {
+		"name": "Togepi",
+		"dex": "175",
+		"gender": "all",
+		"file": "Spr_4pw_175"
+	},
+	"6_175": {
+		"name": "Togetic",
+		"dex": "176",
+		"gender": "all",
+		"file": "Spr_4pw_176"
+	},
+	"6_176": {
+		"name": "Natu",
+		"dex": "177",
+		"gender": "all",
+		"file": "Spr_4pw_177"
+	},
+	"6_177": {
+		"name": "Xatu",
+		"dex": "178",
+		"gender": "male",
+		"file": "Spr_4pw_178_m"
+	},
+	"6_178": {
+		"name": "Mareep",
+		"dex": "179",
+		"gender": "all",
+		"file": "Spr_4pw_179"
+	},
+	"6_179": {
+		"name": "Flaaffy",
+		"dex": "180",
+		"gender": "all",
+		"file": "Spr_4pw_180"
+	},
+	"6_180": {
+		"name": "Ampharos",
+		"dex": "181",
+		"gender": "all",
+		"file": "Spr_4pw_181"
+	},
+	"6_181": {
+		"name": "Bellossom",
+		"dex": "182",
+		"gender": "all",
+		"file": "Spr_4pw_182"
+	},
+	"6_182": {
+		"name": "Marill",
+		"dex": "183",
+		"gender": "all",
+		"file": "Spr_4pw_183"
+	},
+	"6_183": {
+		"name": "Azumarill",
+		"dex": "184",
+		"gender": "all",
+		"file": "Spr_4pw_184"
+	},
+	"6_184": {
+		"name": "Sudowoodo",
+		"dex": "185",
+		"gender": "male",
+		"file": "Spr_4pw_185_m"
+	},
+	"6_185": {
+		"name": "Politoed",
+		"dex": "186",
+		"gender": "male",
+		"file": "Spr_4pw_186_m"
+	},
+	"6_186": {
+		"name": "Hoppip",
+		"dex": "187",
+		"gender": "all",
+		"file": "Spr_4pw_187"
+	},
+	"6_187": {
+		"name": "Skiploom",
+		"dex": "188",
+		"gender": "all",
+		"file": "Spr_4pw_188"
+	},
+	"6_188": {
+		"name": "Jumpluff",
+		"dex": "189",
+		"gender": "all",
+		"file": "Spr_4pw_189"
+	},
+	"6_189": {
+		"name": "Aipom",
+		"dex": "190",
+		"gender": "male",
+		"file": "Spr_4pw_190_m"
+	},
+	"6_190": {
+		"name": "Sunkern",
+		"dex": "191",
+		"gender": "all",
+		"file": "Spr_4pw_191"
+	},
+	"6_191": {
+		"name": "Sunflora",
+		"dex": "192",
+		"gender": "all",
+		"file": "Spr_4pw_192"
+	},
+	"6_192": {
+		"name": "Yanma",
+		"dex": "193",
+		"gender": "all",
+		"file": "Spr_4pw_193"
+	},
+	"6_193": {
+		"name": "Wooper",
+		"dex": "194",
+		"gender": "male",
+		"file": "Spr_4pw_194_m"
+	},
+	"6_194": {
+		"name": "Quagsire",
+		"dex": "195",
+		"gender": "male",
+		"file": "Spr_4pw_195_m"
+	},
+	"6_195": {
+		"name": "Espeon",
+		"dex": "196",
+		"gender": "all",
+		"file": "Spr_4pw_196"
+	},
+	"6_196": {
+		"name": "Umbreon",
+		"dex": "197",
+		"gender": "all",
+		"file": "Spr_4pw_197"
+	},
+	"6_197": {
+		"name": "Murkrow",
+		"dex": "198",
+		"gender": "male",
+		"file": "Spr_4pw_198_m"
+	},
+	"6_198": {
+		"name": "Slowking",
+		"dex": "199",
+		"gender": "all",
+		"file": "Spr_4pw_199"
+	},
+	"6_199": {
+		"name": "Misdreavus",
+		"dex": "200",
+		"gender": "all",
+		"file": "Spr_4pw_200"
+	},
+	"6_200": {
+		"name": "Unown",
+		"dex": "201",
+		"gender": "all",
+		"file": "Spr_4pw_201"
+	},
+	"6_201": {
+		"name": "Wobbuffet",
+		"dex": "202",
+		"gender": "male",
+		"file": "Spr_4pw_202_m"
+	},
+	"6_202": {
+		"name": "Girafarig",
+		"dex": "203",
+		"gender": "male",
+		"file": "Spr_4pw_203_m"
+	},
+	"6_203": {
+		"name": "Pineco",
+		"dex": "204",
+		"gender": "all",
+		"file": "Spr_4pw_204"
+	},
+	"6_204": {
+		"name": "Forretress",
+		"dex": "205",
+		"gender": "all",
+		"file": "Spr_4pw_205"
+	},
+	"6_205": {
+		"name": "Dunsparce",
+		"dex": "206",
+		"gender": "all",
+		"file": "Spr_4pw_206"
+	},
+	"6_206": {
+		"name": "Gligar",
+		"dex": "207",
+		"gender": "male",
+		"file": "Spr_4pw_207_m"
+	},
+	"6_207": {
+		"name": "Steelix",
+		"dex": "208",
+		"gender": "male",
+		"file": "Spr_4pw_208_m"
+	},
+	"6_208": {
+		"name": "Snubbull",
+		"dex": "209",
+		"gender": "all",
+		"file": "Spr_4pw_209"
+	},
+	"6_209": {
+		"name": "Granbull",
+		"dex": "210",
+		"gender": "all",
+		"file": "Spr_4pw_210"
+	},
+	"6_210": {
+		"name": "Qwilfish",
+		"dex": "211",
+		"gender": "all",
+		"file": "Spr_4pw_211"
+	},
+	"6_211": {
+		"name": "Scizor",
+		"dex": "212",
+		"gender": "male",
+		"file": "Spr_4pw_212_m"
+	},
+	"6_212": {
+		"name": "Shuckle",
+		"dex": "213",
+		"gender": "all",
+		"file": "Spr_4pw_213"
+	},
+	"6_213": {
+		"name": "Heracross",
+		"dex": "214",
+		"gender": "male",
+		"file": "Spr_4pw_214_m"
+	},
+	"6_214": {
+		"name": "Sneasel",
+		"dex": "215",
+		"gender": "male",
+		"file": "Spr_4pw_215_m"
+	},
+	"6_215": {
+		"name": "Teddiursa",
+		"dex": "216",
+		"gender": "all",
+		"file": "Spr_4pw_216"
+	},
+	"6_216": {
+		"name": "Ursaring",
+		"dex": "217",
+		"gender": "male",
+		"file": "Spr_4pw_217_m"
+	},
+	"6_217": {
+		"name": "Slugma",
+		"dex": "218",
+		"gender": "all",
+		"file": "Spr_4pw_218"
+	},
+	"6_218": {
+		"name": "Magcargo",
+		"dex": "219",
+		"gender": "all",
+		"file": "Spr_4pw_219"
+	},
+	"6_219": {
+		"name": "Swinub",
+		"dex": "220",
+		"gender": "all",
+		"file": "Spr_4pw_220"
+	},
+	"6_220": {
+		"name": "Piloswine",
+		"dex": "221",
+		"gender": "male",
+		"file": "Spr_4pw_221_m"
+	},
+	"6_221": {
+		"name": "Corsola",
+		"dex": "222",
+		"gender": "all",
+		"file": "Spr_4pw_222"
+	},
+	"6_222": {
+		"name": "Remoraid",
+		"dex": "223",
+		"gender": "all",
+		"file": "Spr_4pw_223"
+	},
+	"6_223": {
+		"name": "Octillery",
+		"dex": "224",
+		"gender": "male",
+		"file": "Spr_4pw_224_m"
+	},
+	"6_224": {
+		"name": "Delibird",
+		"dex": "225",
+		"gender": "all",
+		"file": "Spr_4pw_225"
+	},
+	"6_225": {
+		"name": "Mantine",
+		"dex": "226",
+		"gender": "all",
+		"file": "Spr_4pw_226"
+	},
+	"6_226": {
+		"name": "Skarmory",
+		"dex": "227",
+		"gender": "all",
+		"file": "Spr_4pw_227"
+	},
+	"6_227": {
+		"name": "Houndour",
+		"dex": "228",
+		"gender": "all",
+		"file": "Spr_4pw_228"
+	},
+	"6_228": {
+		"name": "Houndoom",
+		"dex": "229",
+		"gender": "male",
+		"file": "Spr_4pw_229_m"
+	},
+	"6_229": {
+		"name": "Kingdra",
+		"dex": "230",
+		"gender": "all",
+		"file": "Spr_4pw_230"
+	},
+	"6_230": {
+		"name": "Phanpy",
+		"dex": "231",
+		"gender": "all",
+		"file": "Spr_4pw_231"
+	},
+	"6_231": {
+		"name": "Donphan",
+		"dex": "232",
+		"gender": "male",
+		"file": "Spr_4pw_232_m"
+	},
+	"6_232": {
+		"name": "Porygon2",
+		"dex": "233",
+		"gender": "all",
+		"file": "Spr_4pw_233"
+	},
+	"6_233": {
+		"name": "Stantler",
+		"dex": "234",
+		"gender": "all",
+		"file": "Spr_4pw_234"
+	},
+	"6_234": {
+		"name": "Smeargle",
+		"dex": "235",
+		"gender": "all",
+		"file": "Spr_4pw_235"
+	},
+	"6_235": {
+		"name": "Tyrogue",
+		"dex": "236",
+		"gender": "all",
+		"file": "Spr_4pw_236"
+	},
+	"6_236": {
+		"name": "Hitmontop",
+		"dex": "237",
+		"gender": "all",
+		"file": "Spr_4pw_237"
+	},
+	"6_237": {
+		"name": "Smoochum",
+		"dex": "238",
+		"gender": "all",
+		"file": "Spr_4pw_238"
+	},
+	"6_238": {
+		"name": "Elekid",
+		"dex": "239",
+		"gender": "all",
+		"file": "Spr_4pw_239"
+	},
+	"6_239": {
+		"name": "Magby",
+		"dex": "240",
+		"gender": "all",
+		"file": "Spr_4pw_240"
+	},
+	"6_240": {
+		"name": "Miltank",
+		"dex": "241",
+		"gender": "all",
+		"file": "Spr_4pw_241"
+	},
+	"6_241": {
+		"name": "Blissey",
+		"dex": "242",
+		"gender": "all",
+		"file": "Spr_4pw_242"
+	},
+	"6_242": {
+		"name": "Raikou",
+		"dex": "243",
+		"gender": "all",
+		"file": "Spr_4pw_243"
+	},
+	"6_243": {
+		"name": "Entei",
+		"dex": "244",
+		"gender": "all",
+		"file": "Spr_4pw_244"
+	},
+	"6_244": {
+		"name": "Suicune",
+		"dex": "245",
+		"gender": "all",
+		"file": "Spr_4pw_245"
+	},
+	"6_245": {
+		"name": "Larvitar",
+		"dex": "246",
+		"gender": "all",
+		"file": "Spr_4pw_246"
+	},
+	"6_246": {
+		"name": "Pupitar",
+		"dex": "247",
+		"gender": "all",
+		"file": "Spr_4pw_247"
+	},
+	"6_247": {
+		"name": "Tyranitar",
+		"dex": "248",
+		"gender": "all",
+		"file": "Spr_4pw_248"
+	},
+	"6_248": {
+		"name": "Lugia",
+		"dex": "249",
+		"gender": "all",
+		"file": "Spr_4pw_249"
+	},
+	"6_249": {
+		"name": "Ho-Oh",
+		"dex": "250",
+		"gender": "all",
+		"file": "Spr_4pw_250"
+	},
+	"6_250": {
+		"name": "Celebi",
+		"dex": "251",
+		"gender": "all",
+		"file": "Spr_4pw_251"
+	},
+	"6_251": {
+		"name": "Treecko",
+		"dex": "252",
+		"gender": "all",
+		"file": "Spr_4pw_252"
+	},
+	"6_252": {
+		"name": "Grovyle",
+		"dex": "253",
+		"gender": "all",
+		"file": "Spr_4pw_253"
+	},
+	"6_253": {
+		"name": "Sceptile",
+		"dex": "254",
+		"gender": "all",
+		"file": "Spr_4pw_254"
+	},
+	"6_254": {
+		"name": "Torchic",
+		"dex": "255",
+		"gender": "male",
+		"file": "Spr_4pw_255_m"
+	},
+	"6_255": {
+		"name": "Combusken",
+		"dex": "256",
+		"gender": "male",
+		"file": "Spr_4pw_256_m"
+	},
+	"6_256": {
+		"name": "Blaziken",
+		"dex": "257",
+		"gender": "male",
+		"file": "Spr_4pw_257_m"
+	},
+	"6_257": {
+		"name": "Mudkip",
+		"dex": "258",
+		"gender": "all",
+		"file": "Spr_4pw_258"
+	},
+	"6_258": {
+		"name": "Marshtomp",
+		"dex": "259",
+		"gender": "all",
+		"file": "Spr_4pw_259"
+	},
+	"6_259": {
+		"name": "Swampert",
+		"dex": "260",
+		"gender": "all",
+		"file": "Spr_4pw_260"
+	},
+	"6_260": {
+		"name": "Poochyena",
+		"dex": "261",
+		"gender": "all",
+		"file": "Spr_4pw_261"
+	},
+	"6_261": {
+		"name": "Mightyena",
+		"dex": "262",
+		"gender": "all",
+		"file": "Spr_4pw_262"
+	},
+	"6_262": {
+		"name": "Zigzagoon",
+		"dex": "263",
+		"gender": "all",
+		"file": "Spr_4pw_263"
+	},
+	"6_263": {
+		"name": "Linoone",
+		"dex": "264",
+		"gender": "all",
+		"file": "Spr_4pw_264"
+	},
+	"6_264": {
+		"name": "Wurmple",
+		"dex": "265",
+		"gender": "all",
+		"file": "Spr_4pw_265"
+	},
+	"6_265": {
+		"name": "Silcoon",
+		"dex": "266",
+		"gender": "all",
+		"file": "Spr_4pw_266"
+	},
+	"6_266": {
+		"name": "Beautifly",
+		"dex": "267",
+		"gender": "male",
+		"file": "Spr_4pw_267_m"
+	},
+	"6_267": {
+		"name": "Cascoon",
+		"dex": "268",
+		"gender": "all",
+		"file": "Spr_4pw_268"
+	},
+	"6_268": {
+		"name": "Dustox",
+		"dex": "269",
+		"gender": "male",
+		"file": "Spr_4pw_269_m"
+	},
+	"6_269": {
+		"name": "Lotad",
+		"dex": "270",
+		"gender": "all",
+		"file": "Spr_4pw_270"
+	},
+	"6_270": {
+		"name": "Lombre",
+		"dex": "271",
+		"gender": "all",
+		"file": "Spr_4pw_271"
+	},
+	"6_271": {
+		"name": "Ludicolo",
+		"dex": "272",
+		"gender": "male",
+		"file": "Spr_4pw_272_m"
+	},
+	"6_272": {
+		"name": "Seedot",
+		"dex": "273",
+		"gender": "all",
+		"file": "Spr_4pw_273"
+	},
+	"6_273": {
+		"name": "Nuzleaf",
+		"dex": "274",
+		"gender": "male",
+		"file": "Spr_4pw_274_m"
+	},
+	"6_274": {
+		"name": "Shiftry",
+		"dex": "275",
+		"gender": "male",
+		"file": "Spr_4pw_275_m"
+	},
+	"6_275": {
+		"name": "Taillow",
+		"dex": "276",
+		"gender": "all",
+		"file": "Spr_4pw_276"
+	},
+	"6_276": {
+		"name": "Swellow",
+		"dex": "277",
+		"gender": "all",
+		"file": "Spr_4pw_277"
+	},
+	"6_277": {
+		"name": "Wingull",
+		"dex": "278",
+		"gender": "all",
+		"file": "Spr_4pw_278"
+	},
+	"6_278": {
+		"name": "Pelipper",
+		"dex": "279",
+		"gender": "all",
+		"file": "Spr_4pw_279"
+	},
+	"6_279": {
+		"name": "Ralts",
+		"dex": "280",
+		"gender": "all",
+		"file": "Spr_4pw_280"
+	},
+	"6_280": {
+		"name": "Kirlia",
+		"dex": "281",
+		"gender": "all",
+		"file": "Spr_4pw_281"
+	},
+	"6_281": {
+		"name": "Gardevoir",
+		"dex": "282",
+		"gender": "all",
+		"file": "Spr_4pw_282"
+	},
+	"6_282": {
+		"name": "Surskit",
+		"dex": "283",
+		"gender": "all",
+		"file": "Spr_4pw_283"
+	},
+	"6_283": {
+		"name": "Masquerain",
+		"dex": "284",
+		"gender": "all",
+		"file": "Spr_4pw_284"
+	},
+	"6_284": {
+		"name": "Shroomish",
+		"dex": "285",
+		"gender": "all",
+		"file": "Spr_4pw_285"
+	},
+	"6_285": {
+		"name": "Breloom",
+		"dex": "286",
+		"gender": "all",
+		"file": "Spr_4pw_286"
+	},
+	"6_286": {
+		"name": "Slakoth",
+		"dex": "287",
+		"gender": "all",
+		"file": "Spr_4pw_287"
+	},
+	"6_287": {
+		"name": "Vigoroth",
+		"dex": "288",
+		"gender": "all",
+		"file": "Spr_4pw_288"
+	},
+	"6_288": {
+		"name": "Slaking",
+		"dex": "289",
+		"gender": "all",
+		"file": "Spr_4pw_289"
+	},
+	"6_289": {
+		"name": "Nincada",
+		"dex": "290",
+		"gender": "all",
+		"file": "Spr_4pw_290"
+	},
+	"6_290": {
+		"name": "Ninjask",
+		"dex": "291",
+		"gender": "all",
+		"file": "Spr_4pw_291"
+	},
+	"6_291": {
+		"name": "Shedinja",
+		"dex": "292",
+		"gender": "all",
+		"file": "Spr_4pw_292"
+	},
+	"6_292": {
+		"name": "Whismur",
+		"dex": "293",
+		"gender": "all",
+		"file": "Spr_4pw_293"
+	},
+	"6_293": {
+		"name": "Loudred",
+		"dex": "294",
+		"gender": "all",
+		"file": "Spr_4pw_294"
+	},
+	"6_294": {
+		"name": "Exploud",
+		"dex": "295",
+		"gender": "all",
+		"file": "Spr_4pw_295"
+	},
+	"6_295": {
+		"name": "Makuhita",
+		"dex": "296",
+		"gender": "all",
+		"file": "Spr_4pw_296"
+	},
+	"6_296": {
+		"name": "Hariyama",
+		"dex": "297",
+		"gender": "all",
+		"file": "Spr_4pw_297"
+	},
+	"6_297": {
+		"name": "Azurill",
+		"dex": "298",
+		"gender": "all",
+		"file": "Spr_4pw_298"
+	},
+	"6_298": {
+		"name": "Nosepass",
+		"dex": "299",
+		"gender": "all",
+		"file": "Spr_4pw_299"
+	},
+	"6_299": {
+		"name": "Skitty",
+		"dex": "300",
+		"gender": "all",
+		"file": "Spr_4pw_300"
+	},
+	"6_300": {
+		"name": "Delcatty",
+		"dex": "301",
+		"gender": "all",
+		"file": "Spr_4pw_301"
+	},
+	"6_301": {
+		"name": "Sableye",
+		"dex": "302",
+		"gender": "all",
+		"file": "Spr_4pw_302"
+	},
+	"6_302": {
+		"name": "Mawile",
+		"dex": "303",
+		"gender": "all",
+		"file": "Spr_4pw_303"
+	},
+	"6_303": {
+		"name": "Aron",
+		"dex": "304",
+		"gender": "all",
+		"file": "Spr_4pw_304"
+	},
+	"6_304": {
+		"name": "Lairon",
+		"dex": "305",
+		"gender": "all",
+		"file": "Spr_4pw_305"
+	},
+	"6_305": {
+		"name": "Aggron",
+		"dex": "306",
+		"gender": "all",
+		"file": "Spr_4pw_306"
+	},
+	"6_306": {
+		"name": "Meditite",
+		"dex": "307",
+		"gender": "male",
+		"file": "Spr_4pw_307_m"
+	},
+	"6_307": {
+		"name": "Medicham",
+		"dex": "308",
+		"gender": "male",
+		"file": "Spr_4pw_308_m"
+	},
+	"6_308": {
+		"name": "Electrike",
+		"dex": "309",
+		"gender": "all",
+		"file": "Spr_4pw_309"
+	},
+	"6_309": {
+		"name": "Manectric",
+		"dex": "310",
+		"gender": "all",
+		"file": "Spr_4pw_310"
+	},
+	"6_310": {
+		"name": "Plusle",
+		"dex": "311",
+		"gender": "all",
+		"file": "Spr_4pw_311"
+	},
+	"6_311": {
+		"name": "Minun",
+		"dex": "312",
+		"gender": "all",
+		"file": "Spr_4pw_312"
+	},
+	"6_312": {
+		"name": "Volbeat",
+		"dex": "313",
+		"gender": "all",
+		"file": "Spr_4pw_313"
+	},
+	"6_313": {
+		"name": "Illumise",
+		"dex": "314",
+		"gender": "all",
+		"file": "Spr_4pw_314"
+	},
+	"6_314": {
+		"name": "Roselia",
+		"dex": "315",
+		"gender": "male",
+		"file": "Spr_4pw_315_m"
+	},
+	"6_315": {
+		"name": "Gulpin",
+		"dex": "316",
+		"gender": "male",
+		"file": "Spr_4pw_316_m"
+	},
+	"6_316": {
+		"name": "Swalot",
+		"dex": "317",
+		"gender": "male",
+		"file": "Spr_4pw_317_m"
+	},
+	"6_317": {
+		"name": "Carvanha",
+		"dex": "318",
+		"gender": "all",
+		"file": "Spr_4pw_318"
+	},
+	"6_318": {
+		"name": "Sharpedo",
+		"dex": "319",
+		"gender": "all",
+		"file": "Spr_4pw_319"
+	},
+	"6_319": {
+		"name": "Wailmer",
+		"dex": "320",
+		"gender": "all",
+		"file": "Spr_4pw_320"
+	},
+	"6_320": {
+		"name": "Wailord",
+		"dex": "321",
+		"gender": "all",
+		"file": "Spr_4pw_321"
+	},
+	"6_321": {
+		"name": "Numel",
+		"dex": "322",
+		"gender": "male",
+		"file": "Spr_4pw_322_m"
+	},
+	"6_322": {
+		"name": "Camerupt",
+		"dex": "323",
+		"gender": "male",
+		"file": "Spr_4pw_323_m"
+	},
+	"6_323": {
+		"name": "Torkoal",
+		"dex": "324",
+		"gender": "all",
+		"file": "Spr_4pw_324"
+	},
+	"6_324": {
+		"name": "Spoink",
+		"dex": "325",
+		"gender": "all",
+		"file": "Spr_4pw_325"
+	},
+	"6_325": {
+		"name": "Grumpig",
+		"dex": "326",
+		"gender": "all",
+		"file": "Spr_4pw_326"
+	},
+	"6_326": {
+		"name": "Spinda",
+		"dex": "327",
+		"gender": "all",
+		"file": "Spr_4pw_327"
+	},
+	"6_327": {
+		"name": "Trapinch",
+		"dex": "328",
+		"gender": "all",
+		"file": "Spr_4pw_328"
+	},
+	"6_328": {
+		"name": "Vibrava",
+		"dex": "329",
+		"gender": "all",
+		"file": "Spr_4pw_329"
+	},
+	"6_329": {
+		"name": "Flygon",
+		"dex": "330",
+		"gender": "all",
+		"file": "Spr_4pw_330"
+	},
+	"6_330": {
+		"name": "Cacnea",
+		"dex": "331",
+		"gender": "all",
+		"file": "Spr_4pw_331"
+	},
+	"6_331": {
+		"name": "Cacturne",
+		"dex": "332",
+		"gender": "male",
+		"file": "Spr_4pw_332_m"
+	},
+	"6_332": {
+		"name": "Swablu",
+		"dex": "333",
+		"gender": "all",
+		"file": "Spr_4pw_333"
+	},
+	"6_333": {
+		"name": "Altaria",
+		"dex": "334",
+		"gender": "all",
+		"file": "Spr_4pw_334"
+	},
+	"6_334": {
+		"name": "Zangoose",
+		"dex": "335",
+		"gender": "all",
+		"file": "Spr_4pw_335"
+	},
+	"6_335": {
+		"name": "Seviper",
+		"dex": "336",
+		"gender": "all",
+		"file": "Spr_4pw_336"
+	},
+	"6_336": {
+		"name": "Lunatone",
+		"dex": "337",
+		"gender": "all",
+		"file": "Spr_4pw_337"
+	},
+	"6_337": {
+		"name": "Solrock",
+		"dex": "338",
+		"gender": "all",
+		"file": "Spr_4pw_338"
+	},
+	"6_338": {
+		"name": "Barboach",
+		"dex": "339",
+		"gender": "all",
+		"file": "Spr_4pw_339"
+	},
+	"6_339": {
+		"name": "Whiscash",
+		"dex": "340",
+		"gender": "all",
+		"file": "Spr_4pw_340"
+	},
+	"6_340": {
+		"name": "Corphish",
+		"dex": "341",
+		"gender": "all",
+		"file": "Spr_4pw_341"
+	},
+	"6_341": {
+		"name": "Crawdaunt",
+		"dex": "342",
+		"gender": "all",
+		"file": "Spr_4pw_342"
+	},
+	"6_342": {
+		"name": "Baltoy",
+		"dex": "343",
+		"gender": "all",
+		"file": "Spr_4pw_343"
+	},
+	"6_343": {
+		"name": "Claydol",
+		"dex": "344",
+		"gender": "all",
+		"file": "Spr_4pw_344"
+	},
+	"6_344": {
+		"name": "Lileep",
+		"dex": "345",
+		"gender": "all",
+		"file": "Spr_4pw_345"
+	},
+	"6_345": {
+		"name": "Cradily",
+		"dex": "346",
+		"gender": "all",
+		"file": "Spr_4pw_346"
+	},
+	"6_346": {
+		"name": "Anorith",
+		"dex": "347",
+		"gender": "all",
+		"file": "Spr_4pw_347"
+	},
+	"6_347": {
+		"name": "Armaldo",
+		"dex": "348",
+		"gender": "all",
+		"file": "Spr_4pw_348"
+	},
+	"6_348": {
+		"name": "Feebas",
+		"dex": "349",
+		"gender": "all",
+		"file": "Spr_4pw_349"
+	},
+	"6_349": {
+		"name": "Milotic",
+		"dex": "350",
+		"gender": "male",
+		"file": "Spr_4pw_350_m"
+	},
+	"6_350": {
+		"name": "Castform",
+		"dex": "351",
+		"gender": "all",
+		"file": "Spr_4pw_351"
+	},
+	"6_351": {
+		"name": "Kecleon",
+		"dex": "352",
+		"gender": "all",
+		"file": "Spr_4pw_352"
+	},
+	"6_352": {
+		"name": "Shuppet",
+		"dex": "353",
+		"gender": "all",
+		"file": "Spr_4pw_353"
+	},
+	"6_353": {
+		"name": "Banette",
+		"dex": "354",
+		"gender": "all",
+		"file": "Spr_4pw_354"
+	},
+	"6_354": {
+		"name": "Duskull",
+		"dex": "355",
+		"gender": "all",
+		"file": "Spr_4pw_355"
+	},
+	"6_355": {
+		"name": "Dusclops",
+		"dex": "356",
+		"gender": "all",
+		"file": "Spr_4pw_356"
+	},
+	"6_356": {
+		"name": "Tropius",
+		"dex": "357",
+		"gender": "all",
+		"file": "Spr_4pw_357"
+	},
+	"6_357": {
+		"name": "Chimecho",
+		"dex": "358",
+		"gender": "all",
+		"file": "Spr_4pw_358"
+	},
+	"6_358": {
+		"name": "Absol",
+		"dex": "359",
+		"gender": "all",
+		"file": "Spr_4pw_359"
+	},
+	"6_359": {
+		"name": "Wynaut",
+		"dex": "360",
+		"gender": "all",
+		"file": "Spr_4pw_360"
+	},
+	"6_360": {
+		"name": "Snorunt",
+		"dex": "361",
+		"gender": "all",
+		"file": "Spr_4pw_361"
+	},
+	"6_361": {
+		"name": "Glalie",
+		"dex": "362",
+		"gender": "all",
+		"file": "Spr_4pw_362"
+	},
+	"6_362": {
+		"name": "Spheal",
+		"dex": "363",
+		"gender": "all",
+		"file": "Spr_4pw_363"
+	},
+	"6_363": {
+		"name": "Sealeo",
+		"dex": "364",
+		"gender": "all",
+		"file": "Spr_4pw_364"
+	},
+	"6_364": {
+		"name": "Walrein",
+		"dex": "365",
+		"gender": "all",
+		"file": "Spr_4pw_365"
+	},
+	"6_365": {
+		"name": "Clamperl",
+		"dex": "366",
+		"gender": "all",
+		"file": "Spr_4pw_366"
+	},
+	"6_366": {
+		"name": "Huntail",
+		"dex": "367",
+		"gender": "all",
+		"file": "Spr_4pw_367"
+	},
+	"6_367": {
+		"name": "Gorebyss",
+		"dex": "368",
+		"gender": "all",
+		"file": "Spr_4pw_368"
+	},
+	"6_368": {
+		"name": "Relicanth",
+		"dex": "369",
+		"gender": "male",
+		"file": "Spr_4pw_369_m"
+	},
+	"6_369": {
+		"name": "Luvdisc",
+		"dex": "370",
+		"gender": "all",
+		"file": "Spr_4pw_370"
+	},
+	"6_370": {
+		"name": "Bagon",
+		"dex": "371",
+		"gender": "all",
+		"file": "Spr_4pw_371"
+	},
+	"6_371": {
+		"name": "Shelgon",
+		"dex": "372",
+		"gender": "all",
+		"file": "Spr_4pw_372"
+	},
+	"6_372": {
+		"name": "Salamence",
+		"dex": "373",
+		"gender": "all",
+		"file": "Spr_4pw_373"
+	},
+	"6_373": {
+		"name": "Beldum",
+		"dex": "374",
+		"gender": "all",
+		"file": "Spr_4pw_374"
+	},
+	"6_374": {
+		"name": "Metang",
+		"dex": "375",
+		"gender": "all",
+		"file": "Spr_4pw_375"
+	},
+	"6_375": {
+		"name": "Metagross",
+		"dex": "376",
+		"gender": "all",
+		"file": "Spr_4pw_376"
+	},
+	"6_376": {
+		"name": "Regirock",
+		"dex": "377",
+		"gender": "all",
+		"file": "Spr_4pw_377"
+	},
+	"6_377": {
+		"name": "Regice",
+		"dex": "378",
+		"gender": "all",
+		"file": "Spr_4pw_378"
+	},
+	"6_378": {
+		"name": "Registeel",
+		"dex": "379",
+		"gender": "all",
+		"file": "Spr_4pw_379"
+	},
+	"6_379": {
+		"name": "Latias",
+		"dex": "380",
+		"gender": "all",
+		"file": "Spr_4pw_380"
+	},
+	"6_380": {
+		"name": "Latios",
+		"dex": "381",
+		"gender": "all",
+		"file": "Spr_4pw_381"
+	},
+	"6_381": {
+		"name": "Kyogre",
+		"dex": "382",
+		"gender": "all",
+		"file": "Spr_4pw_382"
+	},
+	"6_382": {
+		"name": "Groudon",
+		"dex": "383",
+		"gender": "all",
+		"file": "Spr_4pw_383"
+	},
+	"6_383": {
+		"name": "Rayquaza",
+		"dex": "384",
+		"gender": "all",
+		"file": "Spr_4pw_384"
+	},
+	"6_384": {
+		"name": "Jirachi",
+		"dex": "385",
+		"gender": "all",
+		"file": "Spr_4pw_385"
+	},
+	"6_385": {
+		"name": "Deoxys",
+		"dex": "386",
+		"gender": "all",
+		"file": "Spr_4pw_386"
+	},
+	"6_386": {
+		"name": "Turtwig",
+		"dex": "387",
+		"gender": "all",
+		"file": "Spr_4pw_387"
+	},
+	"6_387": {
+		"name": "Grotle",
+		"dex": "388",
+		"gender": "all",
+		"file": "Spr_4pw_388"
+	},
+	"6_388": {
+		"name": "Torterra",
+		"dex": "389",
+		"gender": "all",
+		"file": "Spr_4pw_389"
+	},
+	"6_389": {
+		"name": "Chimchar",
+		"dex": "390",
+		"gender": "all",
+		"file": "Spr_4pw_390"
+	},
+	"6_390": {
+		"name": "Monferno",
+		"dex": "391",
+		"gender": "all",
+		"file": "Spr_4pw_391"
+	},
+	"6_391": {
+		"name": "Infernape",
+		"dex": "392",
+		"gender": "all",
+		"file": "Spr_4pw_392"
+	},
+	"6_392": {
+		"name": "Piplup",
+		"dex": "393",
+		"gender": "all",
+		"file": "Spr_4pw_393"
+	},
+	"6_393": {
+		"name": "Prinplup",
+		"dex": "394",
+		"gender": "all",
+		"file": "Spr_4pw_394"
+	},
+	"6_394": {
+		"name": "Empoleon",
+		"dex": "395",
+		"gender": "all",
+		"file": "Spr_4pw_395"
+	},
+	"6_395": {
+		"name": "Starly",
+		"dex": "396",
+		"gender": "male",
+		"file": "Spr_4pw_396_m"
+	},
+	"6_396": {
+		"name": "Staravia",
+		"dex": "397",
+		"gender": "male",
+		"file": "Spr_4pw_397_m"
+	},
+	"6_397": {
+		"name": "Staraptor",
+		"dex": "398",
+		"gender": "male",
+		"file": "Spr_4pw_398_m"
+	},
+	"6_398": {
+		"name": "Bidoof",
+		"dex": "399",
+		"gender": "male",
+		"file": "Spr_4pw_399_m"
+	},
+	"6_399": {
+		"name": "Bibarel",
+		"dex": "400",
+		"gender": "male",
+		"file": "Spr_4pw_400_m"
+	},
+	"6_400": {
+		"name": "Kricketot",
+		"dex": "401",
+		"gender": "male",
+		"file": "Spr_4pw_401_m"
+	},
+	"6_401": {
+		"name": "Kricketune",
+		"dex": "402",
+		"gender": "male",
+		"file": "Spr_4pw_402_m"
+	},
+	"6_402": {
+		"name": "Shinx",
+		"dex": "403",
+		"gender": "male",
+		"file": "Spr_4pw_403_m"
+	},
+	"6_403": {
+		"name": "Luxio",
+		"dex": "404",
+		"gender": "male",
+		"file": "Spr_4pw_404_m"
+	},
+	"6_404": {
+		"name": "Luxray",
+		"dex": "405",
+		"gender": "male",
+		"file": "Spr_4pw_405_m"
+	},
+	"6_405": {
+		"name": "Budew",
+		"dex": "406",
+		"gender": "all",
+		"file": "Spr_4pw_406"
+	},
+	"6_406": {
+		"name": "Roserade",
+		"dex": "407",
+		"gender": "male",
+		"file": "Spr_4pw_407_m"
+	},
+	"6_407": {
+		"name": "Cranidos",
+		"dex": "408",
+		"gender": "all",
+		"file": "Spr_4pw_408"
+	},
+	"6_408": {
+		"name": "Rampardos",
+		"dex": "409",
+		"gender": "all",
+		"file": "Spr_4pw_409"
+	},
+	"6_409": {
+		"name": "Shieldon",
+		"dex": "410",
+		"gender": "all",
+		"file": "Spr_4pw_410"
+	},
+	"6_410": {
+		"name": "Bastiodon",
+		"dex": "411",
+		"gender": "all",
+		"file": "Spr_4pw_411"
+	},
+	"6_411": {
+		"name": "Burmy",
+		"dex": "412",
+		"gender": "all",
+		"file": "Spr_4pw_412"
+	},
+	"6_412": {
+		"name": "Wormadam",
+		"dex": "413",
+		"gender": "all",
+		"file": "Spr_4pw_413"
+	},
+	"6_413": {
+		"name": "Mothim",
+		"dex": "414",
+		"gender": "all",
+		"file": "Spr_4pw_414"
+	},
+	"6_414": {
+		"name": "Combee",
+		"dex": "415",
+		"gender": "male",
+		"file": "Spr_4pw_415_m"
+	},
+	"6_415": {
+		"name": "Vespiquen",
+		"dex": "416",
+		"gender": "all",
+		"file": "Spr_4pw_416"
+	},
+	"6_416": {
+		"name": "Pachirisu",
+		"dex": "417",
+		"gender": "male",
+		"file": "Spr_4pw_417_m"
+	},
+	"6_417": {
+		"name": "Buizel",
+		"dex": "418",
+		"gender": "male",
+		"file": "Spr_4pw_418_m"
+	},
+	"6_418": {
+		"name": "Floatzel",
+		"dex": "419",
+		"gender": "male",
+		"file": "Spr_4pw_419_m"
+	},
+	"6_419": {
+		"name": "Cherubi",
+		"dex": "420",
+		"gender": "all",
+		"file": "Spr_4pw_420"
+	},
+	"6_420": {
+		"name": "Cherrim",
+		"dex": "421",
+		"gender": "all",
+		"file": "Spr_4pw_421"
+	},
+	"6_421": {
+		"name": "Shellos",
+		"dex": "422",
+		"gender": "all",
+		"file": "Spr_4pw_422"
+	},
+	"6_422": {
+		"name": "Gastrodon",
+		"dex": "423",
+		"gender": "all",
+		"file": "Spr_4pw_423"
+	},
+	"6_423": {
+		"name": "Ambipom",
+		"dex": "424",
+		"gender": "male",
+		"file": "Spr_4pw_424_m"
+	},
+	"6_424": {
+		"name": "Drifloon",
+		"dex": "425",
+		"gender": "all",
+		"file": "Spr_4pw_425"
+	},
+	"6_425": {
+		"name": "Drifblim",
+		"dex": "426",
+		"gender": "all",
+		"file": "Spr_4pw_426"
+	},
+	"6_426": {
+		"name": "Buneary",
+		"dex": "427",
+		"gender": "all",
+		"file": "Spr_4pw_427"
+	},
+	"6_427": {
+		"name": "Lopunny",
+		"dex": "428",
+		"gender": "all",
+		"file": "Spr_4pw_428"
+	},
+	"6_428": {
+		"name": "Mismagius",
+		"dex": "429",
+		"gender": "all",
+		"file": "Spr_4pw_429"
+	},
+	"6_429": {
+		"name": "Honchkrow",
+		"dex": "430",
+		"gender": "all",
+		"file": "Spr_4pw_430"
+	},
+	"6_430": {
+		"name": "Glameow",
+		"dex": "431",
+		"gender": "all",
+		"file": "Spr_4pw_431"
+	},
+	"6_431": {
+		"name": "Purugly",
+		"dex": "432",
+		"gender": "all",
+		"file": "Spr_4pw_432"
+	},
+	"6_432": {
+		"name": "Chingling",
+		"dex": "433",
+		"gender": "all",
+		"file": "Spr_4pw_433"
+	},
+	"6_433": {
+		"name": "Stunky",
+		"dex": "434",
+		"gender": "all",
+		"file": "Spr_4pw_434"
+	},
+	"6_434": {
+		"name": "Skuntank",
+		"dex": "435",
+		"gender": "all",
+		"file": "Spr_4pw_435"
+	},
+	"6_435": {
+		"name": "Bronzor",
+		"dex": "436",
+		"gender": "all",
+		"file": "Spr_4pw_436"
+	},
+	"6_436": {
+		"name": "Bronzong",
+		"dex": "437",
+		"gender": "all",
+		"file": "Spr_4pw_437"
+	},
+	"6_437": {
+		"name": "Bonsly",
+		"dex": "438",
+		"gender": "all",
+		"file": "Spr_4pw_438"
+	},
+	"6_438": {
+		"name": "Mime Jr.",
+		"dex": "439",
+		"gender": "all",
+		"file": "Spr_4pw_439"
+	},
+	"6_439": {
+		"name": "Happiny",
+		"dex": "440",
+		"gender": "all",
+		"file": "Spr_4pw_440"
+	},
+	"6_440": {
+		"name": "Chatot",
+		"dex": "441",
+		"gender": "all",
+		"file": "Spr_4pw_441"
+	},
+	"6_441": {
+		"name": "Spiritomb",
+		"dex": "442",
+		"gender": "all",
+		"file": "Spr_4pw_442"
+	},
+	"6_442": {
+		"name": "Gible",
+		"dex": "443",
+		"gender": "male",
+		"file": "Spr_4pw_443_m"
+	},
+	"6_443": {
+		"name": "Gabite",
+		"dex": "444",
+		"gender": "male",
+		"file": "Spr_4pw_444_m"
+	},
+	"6_444": {
+		"name": "Garchomp",
+		"dex": "445",
+		"gender": "male",
+		"file": "Spr_4pw_445_m"
+	},
+	"6_445": {
+		"name": "Munchlax",
+		"dex": "446",
+		"gender": "all",
+		"file": "Spr_4pw_446"
+	},
+	"6_446": {
+		"name": "Riolu",
+		"dex": "447",
+		"gender": "all",
+		"file": "Spr_4pw_447"
+	},
+	"6_447": {
+		"name": "Lucario",
+		"dex": "448",
+		"gender": "all",
+		"file": "Spr_4pw_448"
+	},
+	"6_448": {
+		"name": "Hippopotas",
+		"dex": "449",
+		"gender": "male",
+		"file": "Spr_4pw_449_m"
+	},
+	"6_449": {
+		"name": "Hippowdon",
+		"dex": "450",
+		"gender": "male",
+		"file": "Spr_4pw_450_m"
+	},
+	"6_450": {
+		"name": "Skorupi",
+		"dex": "451",
+		"gender": "all",
+		"file": "Spr_4pw_451"
+	},
+	"6_451": {
+		"name": "Drapion",
+		"dex": "452",
+		"gender": "all",
+		"file": "Spr_4pw_452"
+	},
+	"6_452": {
+		"name": "Croagunk",
+		"dex": "453",
+		"gender": "male",
+		"file": "Spr_4pw_453_m"
+	},
+	"6_453": {
+		"name": "Toxicroak",
+		"dex": "454",
+		"gender": "male",
+		"file": "Spr_4pw_454_m"
+	},
+	"6_454": {
+		"name": "Carnivine",
+		"dex": "455",
+		"gender": "all",
+		"file": "Spr_4pw_455"
+	},
+	"6_455": {
+		"name": "Finneon",
+		"dex": "456",
+		"gender": "male",
+		"file": "Spr_4pw_456_m"
+	},
+	"6_456": {
+		"name": "Lumineon",
+		"dex": "457",
+		"gender": "male",
+		"file": "Spr_4pw_457_m"
+	},
+	"6_457": {
+		"name": "Mantyke",
+		"dex": "458",
+		"gender": "all",
+		"file": "Spr_4pw_458"
+	},
+	"6_458": {
+		"name": "Snover",
+		"dex": "459",
+		"gender": "male",
+		"file": "Spr_4pw_459_m"
+	},
+	"6_459": {
+		"name": "Abomasnow",
+		"dex": "460",
+		"gender": "male",
+		"file": "Spr_4pw_460_m"
+	},
+	"6_460": {
+		"name": "Weavile",
+		"dex": "461",
+		"gender": "male",
+		"file": "Spr_4pw_461_m"
+	},
+	"6_461": {
+		"name": "Magnezone",
+		"dex": "462",
+		"gender": "all",
+		"file": "Spr_4pw_462"
+	},
+	"6_462": {
+		"name": "Lickilicky",
+		"dex": "463",
+		"gender": "all",
+		"file": "Spr_4pw_463"
+	},
+	"6_463": {
+		"name": "Rhyperior",
+		"dex": "464",
+		"gender": "male",
+		"file": "Spr_4pw_464_m"
+	},
+	"6_464": {
+		"name": "Tangrowth",
+		"dex": "465",
+		"gender": "male",
+		"file": "Spr_4pw_465_m"
+	},
+	"6_465": {
+		"name": "Electivire",
+		"dex": "466",
+		"gender": "all",
+		"file": "Spr_4pw_466"
+	},
+	"6_466": {
+		"name": "Magmortar",
+		"dex": "467",
+		"gender": "all",
+		"file": "Spr_4pw_467"
+	},
+	"6_467": {
+		"name": "Togekiss",
+		"dex": "468",
+		"gender": "all",
+		"file": "Spr_4pw_468"
+	},
+	"6_468": {
+		"name": "Yanmega",
+		"dex": "469",
+		"gender": "all",
+		"file": "Spr_4pw_469"
+	},
+	"6_469": {
+		"name": "Leafeon",
+		"dex": "470",
+		"gender": "all",
+		"file": "Spr_4pw_470"
+	},
+	"6_470": {
+		"name": "Glaceon",
+		"dex": "471",
+		"gender": "all",
+		"file": "Spr_4pw_471"
+	},
+	"6_471": {
+		"name": "Gliscor",
+		"dex": "472",
+		"gender": "all",
+		"file": "Spr_4pw_472"
+	},
+	"6_472": {
+		"name": "Mamoswine",
+		"dex": "473",
+		"gender": "male",
+		"file": "Spr_4pw_473_m"
+	},
+	"6_473": {
+		"name": "Porygon-Z",
+		"dex": "474",
+		"gender": "all",
+		"file": "Spr_4pw_474"
+	},
+	"6_474": {
+		"name": "Gallade",
+		"dex": "475",
+		"gender": "all",
+		"file": "Spr_4pw_475"
+	},
+	"6_475": {
+		"name": "Probopass",
+		"dex": "476",
+		"gender": "all",
+		"file": "Spr_4pw_476"
+	},
+	"6_476": {
+		"name": "Dusknoir",
+		"dex": "477",
+		"gender": "all",
+		"file": "Spr_4pw_477"
+	},
+	"6_477": {
+		"name": "Froslass",
+		"dex": "478",
+		"gender": "all",
+		"file": "Spr_4pw_478"
+	},
+	"6_478": {
+		"name": "Rotom",
+		"dex": "479",
+		"gender": "all",
+		"file": "Spr_4pw_479"
+	},
+	"6_479": {
+		"name": "Uxie",
+		"dex": "480",
+		"gender": "all",
+		"file": "Spr_4pw_480"
+	},
+	"6_480": {
+		"name": "Mesprit",
+		"dex": "481",
+		"gender": "all",
+		"file": "Spr_4pw_481"
+	},
+	"6_481": {
+		"name": "Azelf",
+		"dex": "482",
+		"gender": "all",
+		"file": "Spr_4pw_482"
+	},
+	"6_482": {
+		"name": "Dialga",
+		"dex": "483",
+		"gender": "all",
+		"file": "Spr_4pw_483"
+	},
+	"6_483": {
+		"name": "Palkia",
+		"dex": "484",
+		"gender": "all",
+		"file": "Spr_4pw_484"
+	},
+	"6_484": {
+		"name": "Heatran",
+		"dex": "485",
+		"gender": "all",
+		"file": "Spr_4pw_485"
+	},
+	"6_485": {
+		"name": "Regigigas",
+		"dex": "486",
+		"gender": "all",
+		"file": "Spr_4pw_486"
+	},
+	"6_486": {
+		"name": "Giratina",
+		"dex": "487",
+		"gender": "all",
+		"file": "Spr_4pw_487"
+	},
+	"6_487": {
+		"name": "Cresselia",
+		"dex": "488",
+		"gender": "all",
+		"file": "Spr_4pw_488"
+	},
+	"6_488": {
+		"name": "Phione",
+		"dex": "489",
+		"gender": "all",
+		"file": "Spr_4pw_489"
+	},
+	"6_489": {
+		"name": "Manaphy",
+		"dex": "490",
+		"gender": "all",
+		"file": "Spr_4pw_490"
+	},
+	"6_490": {
+		"name": "Darkrai",
+		"dex": "491",
+		"gender": "all",
+		"file": "Spr_4pw_491"
+	},
+	"6_491": {
+		"name": "Shaymin",
+		"dex": "492",
+		"gender": "all",
+		"file": "Spr_4pw_492"
+	},
+	"6_492": {
+		"name": "Arceus",
+		"dex": "493",
+		"gender": "all",
+		"file": "Spr_4pw_493"
+	},
+	"6_493": {
+		"name": "Venusaur",
+		"dex": "003",
+		"gender": "female",
+		"file": "Spr_4pw_003_f"
+	},
+	"6_494": {
+		"name": "Butterfree",
+		"dex": "012",
+		"gender": "female",
+		"file": "Spr_4pw_012_f"
+	},
+	"6_495": {
+		"name": "Rattata",
+		"dex": "019",
+		"gender": "female",
+		"file": "Spr_4pw_019_f"
+	},
+	"6_496": {
+		"name": "Raticate",
+		"dex": "020",
+		"gender": "female",
+		"file": "Spr_4pw_020_f"
+	},
+	"6_497": {
+		"name": "Pikachu",
+		"dex": "025",
+		"gender": "female",
+		"file": "Spr_4pw_025_f"
+	},
+	"6_498": {
+		"name": "Raichu",
+		"dex": "026",
+		"gender": "female",
+		"file": "Spr_4pw_026_f"
+	},
+	"6_499": {
+		"name": "Zubat",
+		"dex": "041",
+		"gender": "female",
+		"file": "Spr_4pw_041_f"
+	},
+	"6_500": {
+		"name": "Golbat",
+		"dex": "042",
+		"gender": "female",
+		"file": "Spr_4pw_042_f"
+	},
+	"6_501": {
+		"name": "Gloom",
+		"dex": "044",
+		"gender": "female",
+		"file": "Spr_4pw_044_f"
+	},
+	"6_502": {
+		"name": "Vileplume",
+		"dex": "045",
+		"gender": "female",
+		"file": "Spr_4pw_045_f"
+	},
+	"6_503": {
+		"name": "Kadabra",
+		"dex": "064",
+		"gender": "female",
+		"file": "Spr_4pw_064_f"
+	},
+	"6_504": {
+		"name": "Alakazam",
+		"dex": "065",
+		"gender": "female",
+		"file": "Spr_4pw_065_f"
+	},
+	"6_505": {
+		"name": "Doduo",
+		"dex": "084",
+		"gender": "female",
+		"file": "Spr_4pw_084_f"
+	},
+	"6_506": {
+		"name": "Dodrio",
+		"dex": "085",
+		"gender": "female",
+		"file": "Spr_4pw_085_f"
+	},
+	"6_507": {
+		"name": "Hypno",
+		"dex": "097",
+		"gender": "female",
+		"file": "Spr_4pw_097_f"
+	},
+	"6_508": {
+		"name": "Rhyhorn",
+		"dex": "111",
+		"gender": "female",
+		"file": "Spr_4pw_111_f"
+	},
+	"6_509": {
+		"name": "Rhydon",
+		"dex": "112",
+		"gender": "female",
+		"file": "Spr_4pw_112_f"
+	},
+	"6_510": {
+		"name": "Goldeen",
+		"dex": "118",
+		"gender": "female",
+		"file": "Spr_4pw_118_f"
+	},
+	"6_511": {
+		"name": "Seaking",
+		"dex": "119",
+		"gender": "female",
+		"file": "Spr_4pw_119_f"
+	},
+	"6_512": {
+		"name": "Scyther",
+		"dex": "123",
+		"gender": "female",
+		"file": "Spr_4pw_123_f"
+	},
+	"6_513": {
+		"name": "Magikarp",
+		"dex": "129",
+		"gender": "female",
+		"file": "Spr_4pw_129_f"
+	},
+	"6_514": {
+		"name": "Gyarados",
+		"dex": "130",
+		"gender": "female",
+		"file": "Spr_4pw_130_f"
+	},
+	"6_515": {
+		"name": "Meganium",
+		"dex": "154",
+		"gender": "female",
+		"file": "Spr_4pw_154_f"
+	},
+	"6_516": {
+		"name": "Ledyba",
+		"dex": "165",
+		"gender": "female",
+		"file": "Spr_4pw_165_f"
+	},
+	"6_517": {
+		"name": "Ledian",
+		"dex": "166",
+		"gender": "female",
+		"file": "Spr_4pw_166_f"
+	},
+	"6_518": {
+		"name": "Xatu",
+		"dex": "178",
+		"gender": "female",
+		"file": "Spr_4pw_178_f"
+	},
+	"6_519": {
+		"name": "Sudowoodo",
+		"dex": "185",
+		"gender": "female",
+		"file": "Spr_4pw_185_f"
+	},
+	"6_520": {
+		"name": "Politoed",
+		"dex": "186",
+		"gender": "female",
+		"file": "Spr_4pw_186_f"
+	},
+	"6_521": {
+		"name": "Aipom",
+		"dex": "190",
+		"gender": "female",
+		"file": "Spr_4pw_190_f"
+	},
+	"6_522": {
+		"name": "Wooper",
+		"dex": "194",
+		"gender": "female",
+		"file": "Spr_4pw_194_f"
+	},
+	"6_523": {
+		"name": "Quagsire",
+		"dex": "195",
+		"gender": "female",
+		"file": "Spr_4pw_195_f"
+	},
+	"6_524": {
+		"name": "Murkrow",
+		"dex": "198",
+		"gender": "female",
+		"file": "Spr_4pw_198_f"
+	},
+	"6_525": {
+		"name": "Wobbuffet",
+		"dex": "202",
+		"gender": "female",
+		"file": "Spr_4pw_202_f"
+	},
+	"6_526": {
+		"name": "Girafarig",
+		"dex": "203",
+		"gender": "female",
+		"file": "Spr_4pw_203_f"
+	},
+	"6_527": {
+		"name": "Gligar",
+		"dex": "207",
+		"gender": "female",
+		"file": "Spr_4pw_207_f"
+	},
+	"6_528": {
+		"name": "Steelix",
+		"dex": "208",
+		"gender": "female",
+		"file": "Spr_4pw_208_f"
+	},
+	"6_529": {
+		"name": "Scizor",
+		"dex": "212",
+		"gender": "female",
+		"file": "Spr_4pw_212_f"
+	},
+	"6_530": {
+		"name": "Heracross",
+		"dex": "214",
+		"gender": "female",
+		"file": "Spr_4pw_214_f"
+	},
+	"6_531": {
+		"name": "Sneasel",
+		"dex": "215",
+		"gender": "female",
+		"file": "Spr_4pw_215_f"
+	},
+	"6_532": {
+		"name": "Ursaring",
+		"dex": "217",
+		"gender": "female",
+		"file": "Spr_4pw_217_f"
+	},
+	"6_533": {
+		"name": "Piloswine",
+		"dex": "221",
+		"gender": "female",
+		"file": "Spr_4pw_221_f"
+	},
+	"6_534": {
+		"name": "Octillery",
+		"dex": "224",
+		"gender": "female",
+		"file": "Spr_4pw_224_f"
+	},
+	"6_535": {
+		"name": "Houndoom",
+		"dex": "229",
+		"gender": "female",
+		"file": "Spr_4pw_229_f"
+	},
+	"6_536": {
+		"name": "Donphan",
+		"dex": "232",
+		"gender": "female",
+		"file": "Spr_4pw_232_f"
+	},
+	"6_537": {
+		"name": "Torchic",
+		"dex": "255",
+		"gender": "female",
+		"file": "Spr_4pw_255_f"
+	},
+	"6_538": {
+		"name": "Combusken",
+		"dex": "256",
+		"gender": "female",
+		"file": "Spr_4pw_256_f"
+	},
+	"6_539": {
+		"name": "Blaziken",
+		"dex": "257",
+		"gender": "female",
+		"file": "Spr_4pw_257_f"
+	},
+	"6_540": {
+		"name": "Beautifly",
+		"dex": "267",
+		"gender": "female",
+		"file": "Spr_4pw_267_f"
+	},
+	"6_541": {
+		"name": "Dustox",
+		"dex": "269",
+		"gender": "female",
+		"file": "Spr_4pw_269_f"
+	},
+	"6_542": {
+		"name": "Ludicolo",
+		"dex": "272",
+		"gender": "female",
+		"file": "Spr_4pw_272_f"
+	},
+	"6_543": {
+		"name": "Nuzleaf",
+		"dex": "274",
+		"gender": "female",
+		"file": "Spr_4pw_274_f"
+	},
+	"6_544": {
+		"name": "Shiftry",
+		"dex": "275",
+		"gender": "female",
+		"file": "Spr_4pw_275_f"
+	},
+	"6_545": {
+		"name": "Meditite",
+		"dex": "307",
+		"gender": "female",
+		"file": "Spr_4pw_307_f"
+	},
+	"6_546": {
+		"name": "Medicham",
+		"dex": "308",
+		"gender": "female",
+		"file": "Spr_4pw_308_f"
+	},
+	"6_547": {
+		"name": "Roselia",
+		"dex": "315",
+		"gender": "female",
+		"file": "Spr_4pw_315_f"
+	},
+	"6_548": {
+		"name": "Gulpin",
+		"dex": "316",
+		"gender": "female",
+		"file": "Spr_4pw_316_f"
+	},
+	"6_549": {
+		"name": "Swalot",
+		"dex": "317",
+		"gender": "female",
+		"file": "Spr_4pw_317_f"
+	},
+	"6_550": {
+		"name": "Numel",
+		"dex": "322",
+		"gender": "female",
+		"file": "Spr_4pw_322_f"
+	},
+	"6_551": {
+		"name": "Camerupt",
+		"dex": "323",
+		"gender": "female",
+		"file": "Spr_4pw_323_f"
+	},
+	"6_552": {
+		"name": "Cacturne",
+		"dex": "332",
+		"gender": "female",
+		"file": "Spr_4pw_332_f"
+	},
+	"6_553": {
+		"name": "Milotic",
+		"dex": "350",
+		"gender": "female",
+		"file": "Spr_4pw_350_f"
+	},
+	"6_554": {
+		"name": "Relicanth",
+		"dex": "369",
+		"gender": "female",
+		"file": "Spr_4pw_369_f"
+	},
+	"6_555": {
+		"name": "Weavile",
+		"dex": "461",
+		"gender": "female",
+		"file": "Spr_4pw_461_f"
+	},
+	"6_556": {
+		"name": "Buizel",
+		"dex": "418",
+		"gender": "female",
+		"file": "Spr_4pw_418_f"
+	},
+	"6_557": {
+		"name": "Roserade",
+		"dex": "407",
+		"gender": "female",
+		"file": "Spr_4pw_407_f"
+	},
+	"6_558": {
+		"name": "Tangrowth",
+		"dex": "465",
+		"gender": "female",
+		"file": "Spr_4pw_465_f"
+	},
+	"6_559": {
+		"name": "Mamoswine",
+		"dex": "473",
+		"gender": "female",
+		"file": "Spr_4pw_473_f"
+	},
+	"6_560": {
+		"name": "Starly",
+		"dex": "396",
+		"gender": "female",
+		"file": "Spr_4pw_396_f"
+	},
+	"6_561": {
+		"name": "Floatzel",
+		"dex": "419",
+		"gender": "female",
+		"file": "Spr_4pw_419_f"
+	},
+	"6_562": {
+		"name": "Rhyperior",
+		"dex": "464",
+		"gender": "female",
+		"file": "Spr_4pw_464_f"
+	},
+	"6_563": {
+		"name": "Staravia",
+		"dex": "397",
+		"gender": "female",
+		"file": "Spr_4pw_397_f"
+	},
+	"6_564": {
+		"name": "Staraptor",
+		"dex": "398",
+		"gender": "female",
+		"file": "Spr_4pw_398_f"
+	},
+	"6_565": {
+		"name": "Croagunk",
+		"dex": "453",
+		"gender": "female",
+		"file": "Spr_4pw_453_f"
+	},
+	"6_566": {
+		"name": "Toxicroak",
+		"dex": "454",
+		"gender": "female",
+		"file": "Spr_4pw_454_f"
+	},
+	"6_567": {
+		"name": "Bidoof",
+		"dex": "399",
+		"gender": "female",
+		"file": "Spr_4pw_399_f"
+	},
+	"6_568": {
+		"name": "Bibarel",
+		"dex": "400",
+		"gender": "female",
+		"file": "Spr_4pw_400_f"
+	},
+	"6_569": {
+		"name": "Hippopotas",
+		"dex": "449",
+		"gender": "female",
+		"file": "Spr_4pw_449_f"
+	},
+	"6_570": {
+		"name": "Hippowdon",
+		"dex": "450",
+		"gender": "female",
+		"file": "Spr_4pw_450_f"
+	},
+	"6_571": {
+		"name": "Finneon",
+		"dex": "456",
+		"gender": "female",
+		"file": "Spr_4pw_456_f"
+	},
+	"6_572": {
+		"name": "Lumineon",
+		"dex": "457",
+		"gender": "female",
+		"file": "Spr_4pw_457_f"
+	},
+	"6_573": {
+		"name": "Combee",
+		"dex": "415",
+		"gender": "female",
+		"file": "Spr_4pw_415_f"
+	},
+	"6_574": {
+		"name": "Shinx",
+		"dex": "403",
+		"gender": "female",
+		"file": "Spr_4pw_403_f"
+	},
+	"6_575": {
+		"name": "Luxio",
+		"dex": "404",
+		"gender": "female",
+		"file": "Spr_4pw_404_f"
+	},
+	"6_576": {
+		"name": "Luxray",
+		"dex": "405",
+		"gender": "female",
+		"file": "Spr_4pw_405_f"
+	},
+	"6_577": {
+		"name": "Snover",
+		"dex": "459",
+		"gender": "female",
+		"file": "Spr_4pw_459_f"
+	},
+	"6_578": {
+		"name": "Abomasnow",
+		"dex": "460",
+		"gender": "female",
+		"file": "Spr_4pw_460_f"
+	},
+	"6_579": {
+		"name": "Pachirisu",
+		"dex": "417",
+		"gender": "female",
+		"file": "Spr_4pw_417_f"
+	},
+	"6_580": {
+		"name": "Kricketot",
+		"dex": "401",
+		"gender": "female",
+		"file": "Spr_4pw_401_f"
+	},
+	"6_581": {
+		"name": "Kricketune",
+		"dex": "402",
+		"gender": "female",
+		"file": "Spr_4pw_402_f"
+	},
+	"6_582": {
+		"name": "Gible",
+		"dex": "443",
+		"gender": "female",
+		"file": "Spr_4pw_443_f"
+	},
+	"6_583": {
+		"name": "Gabite",
+		"dex": "444",
+		"gender": "female",
+		"file": "Spr_4pw_444_f"
+	},
+	"6_584": {
+		"name": "Garchomp",
+		"dex": "445",
+		"gender": "female",
+		"file": "Spr_4pw_445_f"
+	},
+	"6_585": {
+		"name": "Ambipom",
+		"dex": "424",
+		"gender": "female",
+		"file": "Spr_4pw_424_f"
+	},
+	"6_586": {
+		"name": "Deoxys",
+		"form": "Normal",
+		"gender": "all",
+		"dex": "386",
+		"file": "Spr_4pw_386-Normal"
+	},
+	"6_587": {
+		"name": "Deoxys",
+		"form": "Attack",
+		"gender": "all",
+		"dex": "386",
+		"file": "Spr_4pw_386-Attack"
+	},
+	"6_588": {
+		"name": "Deoxys",
+		"form": "Defense",
+		"gender": "all",
+		"dex": "386",
+		"file": "Spr_4pw_386-Defense"
+	},
+	"6_589": {
+		"name": "Deoxys",
+		"form": "Speed",
+		"gender": "all",
+		"dex": "386",
+		"file": "Spr_4pw_386-Speed"
+	},
+	"6_590": {
+		"name": "Unown",
+		"form": "A",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-A"
+	},
+	"6_591": {
+		"name": "Unown",
+		"form": "B",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-B"
+	},
+	"6_592": {
+		"name": "Unown",
+		"form": "C",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-C"
+	},
+	"6_593": {
+		"name": "Unown",
+		"form": "D",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-D"
+	},
+	"6_594": {
+		"name": "Unown",
+		"form": "E",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-E"
+	},
+	"6_595": {
+		"name": "Unown",
+		"form": "F",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-F"
+	},
+	"6_596": {
+		"name": "Unown",
+		"form": "G",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-G"
+	},
+	"6_597": {
+		"name": "Unown",
+		"form": "H",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-H"
+	},
+	"6_598": {
+		"name": "Unown",
+		"form": "I",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-I"
+	},
+	"6_599": {
+		"name": "Unown",
+		"form": "J",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-J"
+	},
+	"6_600": {
+		"name": "Unown",
+		"form": "K",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-K"
+	},
+	"6_601": {
+		"name": "Unown",
+		"form": "L",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-L"
+	},
+	"6_602": {
+		"name": "Unown",
+		"form": "M",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-M"
+	},
+	"6_603": {
+		"name": "Unown",
+		"form": "N",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-N"
+	},
+	"6_604": {
+		"name": "Unown",
+		"form": "O",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-O"
+	},
+	"6_605": {
+		"name": "Unown",
+		"form": "P",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-P"
+	},
+	"6_606": {
+		"name": "Unown",
+		"form": "Q",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-Q"
+	},
+	"6_607": {
+		"name": "Unown",
+		"form": "R",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-R"
+	},
+	"6_608": {
+		"name": "Unown",
+		"form": "S",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-S"
+	},
+	"6_609": {
+		"name": "Unown",
+		"form": "T",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-T"
+	},
+	"6_610": {
+		"name": "Unown",
+		"form": "U",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-U"
+	},
+	"6_611": {
+		"name": "Unown",
+		"form": "V",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-V"
+	},
+	"6_612": {
+		"name": "Unown",
+		"form": "W",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-W"
+	},
+	"6_613": {
+		"name": "Unown",
+		"form": "X",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-X"
+	},
+	"6_614": {
+		"name": "Unown",
+		"form": "Y",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-Y"
+	},
+	"6_615": {
+		"name": "Unown",
+		"form": "Z",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-Z"
+	},
+	"6_616": {
+		"name": "Unown",
+		"form": "Exclamation Mark",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-EX"
+	},
+	"6_617": {
+		"name": "Unown",
+		"form": "Question Mark",
+		"gender": "all",
+		"dex": "201",
+		"file": "Spr_4pw_201-QU"
+	},
+	"6_618": {
+		"name": "Castform",
+		"form": "Normal",
+		"gender": "all",
+		"dex": "351",
+		"file": "Spr_4pw_351-Normal"
+	},
+	"6_619": {
+		"name": "Castform",
+		"form": "Sunny",
+		"gender": "all",
+		"dex": "351",
+		"file": "Spr_4pw_351-Sunny"
+	},
+	"6_620": {
+		"name": "Castform",
+		"form": "Rainy",
+		"gender": "all",
+		"dex": "351",
+		"file": "Spr_4pw_351-Rainy"
+	},
+	"6_621": {
+		"name": "Castform",
+		"form": "Snowy",
+		"gender": "all",
+		"dex": "351",
+		"file": "Spr_4pw_351-Snowy"
+	},
+	"6_622": {
+		"name": "Burmy",
+		"form": "Plant",
+		"gender": "all",
+		"dex": "412",
+		"file": "Spr_4pw_412-Plant"
+	},
+	"6_623": {
+		"name": "Burmy",
+		"form": "Sandy",
+		"gender": "all",
+		"dex": "412",
+		"file": "Spr_4pw_412-Sandy"
+	},
+	"6_624": {
+		"name": "Burmy",
+		"form": "Trash",
+		"gender": "all",
+		"dex": "412",
+		"file": "Spr_4pw_412-Trash"
+	},
+	"6_625": {
+		"name": "Wormadam",
+		"form": "Plant",
+		"gender": "all",
+		"dex": "413",
+		"file": "Spr_4pw_413-Plant"
+	},
+	"6_626": {
+		"name": "Wormadam",
+		"form": "Sandy",
+		"gender": "all",
+		"dex": "413",
+		"file": "Spr_4pw_413-Sandy"
+	},
+	"6_627": {
+		"name": "Wormadam",
+		"form": "Trash",
+		"gender": "all",
+		"dex": "413",
+		"file": "Spr_4pw_413-Trash"
+	},
+	"6_628": {
+		"name": "Shellos",
+		"form": "West",
+		"gender": "all",
+		"dex": "422",
+		"file": "Spr_4pw_422-West"
+	},
+	"6_629": {
+		"name": "Shellos",
+		"form": "East",
+		"gender": "all",
+		"dex": "422",
+		"file": "Spr_4pw_422-East"
+	},
+	"6_630": {
+		"name": "Gastrodon",
+		"form": "West",
+		"gender": "all",
+		"dex": "423",
+		"file": "Spr_4pw_423-West"
+	},
+	"6_631": {
+		"name": "Gastrodon",
+		"form": "East",
+		"gender": "all",
+		"dex": "423",
+		"file": "Spr_4pw_423-East"
+	},
+	"6_632": {
+		"name": "Cherrim",
+		"form": "Overcast",
+		"gender": "all",
+		"dex": "421",
+		"file": "Spr_4pw_421-Overcast"
+	},
+	"6_633": {
+		"name": "Cherrim",
+		"form": "Sunshine",
+		"gender": "all",
+		"dex": "421",
+		"file": "Spr_4pw_421-Sunshine"
+	},
+	"6_634": {
+		"name": "Arceus",
+		"form": "Normal",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Normal"
+	},
+	"6_635": {
+		"name": "Arceus",
+		"form": "Fighting",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Fighting"
+	},
+	"6_636": {
+		"name": "Arceus",
+		"form": "Flying",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Flying"
+	},
+	"6_637": {
+		"name": "Arceus",
+		"form": "Poison",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Poison"
+	},
+	"6_638": {
+		"name": "Arceus",
+		"form": "Ground",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Ground"
+	},
+	"6_639": {
+		"name": "Arceus",
+		"form": "Rock",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Rock"
+	},
+	"6_640": {
+		"name": "Arceus",
+		"form": "Bug",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Bug"
+	},
+	"6_641": {
+		"name": "Arceus",
+		"form": "Ghost",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Ghost"
+	},
+	"6_642": {
+		"name": "Arceus",
+		"form": "Steel",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Steel"
+	},
+	"6_643": {
+		"name": "Arceus",
+		"form": "Mystery",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Unknown"
+	},
+	"6_644": {
+		"name": "Arceus",
+		"form": "Fire",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Fire"
+	},
+	"6_645": {
+		"name": "Arceus",
+		"form": "Water",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Water"
+	},
+	"6_646": {
+		"name": "Arceus",
+		"form": "Grass",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Grass"
+	},
+	"6_647": {
+		"name": "Arceus",
+		"form": "Electric",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Electric"
+	},
+	"6_648": {
+		"name": "Arceus",
+		"form": "Psychic",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Psychic"
+	},
+	"6_649": {
+		"name": "Arceus",
+		"form": "Ice",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Ice"
+	},
+	"6_650": {
+		"name": "Arceus",
+		"form": "Dragon",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Dragon"
+	},
+	"6_651": {
+		"name": "Arceus",
+		"form": "Dark",
+		"gender": "all",
+		"dex": "493",
+		"file": "Spr_4pw_493-Dark"
+	},
+	"6_652": {
+		"name": "Shaymin",
+		"form": "Land",
+		"gender": "all",
+		"dex": "492",
+		"file": "Spr_4pw_492-Land"
+	},
+	"6_653": {
+		"name": "Shaymin",
+		"form": "Sky",
+		"gender": "all",
+		"dex": "492",
+		"file": "Spr_4pw_492-Sky"
+	},
+	"6_654": {
+		"name": "Rotom",
+		"form": "Normal",
+		"gender": "all",
+		"dex": "479",
+		"file": "Spr_4pw_479-Normal"
+	},
+	"6_655": {
+		"name": "Rotom",
+		"form": "Heat",
+		"gender": "all",
+		"dex": "479",
+		"file": "Spr_4pw_479-Heat"
+	},
+	"6_656": {
+		"name": "Rotom",
+		"form": "Wash",
+		"gender": "all",
+		"dex": "479",
+		"file": "Spr_4pw_479-Wash"
+	},
+	"6_657": {
+		"name": "Rotom",
+		"form": "Frost",
+		"gender": "all",
+		"dex": "479",
+		"file": "Spr_4pw_479-Frost"
+	},
+	"6_658": {
+		"name": "Rotom",
+		"form": "Fan",
+		"gender": "all",
+		"dex": "479",
+		"file": "Spr_4pw_479-Fan"
+	},
+	"6_659": {
+		"name": "Rotom",
+		"form": "Mow",
+		"gender": "all",
+		"dex": "479",
+		"file": "Spr_4pw_479-Mow"
+	},
+	"6_660": {
+		"name": "Giratina",
+		"form": "Altered",
+		"gender": "all",
+		"dex": "487",
+		"file": "Spr_4pw_487-Altered"
+	},
+	"6_661": {
+		"name": "Giratina",
+		"form": "Origin",
+		"gender": "all",
+		"dex": "487",
+		"file": "Spr_4pw_487-Origin"
+	},
+	"6_662": {
+		"name": "Pichu",
+		"form": "Normal",
+		"gender": "all",
+		"dex": "172",
+		"file": "Spr_4pw_172-Normal"
+	},
+	"6_663": {
+		"name": "Pichu",
+		"form": "Spiky-eared",
+		"gender": "all",
+		"dex": "172",
+		"file": "Spr_4pw_172-Spiky"
+	}
+}

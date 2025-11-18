@@ -38,6 +38,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -105,6 +106,7 @@ import kotlinx.coroutines.launch
 import java.util.function.Function
 import kotlin.concurrent.thread
 import kotlin.experimental.xor
+import org.json.JSONObject
 
 class AppActivity : ComponentActivity()  {
     private var canvasBitmap by mutableStateOf<Bitmap?>(null)
@@ -130,8 +132,93 @@ class AppActivity : ComponentActivity()  {
 
     private var didInitialize: Boolean = false
 
+    private data class WalkerSpriteMeta(
+        val id: String,
+        val dex: Int,
+        val gender: String,
+        val file: String,
+        val form: String?,
+        val name: String
+    )
+
+    private val walkerSpriteMeta by lazy {
+        val list = mutableListOf<WalkerSpriteMeta>()
+        try {
+            assets.open("mapped-sprite-data.json").use { input ->
+                val text = input.bufferedReader().use { it.readText() }
+                val root = JSONObject(text)
+                val keys = root.keys()
+                while (keys.hasNext()) {
+                    val key = keys.next()
+                    val obj = root.getJSONObject(key)
+                    val dexStr = obj.optString("dex", "0")
+                    val dex = dexStr.toIntOrNull() ?: continue
+                    val gender = obj.optString("gender", "all")
+                    val file = obj.optString("file", "")
+                    val form = if (obj.has("form")) obj.optString("form", null) else null
+                    val name = obj.optString("name", "")
+                    if (file.isNotEmpty()) {
+                        list += WalkerSpriteMeta(key, dex, gender, file, form, name)
+                    }
+                }
+            }
+        } catch (_: Exception) {
+        }
+        list
+    }
+
+    private fun findWalkerSpriteMeta(
+        species: Int,
+        isFemale: Boolean,
+        hasForm: Boolean,
+        variant: Int
+    ): WalkerSpriteMeta? {
+        if (species <= 0) return null
+        val dexNumber = species
+
+        val candidates = walkerSpriteMeta.filter { it.dex == dexNumber }
+        if (candidates.isEmpty()) return null
+
+        if (dexNumber == 201 && hasForm && candidates.size > 1) {
+            val orderedForms = listOf(
+                "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+                "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+                "U", "V", "W", "X", "Y", "Z",
+                "Exclamation Mark", "Question Mark"
+            )
+
+            val clampedVariant = variant.coerceIn(0, orderedForms.lastIndex)
+            val targetForm = orderedForms[clampedVariant]
+            val formMatch = candidates.firstOrNull { it.form.equals(targetForm, ignoreCase = true) }
+            if (formMatch != null) return formMatch
+        }
+
+        if (hasForm) {
+            val formCandidates = candidates.filter { it.form != null }
+            if (formCandidates.size > 1) {
+                val sortedForms = formCandidates.sortedBy { it.id }
+                val index = if (variant >= 0) variant % sortedForms.size else 0
+                return sortedForms[index]
+            }
+        }
+
+        val genderKey = if (isFemale) "female" else "male"
+
+        val genderMatch = candidates.firstOrNull { it.gender.equals(genderKey, ignoreCase = true) }
+        if (genderMatch != null) return genderMatch
+
+        val allMatch = candidates.firstOrNull { it.gender.equals("all", ignoreCase = true) }
+        if (allMatch != null) return allMatch
+
+        return candidates.firstOrNull()
+    }
+
     private fun setTint(tint: Tint) {
         palette = tintPalette(tint)
+    }
+
+    private fun formatWalkerName(meta: WalkerSpriteMeta): String {
+        return meta.name.ifEmpty { "Dex ${meta.dex}" }
     }
 
     fun initializePokeWalkerIfReady() {
@@ -145,9 +232,20 @@ class AppActivity : ComponentActivity()  {
         pokeWalker = PocketWalkerNative()
         pokeWalker.create(rom, eeprom)
 
+        val initialColorMode = preferences.getBoolean("colorization_enabled", false)
+        pokeWalker.setColorMode(initialColorMode)
+
         pokeWalker.onDraw { bytes ->
-            val baseBitmap = createBitmap(bytes)
-            canvasBitmap = applyCurrentShaderOption(baseBitmap)
+            val prefColor = preferences.getBoolean("colorization_enabled", false)
+            val useColor = prefColor && hasWalkerColorSprite
+            if (useColor) {
+                val colorFrame = pokeWalker.getColorFrame()
+                val colorBitmap = createHybridColorBitmap(bytes, colorFrame)
+                canvasBitmap = applyCurrentShaderOption(colorBitmap)
+            } else {
+                val baseBitmap = createBitmap(bytes)
+                canvasBitmap = applyCurrentShaderOption(baseBitmap)
+            }
         }
 
         val audioEngine = AudioEngine()
@@ -170,6 +268,8 @@ class AppActivity : ComponentActivity()  {
         }
 
         didInitialize = true
+        startWalkerSpriteWatcher()
+        startRouteWatcher()
     }
 
     fun initializeTcp(host: String, port: Int) {
@@ -298,17 +398,80 @@ class AppActivity : ComponentActivity()  {
         setTint(savedTint)
 
         setContent {
-            PWApp(
-                pokeWalker = if (::pokeWalker.isInitialized && didInitialize) pokeWalker else null,
-                canvasBitmap = canvasBitmap,
-                onLoadRom = { romPickerLauncher.launch(arrayOf("*/*")) },
-                onLoadEeprom = { eepromPickerLauncher.launch(arrayOf("*/*")) },
-                onTintSelected = { tint ->
-                    setTint(tint)
-                    preferences.edit().putString("tint", tint.name).apply()
-                },
-                initialSelectedTint = savedTint
-            )
+            val showDebugOverlayState = remember {
+                mutableStateOf(preferences.getBoolean("debug_overlay_enabled", false))
+            }
+
+            Box(Modifier.fillMaxSize()) {
+                PWApp(
+                    pokeWalker = if (::pokeWalker.isInitialized && didInitialize) pokeWalker else null,
+                    canvasBitmap = canvasBitmap,
+                    onLoadRom = { romPickerLauncher.launch(arrayOf("*/*")) },
+                    onLoadEeprom = { eepromPickerLauncher.launch(arrayOf("*/*")) },
+                    onTintSelected = { tint ->
+                        setTint(tint)
+                        preferences.edit().putString("tint", tint.name).apply()
+                    },
+                    initialSelectedTint = savedTint,
+                    showDebugOverlay = showDebugOverlayState.value,
+                    onShowDebugOverlayChange = { enabled ->
+                        showDebugOverlayState.value = enabled
+                        preferences.edit().putBoolean("debug_overlay_enabled", enabled).apply()
+                    }
+                )
+
+                if (showDebugOverlayState.value) {
+                    val routeId = currentRouteId
+                    val special = isSpecialRoute
+                    val walkerDex = lastWalkerDex
+                    val walkerVariant = lastWalkerVariant
+                    val walkerShiny = lastWalkerIsShiny
+                    val walkerFemale = lastWalkerIsFemale
+                    val walkerHasForm = lastWalkerHasForm
+                    val walkerName = lastWalkerName
+                    val walkerFormName = lastWalkerFormName
+
+                    val routePart = when {
+                        routeId == null -> "No route selected"
+                        special -> "Route $routeId (special)"
+                        else -> "Route $routeId"
+                    }
+
+                    val wattsPart = "${currentWatts.coerceAtLeast(0)} W"
+
+                    val walkerPart = if (walkerDex != null) {
+                        buildString {
+                            if (walkerName != null) {
+                                append("$walkerName ($walkerDex)")
+                            } else {
+                                append("Dex $walkerDex")
+                            }
+                            if (walkerVariant != null) {
+                                append(" – variant $walkerVariant")
+                                if (walkerHasForm && walkerFormName != null && walkerFormName.isNotEmpty()) {
+                                    append(" ($walkerFormName)")
+                                }
+                            }
+
+                            append(", ")
+                            append(if (walkerFemale) "female" else "male")
+                            if (walkerShiny) append(" – shiny ✨")
+                        }
+                    } else {
+                        "No walker on device"
+                    }
+
+                    Text(
+                        text = "$routePart • $wattsPart • $walkerPart",
+                        color = Color.White,
+                        fontSize = 11.sp,
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .background(Color(0x80000000))
+                            .padding(vertical = 4.dp, horizontal = 8.dp)
+                    )
+                }
+            }
         }
 
         sensorManager = applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -361,6 +524,21 @@ class AppActivity : ComponentActivity()  {
     private val SENSOR_INTERVAL_US = 1_000_000 / SENSOR_TARGET_HZ
     private var lastSensorTimestamp = 0L
 
+    private var lastWalkerDex: Int? = null
+    private var lastWalkerName: String? = null
+
+    private var lastWalkerVariant: Int? = null
+    private var lastWalkerIsShiny: Boolean = false
+    private var lastWalkerIsFemale: Boolean = false
+    private var lastWalkerHasForm: Boolean = false
+    private var lastWalkerFormName: String? = null
+
+    private var hasWalkerColorSprite: Boolean = false
+
+    private var currentRouteId: Int? = null
+    private var isSpecialRoute: Boolean = false
+    private var currentWatts: Int = 0
+
     private val sensorListener = object : SensorEventListener {
         override fun onSensorChanged(event: SensorEvent) {
             if (!didInitialize) return
@@ -378,6 +556,84 @@ class AppActivity : ComponentActivity()  {
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
     }
 
+    private fun startRouteWatcher() {
+        if (!::pokeWalker.isInitialized) return
+
+        lifecycleScope.launch {
+            while (didInitialize) {
+                try {
+                    currentRouteId = pokeWalker.getCurrentRouteId()
+                    isSpecialRoute = pokeWalker.isSpecialRoute()
+                    currentWatts = pokeWalker.getCurrentWatts()
+                } catch (_: Exception) {
+                }
+
+                delay(1000L)
+            }
+        }
+    }
+
+    private fun startWalkerSpriteWatcher() {
+        if (!::pokeWalker.isInitialized) return
+
+        lifecycleScope.launch {
+            while (didInitialize) {
+                try {
+                    val useColor = preferences.getBoolean("colorization_enabled", false)
+                    if (!useColor) {
+                        delay(1000L)
+                        continue
+                    }
+
+                    val info = pokeWalker.getWalkerVariantInfo()
+                    if (info.size >= 5) {
+                        val species = info[0]
+                        val variant = info[1]
+                        val isFemale = info[2] != 0
+                        val isShiny = info[3] != 0
+                        val hasForm = info[4] != 0
+
+                        if (species != lastWalkerDex || variant != (lastWalkerVariant ?: -1) || isShiny != lastWalkerIsShiny || isFemale != lastWalkerIsFemale || hasForm != lastWalkerHasForm) {
+                            val meta = findWalkerSpriteMeta(species, isFemale, hasForm, variant)
+                            if (meta != null) {
+                                val baseDir = if (isShiny) "pokemon-shiny-sprites" else "pokemon-sprites"
+                                val filename = "$baseDir/${meta.id}.png"
+
+                                try {
+                                    assets.open(filename).use { inputStream ->
+                                        val fullBitmap = BitmapFactory.decodeStream(inputStream) ?: return@use
+                                        val width = fullBitmap.width
+                                        val height = fullBitmap.height
+
+                                        val pixels = IntArray(width * height)
+                                        fullBitmap.getPixels(pixels, 0, width, 0, 0, width, height)
+
+                                        pokeWalker.setColorSprite("walker", pixels, width, height)
+                                        lastWalkerDex = species
+                                        lastWalkerVariant = variant
+                                        lastWalkerIsShiny = isShiny
+                                        lastWalkerIsFemale = isFemale
+                                        lastWalkerHasForm = hasForm
+                                        lastWalkerName = formatWalkerName(meta)
+                                        lastWalkerFormName = meta.form
+
+                                        hasWalkerColorSprite = true
+                                    }
+                                } catch (_: Exception) {
+                                    hasWalkerColorSprite = false
+                                }
+                            } else {
+                                hasWalkerColorSprite = false
+                            }
+                        }
+                    }
+                } catch (_: Exception) {
+                }
+
+                delay(1000L)
+            }
+        }
+    }
 
     private fun createBitmap(paletteIndices: ByteArray): Bitmap {
         val width = 96
@@ -402,6 +658,58 @@ class AppActivity : ComponentActivity()  {
         }
 
         bitmap.setPixels(pixels, 0, width, 0, 0, width, height)
+        return bitmap
+    }
+
+    private fun createHybridColorBitmap(paletteIndices: ByteArray, colorFrame: IntArray): Bitmap {
+        val width = 96
+        val height = 64
+        val pixelCount = width * height
+
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val outPixels = IntArray(pixelCount)
+
+        // Native base LCD palette (including alpha) used by Lcd::colorBuffer
+        val basePalette = intArrayOf(
+            0xFFFFFFFF.toInt(), // PALETTE[0]
+            0xFF8787A1.toInt(),
+            0xFF58588A.toInt(),
+            0xFF1E1E29.toInt()
+        )
+
+        for (i in 0 until pixelCount) {
+            val hasColorFrame = i < colorFrame.size
+            val nativePixel = if (hasColorFrame) colorFrame[i] else 0
+
+            val isBaseLcdColor = hasColorFrame && basePalette.any { it == nativePixel }
+
+            if (!hasColorFrame || isBaseLcdColor) {
+                // Use original grayscale indices + tint palette for non-sprite content.
+                val paletteIndex = (paletteIndices.getOrNull(i)?.toInt() ?: 0) and 0xFF
+                val safeIndex = if (paletteIndex in palette.indices) paletteIndex else 0
+                val color = palette[safeIndex]
+                val r = (color shr 16) and 0xFF
+                val g = (color shr 8) and 0xFF
+                val b = color and 0xFF
+                outPixels[i] = (0xFF shl 24) or (r shl 16) or (g shl 8) or b
+            } else {
+                // Use full native ARGB for colored sprite pixels.
+                outPixels[i] = nativePixel
+            }
+        }
+
+        bitmap.setPixels(outPixels, 0, width, 0, 0, width, height)
+        return bitmap
+    }
+
+    private fun createColorBitmap(colorFrame: IntArray): Bitmap {
+        val width = 96
+        val height = 64
+
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        if (colorFrame.size >= width * height) {
+            bitmap.setPixels(colorFrame, 0, width, 0, 0, width, height)
+        }
         return bitmap
     }
 
@@ -516,7 +824,9 @@ fun PWApp(
     onLoadRom: () -> Unit,
     onLoadEeprom: () -> Unit,
     onTintSelected: (Tint) -> Unit,
-    initialSelectedTint: Tint = Tint.None
+    initialSelectedTint: Tint = Tint.None,
+    showDebugOverlay: Boolean,
+    onShowDebugOverlayChange: (Boolean) -> Unit
 ) {
     var filesExpanded by remember { mutableStateOf(true) }
     var appearanceExpanded by remember { mutableStateOf(true) }
@@ -582,6 +892,10 @@ fun PWApp(
     }
     var sidebarRowSpacingLevel by remember {
         mutableStateOf(preferences.getInt("sidebar_row_spacing_level", 4).coerceIn(0, 10))
+    }
+
+    var showDebugOverlayState by remember {
+        mutableStateOf(showDebugOverlay)
     }
 
     val isLoaded = pokeWalker != null
@@ -729,6 +1043,12 @@ fun PWApp(
                         onTintSelected(tint)
                         preferences.edit().putString("tint", tint.name).apply()
                     },
+                    colorizationEnabled = colorizationEnabled,
+                    onColorizationEnabledChange = { checked ->
+                        colorizationEnabled = checked
+                        preferences.edit().putBoolean("colorization_enabled", checked).apply()
+                        pokeWalker?.setColorMode(checked)
+                    },
                     selectedShader = selectedShader,
                     onSelectedShaderChange = { option ->
                         selectedShader = option
@@ -794,6 +1114,11 @@ fun PWApp(
                         irPortText = value
                         val parsed = value.toIntOrNull() ?: 8081
                         preferences.edit().putInt("ir_port", parsed).apply()
+                    },
+                    showDebugOverlay = showDebugOverlayState,
+                    onShowDebugOverlayChange = { enabled ->
+                        showDebugOverlayState = enabled
+                        onShowDebugOverlayChange(enabled)
                     },
                     controlWidth = controlWidth
                 )

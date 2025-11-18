@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -53,6 +54,8 @@ fun AppearanceSection(
     onShadeLevelChange: (Int) -> Unit,
     selectedLcdSize: String,
     onSelectedLcdSizeChange: (String) -> Unit,
+    colorizationEnabled: Boolean,
+    onColorizationEnabledChange: (Boolean) -> Unit,
     controlWidth: Dp,
     dropdownBackground: Color
 ) {
@@ -222,6 +225,36 @@ fun AppearanceSection(
                     ballThemeItem(BallTheme.BeastBall)
                     ballThemeItem(BallTheme.LuxuryBall)
                 }
+            }
+        }
+    }
+
+    // Colorization row
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp, top = 4.dp, bottom = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = "Colorization",
+            color = Color(0xFFB0B0C8),
+            fontSize = 12.sp,
+            modifier = Modifier.weight(1f)
+        )
+
+        Box(
+            modifier = Modifier
+                .width(controlWidth)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Switch(
+                    checked = colorizationEnabled,
+                    onCheckedChange = { checked -> onColorizationEnabledChange(checked) }
+                )
             }
         }
     }

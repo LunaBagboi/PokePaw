@@ -1362,10 +1362,6 @@ InstructionTable::InstructionTable() :
 
                             if (shouldLog)
                             {
-                                __android_log_print(ANDROID_LOG_DEBUG,
-                                                    "pokepaw-sleep",
-                                                    "SLEEP instruction putting CPU to sleep at PC=0x%04X",
-                                                    cpu->registers->pc);
                             }
 
                             cpu->sleeping = true;

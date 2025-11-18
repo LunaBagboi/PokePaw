@@ -39,6 +39,8 @@ fun TweaksSection(
     onIrHostChange: (String) -> Unit,
     irPortText: String,
     onIrPortTextChange: (String) -> Unit,
+    showDebugOverlay: Boolean,
+    onShowDebugOverlayChange: (Boolean) -> Unit,
     controlWidth: Dp
 ) {
     Text(
@@ -146,28 +148,85 @@ fun TweaksSection(
                         .background(Color(0xFF20203A), RoundedCornerShape(8.dp))
                         .padding(horizontal = 10.dp, vertical = 8.dp)
                 ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Column(
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text(
-                                text = "IR TCP Bridge",
-                                color = Color(0xFFB0B0C8),
-                                fontSize = 12.sp
-                            )
-                            Text(
-                                text = "Forward SCI3 IR data over TCP.",
-                                color = Color(0xFF8080A0),
-                                fontSize = 11.sp
-                            )
-                        }
-
+                    Column(modifier = Modifier.fillMaxWidth()) {
                         Row(
+                            modifier = Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
+                            Column(
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Text(
+                                    text = "IR TCP Bridge",
+                                    color = Color(0xFFB0B0C8),
+                                    fontSize = 12.sp
+                                )
+                                Text(
+                                    text = "Forward SCI3 IR data over TCP.",
+                                    color = Color(0xFF8080A0),
+                                    fontSize = 11.sp
+                                )
+                            }
+
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(22.dp)
+                                        .background(Color(0xFF15152A), RoundedCornerShape(6.dp))
+                                        .border(1.dp, Color(0xFF505070), RoundedCornerShape(6.dp)),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Checkbox(
+                                        checked = irEnabled,
+                                        onCheckedChange = onIrEnabledChange,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                }
+
+                                Spacer(modifier = Modifier.width(8.dp))
+
+                                Box(
+                                    modifier = Modifier
+                                        .size(24.dp)
+                                        .background(Color(0xFF15152A), RoundedCornerShape(6.dp))
+                                        .border(1.dp, Color(0xFF505070), RoundedCornerShape(6.dp))
+                                        .clickable { },
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = "⚙",
+                                        color = Color(0xFFB0B0C8),
+                                        fontSize = 12.sp
+                                    )
+                                }
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.width(8.dp))
+
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Column(
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Text(
+                                    text = "Show overlay debug HUD",
+                                    color = Color(0xFFB0B0C8),
+                                    fontSize = 12.sp
+                                )
+                                Text(
+                                    text = "Displays watts/route stats at the top of the app.",
+                                    color = Color(0xFF8080A0),
+                                    fontSize = 11.sp
+                                )
+                            }
+
                             Box(
                                 modifier = Modifier
                                     .size(22.dp)
@@ -176,26 +235,9 @@ fun TweaksSection(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Checkbox(
-                                    checked = irEnabled,
-                                    onCheckedChange = onIrEnabledChange,
+                                    checked = showDebugOverlay,
+                                    onCheckedChange = onShowDebugOverlayChange,
                                     modifier = Modifier.size(18.dp)
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.width(8.dp))
-
-                            Box(
-                                modifier = Modifier
-                                    .size(24.dp)
-                                    .background(Color(0xFF15152A), RoundedCornerShape(6.dp))
-                                    .border(1.dp, Color(0xFF505070), RoundedCornerShape(6.dp))
-                                    .clickable { },
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Text(
-                                    text = "⚙",
-                                    color = Color(0xFFB0B0C8),
-                                    fontSize = 12.sp
                                 )
                             }
                         }

@@ -29,6 +29,22 @@ class PocketWalkerNative {
 
     external fun setDisableSleep(disable: Boolean)
 
+    external fun setColorMode(enabled: Boolean)
+
+    external fun getColorFrame(): IntArray
+
+    external fun getWalkerDexNumber(): Int
+
+    external fun getWalkerVariantInfo(): IntArray
+
+    external fun getCurrentRouteId(): Int
+
+    external fun isSpecialRoute(): Boolean
+
+    external fun setColorSprite(id: String, pixels: IntArray, width: Int, height: Int)
+
+    external fun getCurrentWatts(): Int
+
     companion object {
         init {
             System.loadLibrary("pocketwalkerlib")
