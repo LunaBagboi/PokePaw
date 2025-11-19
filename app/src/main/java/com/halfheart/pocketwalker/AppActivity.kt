@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.net.Uri
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.animateDpAsState
@@ -107,6 +108,10 @@ import java.util.function.Function
 import kotlin.concurrent.thread
 import kotlin.experimental.xor
 import org.json.JSONObject
+
+import com.bagboi.pokepaw.BaselineStepDetector
+import com.bagboi.pokepaw.StepFusionFilter
+import android.util.Log
 
 class AppActivity : ComponentActivity()  {
     private var canvasBitmap by mutableStateOf<Bitmap?>(null)
@@ -326,15 +331,7 @@ class AppActivity : ComponentActivity()  {
         val savedRomUri = preferences.getString("rom_uri", null)?.let { Uri.parse(it) }
         val savedTint = preferences.getString("tint", Tint.None.name)
             ?.let { raw ->
-                runCatching { Tint.valueOf(raw) }.getOrElse {
-                    // Map old tint names to new ones for backwards compatibility
-                    when (raw) {
-                        "CinnabarIsland" -> Tint.Red
-                        "Elysium" -> Tint.Blue
-                        "DMG" -> Tint.Green
-                        else -> Tint.None
-                    }
-                }
+                runCatching { Tint.valueOf(raw) }.getOrElse { Tint.None }
             } ?: Tint.None
 
         if (savedRomUri != null) {
@@ -461,15 +458,26 @@ class AppActivity : ComponentActivity()  {
                         "No walker on device"
                     }
 
-                    Text(
-                        text = "$routePart • $wattsPart • $walkerPart",
-                        color = Color.White,
-                        fontSize = 11.sp,
+                    val baselineSteps = baselineStepCount
+                    val fusedSteps = fusedStepCount
+
+                    Column(
                         modifier = Modifier
-                            .align(Alignment.BottomCenter)
+                            .align(Alignment.BottomEnd)
                             .background(Color(0x80000000))
                             .padding(vertical = 4.dp, horizontal = 8.dp)
-                    )
+                    ) {
+                        Text(
+                            text = "$routePart • $wattsPart • $walkerPart",
+                            color = Color.White,
+                            fontSize = 11.sp
+                        )
+                        Text(
+                            text = "Baseline: $baselineSteps • Fused: $fusedSteps",
+                            color = Color.White,
+                            fontSize = 11.sp
+                        )
+                    }
                 }
             }
         }
@@ -478,6 +486,16 @@ class AppActivity : ComponentActivity()  {
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
         accelerometer?.let {
             sensorManager.registerListener(sensorListener, it, SENSOR_INTERVAL_US)
+        }
+
+        // Optional fusion sensors (no extra permissions required)
+        linearAccelSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
+        gyroSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+        linearAccelSensor?.let {
+            sensorManager.registerListener(fusionSensorListener, it, SENSOR_INTERVAL_US)
+        }
+        gyroSensor?.let {
+            sensorManager.registerListener(fusionSensorListener, it, SENSOR_INTERVAL_US)
         }
 
         initializePokeWalkerIfReady()
@@ -489,40 +507,71 @@ class AppActivity : ComponentActivity()  {
                 initializeTcp(irHost, irPort)
             }
         }
-    }
 
-    override fun onStop() {
-        super.onStop()
-        // Persist current EEPROM state to internal save if emulator is running
-        if (::pokeWalker.isInitialized) {
-            val currentEeprom = pokeWalker.getEepromBuffer()
-            applicationContext.openFileOutput(EEPROM_SAVE_FILENAME, MODE_PRIVATE).use { output ->
-                output.write(currentEeprom)
+        // Initialize baseline step detector
+        baselineStepDetector = BaselineStepDetector().apply {
+            listener = object : BaselineStepDetector.Listener {
+                override fun onStep(timestampNanos: Long) {
+                    baselineStepCount += 1
+
+                    // Forward baseline steps into the fusion filter
+                    stepFusionFilter?.onBaselineStep(timestampNanos)
+                }
             }
         }
-    }
 
-    override fun onPause() {
-        super.onPause()
-        if (::pokeWalker.isInitialized) {
-            pokeWalker.pause()
-        }
-    }
+        // Initialize step fusion filter
+        stepFusionFilter = StepFusionFilter().apply {
+            listener = object : StepFusionFilter.Listener {
+                override fun onFusedStep(timestampNanos: Long) {
+                    fusedStepCount += 1
 
-    override fun onResume() {
-        super.onResume()
-        if (::pokeWalker.isInitialized) {
-            pokeWalker.resume()
+                    // Debug: inspect accelerometer registers around the region the
+                    // ROM reads for samples (0x04/0x06/0x08) when we accept a step.
+                    if (::pokeWalker.isInitialized) {
+                        try {
+                            val window = pokeWalker.getAccelWindow(0, 0x10)
+                            if (window.size >= 0x09) {
+                                val b4 = window[0x04].toInt()
+                                val b6 = window[0x06].toInt()
+                                val b8 = window[0x08].toInt()
+                                Log.d(
+                                    "AccelWindow",
+                                    "step#$fusedStepCount regs[4,6,8]=[$b4,$b6,$b8]"
+                                )
+                            } else {
+                                Log.d("AccelWindow", "window too small: size=${window.size}")
+                            }
+                        } catch (t: Throwable) {
+                            Log.d("AccelWindow", "error reading accel window: ${t.message}")
+                        }
+                    }
+
+                    // Forward fused steps into the native emulator so the ROM's
+                    // handleAccelSteps pipeline can consume them.
+                    if (::pokeWalker.isInitialized) {
+                        try {
+                            pokeWalker.addFusedSteps(1)
+                        } catch (_: Throwable) {
+                        }
+                    }
+                }
+            }
         }
     }
 
     private lateinit var sensorManager: SensorManager
     private var accelerometer: Sensor? = null
+    private var linearAccelSensor: Sensor? = null
+    private var gyroSensor: Sensor? = null
 
     private val SENSOR_TARGET_HZ = 50
     private val SENSOR_INTERVAL_NS = 1_000_000_000L / SENSOR_TARGET_HZ
     private val SENSOR_INTERVAL_US = 1_000_000 / SENSOR_TARGET_HZ
     private var lastSensorTimestamp = 0L
+
+    private var lastFusionLinearTimestamp = 0L
+    private var lastFusionGyroTimestamp = 0L
 
     private var lastWalkerDex: Int? = null
     private var lastWalkerName: String? = null
@@ -546,11 +595,52 @@ class AppActivity : ComponentActivity()  {
 
             lastSensorTimestamp = event.timestamp
 
-            val x = event.values[0] / SensorManager.GRAVITY_EARTH
-            val y = event.values[1] / SensorManager.GRAVITY_EARTH
-            val z = event.values[2] / SensorManager.GRAVITY_EARTH
+            val normX = event.values[0] / SensorManager.GRAVITY_EARTH
+            val normY = event.values[1] / SensorManager.GRAVITY_EARTH
+            val normZ = event.values[2] / SensorManager.GRAVITY_EARTH
 
-            pokeWalker.setAccelerationData(x, y, z)
+            // Apply an emulator-only gain so the ROM sees stronger motion,
+            // while Baseline/Fusion continue to use the normalized values.
+            val gain = 2.0f
+            val emuX = normX * gain
+            val emuY = normY * gain
+            val emuZ = normZ * gain
+
+            // Feed the native emulator and baseline step detector
+            pokeWalker.setAccelerationData(emuX, emuY, emuZ)
+            baselineStepDetector?.addSample(normX, normY, normZ, event.timestamp)
+        }
+
+        override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+    }
+
+    private var baselineStepDetector: BaselineStepDetector? = null
+    private var baselineStepCount: Int = 0
+
+    private var stepFusionFilter: StepFusionFilter? = null
+    private var fusedStepCount: Int = 0
+
+    private val fusionSensorListener = object : SensorEventListener {
+        override fun onSensorChanged(event: SensorEvent) {
+            when (event.sensor.type) {
+                Sensor.TYPE_LINEAR_ACCELERATION -> {
+                    // Throttle fusion processing to target rate
+                    if (event.timestamp - lastFusionLinearTimestamp < SENSOR_INTERVAL_NS) return
+                    lastFusionLinearTimestamp = event.timestamp
+                    val ax = event.values[0]
+                    val ay = event.values[1]
+                    val az = event.values[2]
+                    stepFusionFilter?.onLinearAccelSample(ax, ay, az, event.timestamp)
+                }
+                Sensor.TYPE_GYROSCOPE -> {
+                    if (event.timestamp - lastFusionGyroTimestamp < SENSOR_INTERVAL_NS) return
+                    lastFusionGyroTimestamp = event.timestamp
+                    val gx = event.values[0]
+                    val gy = event.values[1]
+                    val gz = event.values[2]
+                    stepFusionFilter?.onGyroSample(gx, gy, gz, event.timestamp)
+                }
+            }
         }
 
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}

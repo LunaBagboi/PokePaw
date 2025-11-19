@@ -3,6 +3,13 @@
 #include "../H8/Ssu/Ssu.h"
 #include "../../SleepConfig.h"
 
+#if ANDROID
+#include <android/log.h>
+#define LOGD(fmt, ...) __android_log_print(ANDROID_LOG_DEBUG, "PWStep", fmt, ##__VA_ARGS__)
+#else
+#define LOGD(fmt, ...) (void)0
+#endif
+
 PokeWalker::PokeWalker(uint8_t* ramBuffer, uint8_t* eepromBuffer) : H8300H(ramBuffer)
 {
     SetupAddressHandlers();
@@ -106,6 +113,17 @@ void PokeWalker::SetupAddressHandlers() const
         return Continue;
     });
 
+    // Uncap the main event loop timing by skipping a sleep-related
+    // instruction at 0x788A.
+    board->cpu->OnAddress(0x788A, [](Cpu* cpu)
+    {
+        LOGD("main loop sleep bypass at pc=%04x", cpu->registers->pc);
+
+        cpu->registers->pc += 4;
+
+        return SkipInstruction;
+    });
+
     // factory tests
     board->cpu->OnAddress(0x336, [](Cpu* cpu)
     {
@@ -126,6 +144,32 @@ void PokeWalker::SetupAddressHandlers() const
     board->cpu->OnAddress(0x8EE, [](Cpu* cpu)
     {
         cpu->registers->pc += 2;
+
+        return SkipInstruction;
+    });
+
+    // Log when the firmware enters handleAccelSteps (0x945A). This is a
+    // read-only hook for now; it does not modify CPU state or RAM.
+    board->cpu->OnAddress(0x945A, [](Cpu* cpu)
+    {
+        (void)cpu;
+
+        LOGD("handleAccelSteps entered (pc=%04x)", cpu->registers->pc);
+
+        return Continue;
+    });
+
+    // Override checkAccelForSteps result at the jsr site inside handleAccelSteps.
+    // The jsr @checkAccelForSteps is at 0x94A8 with a return address of 0x94AC.
+    board->cpu->OnAddress(0x94A8, [](Cpu* cpu)
+    {
+        auto* er0 = cpu->registers->Register32(0);
+        *er0 = 1;          // constant test stepsDetected value
+
+        LOGD("checkAccelForSteps override at pc=%04x, er0 set to %ld", cpu->registers->pc,
+             static_cast<long>(*er0));
+
+        cpu->registers->pc = 0x94AC; // skip over the jsr as if it had returned
 
         return SkipInstruction;
     });

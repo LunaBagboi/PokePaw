@@ -27,6 +27,8 @@ class PocketWalkerNative {
 
     external fun setAccelerationData(x: Float, y: Float, z: Float)
 
+    external fun addFusedSteps(count: Int)
+
     external fun setDisableSleep(disable: Boolean)
 
     external fun setColorMode(enabled: Boolean)
@@ -46,6 +48,8 @@ class PocketWalkerNative {
     external fun getCurrentWatts(): Int
 
     external fun adjustWatts(delta: Int)
+
+    external fun getAccelWindow(start: Int, length: Int): ByteArray
 
     companion object {
         init {

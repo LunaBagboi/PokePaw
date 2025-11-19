@@ -65,8 +65,25 @@ public:
 
     void AdjustWatts(int16_t delta) const;
 
+    // Accumulate fused steps from the Android fusion pipeline. These
+    // will be consumed by the handleAccelSteps hook inside the CPU
+    // address handler.
+    void AddFusedSteps(uint16_t count) const;
+
+    // Inject a normalized acceleration sample into the emulated
+    // accelerometer so the firmware's accel pipeline sees live data.
+    void SetAccelerationData(float x, float y, float z) const;
+
+    // Read a small window from the emulated accelerometer's internal
+    // memory for debugging (e.g. to verify what the firmware sees).
+    void ReadAccelerometerWindow(uint8_t start, uint8_t length, uint8_t* out) const;
+
 private:
     void SetupAddressHandlers() const;
+
+    // Pending fused steps that have been accepted on the Android
+    // side but not yet consumed by the firmware's step pipeline.
+    mutable uint32_t fusedStepBudget = 0;
 
     Lcd* lcd;
     LcdData* lcdData;

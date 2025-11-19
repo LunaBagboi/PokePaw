@@ -175,7 +175,7 @@ fun BallThemeBackground(
     val defaultBottom = Color(0xffdadade)
 
     val topColor = when (selectedBallTheme) {
-        BallTheme.UltraBall -> Color(0xFF181414)
+        BallTheme.UltraBall -> Color(0xFF191A1B)
         BallTheme.SafariBall -> Color(0xFF76BD25)
         BallTheme.QuickBall -> Color(0xFF4DA2CA)
         BallTheme.PremierBall -> Color(0xFFDBDBDF)

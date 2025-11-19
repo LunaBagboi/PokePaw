@@ -1,22 +1,25 @@
  #include "PokeWalker.h"
- #include "../H8/Ssu/Ssu.h"
- #include "../../SleepConfig.h"
- 
- #ifdef __ANDROID__
- #include <android/log.h>
- #endif
+#include "../H8/Ssu/Ssu.h"
+#include "../../SleepConfig.h"
 
- // FNV-1a 32-bit hash function for detecting walker frame changes
- static uint32_t fnv1a_32(const uint8_t* data, size_t size)
- {
-     uint32_t hash = 0x811c9dc5u;
-     for (size_t i = 0; i < size; ++i)
-     {
-         hash ^= data[i];
-         hash *= 0x01000193u;
-     }
-     return hash;
- }
+#ifdef __ANDROID__
+#include <android/log.h>
+#define PW_LOGD(fmt, ...) __android_log_print(ANDROID_LOG_DEBUG, "PWStep", fmt, ##__VA_ARGS__)
+#else
+#define PW_LOGD(fmt, ...) (void)0
+#endif
+
+// FNV-1a 32-bit hash function for detecting walker frame changes
+static uint32_t fnv1a_32(const uint8_t* data, size_t size)
+{
+    uint32_t hash = 0x811c9dc5u;
+    for (size_t i = 0; i < size; ++i)
+    {
+        hash ^= data[i];
+        hash *= 0x01000193u;
+    }
+    return hash;
+}
 
 PokeWalker::PokeWalker(uint8_t* ramBuffer, uint8_t* eepromBuffer) : H8300H(ramBuffer)
 {
@@ -288,6 +291,77 @@ void PokeWalker::AdjustWatts(const int16_t delta) const
     board->ram->WriteShort(wattsAddr, static_cast<uint16_t>(newWatts));
 }
 
+void PokeWalker::AddFusedSteps(const uint16_t count) const
+{
+    if (count == 0)
+    {
+        return;
+    }
+
+    fusedStepBudget += count;
+}
+
+void PokeWalker::SetAccelerationData(const float x, const float y, const float z) const
+{
+    if (!accelerometer || !accelerometer->memory)
+    {
+        return;
+    }
+
+    auto writeAxis = [this](uint8_t addr, float value)
+    {
+        // Clamp to roughly [-2g, 2g] and map to signed 8-bit range.
+        float clamped = value;
+        if (clamped > 2.0f)
+        {
+            clamped = 2.0f;
+        }
+        else if (clamped < -2.0f)
+        {
+            clamped = -2.0f;
+        }
+
+        const float scaled = (clamped / 2.0f) * 127.0f;
+        const int8_t raw = static_cast<int8_t>(scaled);
+
+        accelerometer->memory->WriteByte(addr, static_cast<uint8_t>(raw));
+    };
+
+    // Store the latest normalized acceleration samples into the
+    // accelerometer registers that the Pok e9walker firmware actually
+    // reads for X/Y/Z. Empirically, the ROM uses 0x04/0x06/0x08 as its
+    // sample bytes rather than the canonical datasheet MSB addresses.
+    writeAxis(0x04, x); // X
+    writeAxis(0x06, y); // Y
+    writeAxis(0x08, z); // Z
+}
+
+void PokeWalker::ReadAccelerometerWindow(uint8_t start, uint8_t length, uint8_t* out) const
+{
+    if (!accelerometer || !accelerometer->memory || !out)
+    {
+        return;
+    }
+
+    const uint16_t maxSize = 0x7F;
+    if (start >= maxSize)
+    {
+        return;
+    }
+
+    uint16_t end = static_cast<uint16_t>(start) + static_cast<uint16_t>(length);
+    if (end > maxSize)
+    {
+        end = maxSize;
+    }
+
+    uint8_t idx = 0;
+    for (uint16_t addr = start; addr < end; ++addr, ++idx)
+    {
+        out[idx] = accelerometer->memory->ReadByte(addr);
+    }
+}
+
 void PokeWalker::SetupAddressHandlers() const
 {
     // prevent firmware sleep when the Power Saving Cheat is enabled
@@ -299,6 +373,16 @@ void PokeWalker::SetupAddressHandlers() const
         }
 
         return Continue;
+    });
+
+    // Uncap the main event loop timing by skipping a sleep-related
+    // instruction at 0x788A. This improves button responsiveness and
+    // ensures the accel sampling loop runs at a higher effective rate.
+    board->cpu->OnAddress(0x788A, [](Cpu* cpu)
+    {
+        cpu->registers->pc += 4;
+
+        return SkipInstruction;
     });
 
     // factory tests
@@ -343,5 +427,41 @@ void PokeWalker::SetupAddressHandlers() const
         lcd->OnFirmwareDraw(args);
 
         return Continue; // Allow the original firmware draw to complete
+    });
+
+    // Log when the firmware enters handleAccelSteps (0x945A).
+    board->cpu->OnAddress(0x945A, [](Cpu* cpu)
+    {
+        return Continue;
+    });
+
+    // Override checkAccelForSteps result at the jsr site inside handleAccelSteps
+    // when we have pending fused steps from Android. The jsr @checkAccelForSteps
+    // is at 0x94A8 with a return address of 0x94AC.
+    board->cpu->OnAddress(0x94A8, [this](Cpu* cpu)
+    {
+        if (fusedStepBudget == 0)
+        {
+            // No pending fused steps; let the firmware call checkAccelForSteps
+            // normally so native accel can still contribute.
+            return Continue;
+        }
+
+        // Consume the current budget atomically w.r.t. this handler.
+        const uint32_t fused = fusedStepBudget;
+        fusedStepBudget = 0;
+
+        // Map fused steps into an effective stepsDetected amplitude. The
+        // batcher uses a 9-bit accumulator, so we choose a scale that is
+        // large enough to cross its threshold without exploding counters.
+        constexpr uint32_t kScale = 0x200; // 512
+        uint32_t amplitude = fused * kScale;
+
+        uint32_t* er0 = cpu->registers->Register32(0x0);
+        *er0 = amplitude;
+
+        cpu->registers->pc = 0x94AC; // skip over the jsr as if it had returned
+
+        return SkipInstruction;
     });
 }

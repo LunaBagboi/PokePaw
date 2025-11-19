@@ -237,6 +237,49 @@ Java_com_halfheart_pocketwalkerlib_PocketWalkerNative_adjustWatts(JNIEnv *env, j
 }
 
 extern "C"
+JNIEXPORT void JNICALL
+Java_com_halfheart_pocketwalkerlib_PocketWalkerNative_addFusedSteps(JNIEnv *env, jobject thiz,
+                                                                    jint count) {
+    auto emulator = PocketWalkerState::Emulator();
+    if (!emulator || count <= 0) {
+        return;
+    }
+
+    emulator->AddFusedSteps(static_cast<uint16_t>(count));
+}
+
+extern "C"
+JNIEXPORT jbyteArray JNICALL
+Java_com_halfheart_pocketwalkerlib_PocketWalkerNative_getAccelWindow(JNIEnv *env, jobject thiz,
+                                                                     jint start,
+                                                                     jint length) {
+    auto emulator = PocketWalkerState::Emulator();
+    if (!emulator || length <= 0) {
+        return env->NewByteArray(0);
+    }
+
+    if (start < 0) {
+        start = 0;
+    }
+    if (length > 0x7F) {
+        length = 0x7F;
+    }
+
+    std::vector<uint8_t> buffer(static_cast<size_t>(length));
+    emulator->ReadAccelerometerWindow(static_cast<uint8_t>(start),
+                                      static_cast<uint8_t>(length),
+                                      buffer.data());
+
+    jbyteArray result = env->NewByteArray(length);
+    if (!result) {
+        return nullptr;
+    }
+    env->SetByteArrayRegion(result, 0, length,
+                            reinterpret_cast<const jbyte*>(buffer.data()));
+    return result;
+}
+
+extern "C"
 JNIEXPORT jintArray JNICALL
 Java_com_halfheart_pocketwalkerlib_PocketWalkerNative_getWalkerVariantInfo(JNIEnv *env, jobject thiz) {
     auto emulator = PocketWalkerState::Emulator();
@@ -406,7 +449,7 @@ Java_com_halfheart_pocketwalkerlib_PocketWalkerNative_setAccelerationData(JNIEnv
         return;
     }
 
-    //emulator->SetAccelerationData(x, y, z);
+    emulator->SetAccelerationData(x, y, z);
 }
 
 extern "C"
