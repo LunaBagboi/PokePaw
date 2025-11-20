@@ -51,7 +51,6 @@ fun PWButton(
                         pokeWalker?.press(button)
                         tryAwaitRelease()
                         isPressed.value = false
-                        delay(100)
                         pokeWalker?.release(button)
                     }
                 )

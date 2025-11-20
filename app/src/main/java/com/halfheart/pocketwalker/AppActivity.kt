@@ -761,10 +761,10 @@ class AppActivity : ComponentActivity()  {
 
         // Native base LCD palette (including alpha) used by Lcd::colorBuffer
         val basePalette = intArrayOf(
-            0xFFFFFFFF.toInt(), // PALETTE[0]
-            0xFF8787A1.toInt(),
-            0xFF58588A.toInt(),
-            0xFF1E1E29.toInt()
+            0xFFB7B8B0.toInt(), // PALETTE[0]
+            0xFF808173.toInt(),
+            0xFF666559.toInt(),
+            0xFF1F1A17.toInt()
         )
 
         for (i in 0 until pixelCount) {
@@ -808,88 +808,6 @@ class AppActivity : ComponentActivity()  {
         return applyShaderOption(bitmap, option)
     }
 
-
-    //DISABLEDCODE: legacy contrast adjustment logic kept for reference
-//    private fun createBitmapWithContrast(paletteIndices: ByteArray): Bitmap {
-//        val width = 96
-//        val height = 64
-//
-//        val contrast = pokeWalker.getContrast().toInt()
-//        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-//        val pixels = IntArray(width * height)
-//
-//        for (i in pixels.indices) {
-//            var paletteIndex = paletteIndices[i].toInt() and 0xFF
-//            if (paletteIndex >= palette.size) {
-//                paletteIndex = 0
-//            }
-//
-//            val color = palette[paletteIndex]
-//            val r = (color shr 16) and 0xFF
-//            val g = (color shr 8) and 0xFF
-//            val b = color and 0xFF
-//
-//            val (adjustedR, adjustedG, adjustedB) = if (paletteIndex == 0) {
-//                Triple(r, g, b)
-//            } else {
-//                Triple(
-//                    applyContrast(r, contrast),
-//                    applyContrast(g, contrast),
-//                    applyContrast(b, contrast)
-//                )
-//            }
-//
-//            pixels[i] = (0xFF shl 24) or (adjustedR shl 16) or (adjustedG shl 8) or adjustedB
-//        }
-//
-//        bitmap.setPixels(pixels, 0, width, 0, 0, width, height)
-//        return bitmap
-//    }
-//
-//    private fun applyContrast(colorValue: Int, contrast: Int): Int {
-//
-//        val clampedContrast = contrast.coerceIn(0, 9)
-//
-//        if (colorValue == 0xCC) {
-//            return colorValue
-//        }
-//
-//        val contrastMultiplier = when (clampedContrast) {
-//            0 -> 0.2f
-//            1 -> 0.4f
-//            2 -> 0.6f
-//            3 -> 0.8f
-//            4 -> 1.0f
-//            5 -> 1.2f
-//            6 -> 1.4f
-//            7 -> 1.6f
-//            8 -> 1.8f
-//            9 -> 2.0f
-//            else -> 1.0f
-//        }
-//
-//        val referenceValues = mapOf(
-//            0x99 to 153,
-//            0x66 to 102,
-//            0x33 to 51
-//        )
-//
-//        val referenceValue = referenceValues[colorValue]
-//        if (referenceValue != null) {
-//            val distanceFromMid = referenceValue - 128
-//
-//            val adjustedDistance = (distanceFromMid * contrastMultiplier).toInt()
-//            val newValue = 128 + adjustedDistance
-//
-//            return newValue.coerceIn(0, 255)
-//        }
-//
-//        val distanceFromMid = colorValue - 128
-//        val adjustedDistance = (distanceFromMid * contrastMultiplier).toInt()
-//        val newValue = 128 + adjustedDistance
-//
-//        return newValue.coerceIn(0, 255)
-//    }
 }
 
 fun Bitmap.sampleEdgeColor(top: Boolean): Color {

@@ -2,7 +2,7 @@ package com.bagboi.pokepaw
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -14,8 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
+import kotlin.math.min
+import kotlin.math.roundToInt
 
 enum class BallTheme {
     None,
@@ -213,32 +216,106 @@ fun BallThemeBackground(
     }
 
     Box(modifier = modifier) {
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.5f)
-                .align(Alignment.TopCenter)
-                .background(topColor)
-        )
-
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.5f)
-                .align(Alignment.BottomCenter)
-                .background(bottomColor)
-        )
-
-        bgBitmap?.let { bitmap ->
-            Image(
-                bitmap = bitmap.asImageBitmap(),
-                contentDescription = null,
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .fillMaxWidth(),
-                contentScale = ContentScale.Crop,
-                filterQuality = FilterQuality.Low
+        if (bgBitmap == null) {
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.5f)
+                    .align(Alignment.TopCenter)
+                    .background(topColor)
             )
+
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.5f)
+                    .align(Alignment.BottomCenter)
+                    .background(bottomColor)
+            )
+        } else {
+            val imageBitmap = remember(bgBitmap) { bgBitmap.asImageBitmap() }
+
+            Canvas(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .align(Alignment.Center)
+            ) {
+                val canvasWidth = size.width
+                val canvasHeight = size.height
+
+                val imgWidth = imageBitmap.width.toFloat()
+                val imgHeight = imageBitmap.height.toFloat()
+
+                if (imgWidth <= 0f || imgHeight <= 0f) return@Canvas
+
+                val scale = min(canvasWidth / imgWidth, canvasHeight / imgHeight)
+                val destWidth = imgWidth * scale
+                val destHeight = imgHeight * scale
+
+                val left = (canvasWidth - destWidth) / 2f
+                val top = (canvasHeight - destHeight) / 2f
+
+                val destWidthInt = destWidth.roundToInt().coerceAtLeast(1)
+                val destHeightInt = destHeight.roundToInt().coerceAtLeast(1)
+                val leftInt = left.roundToInt()
+                val topInt = top.roundToInt()
+                val canvasWidthInt = canvasWidth.roundToInt()
+                val canvasHeightInt = canvasHeight.roundToInt()
+
+                drawImage(
+                    image = imageBitmap,
+                    dstOffset = IntOffset(leftInt, topInt),
+                    dstSize = IntSize(destWidthInt, destHeightInt),
+                    filterQuality = FilterQuality.Low
+                )
+
+                if (topInt > 0) {
+                    drawImage(
+                        image = imageBitmap,
+                        srcOffset = IntOffset(0, 0),
+                        srcSize = IntSize(imageBitmap.width, 1),
+                        dstOffset = IntOffset(leftInt, 0),
+                        dstSize = IntSize(destWidthInt, topInt),
+                        filterQuality = FilterQuality.Low
+                    )
+
+                    val bottomStripeHeight = canvasHeightInt - (topInt + destHeightInt)
+                    if (bottomStripeHeight > 0) {
+                        drawImage(
+                            image = imageBitmap,
+                            srcOffset = IntOffset(0, imageBitmap.height - 1),
+                            srcSize = IntSize(imageBitmap.width, 1),
+                            dstOffset = IntOffset(leftInt, topInt + destHeightInt),
+                            dstSize = IntSize(destWidthInt, bottomStripeHeight),
+                            filterQuality = FilterQuality.Low
+                        )
+                    }
+                }
+
+                if (leftInt > 0) {
+                    drawImage(
+                        image = imageBitmap,
+                        srcOffset = IntOffset(0, 0),
+                        srcSize = IntSize(1, imageBitmap.height),
+                        dstOffset = IntOffset(0, topInt),
+                        dstSize = IntSize(leftInt, destHeightInt),
+                        filterQuality = FilterQuality.Low
+                    )
+
+                    val rightStripeWidth = canvasWidthInt - (leftInt + destWidthInt)
+                    if (rightStripeWidth > 0) {
+                        drawImage(
+                            image = imageBitmap,
+                            srcOffset = IntOffset(imageBitmap.width - 1, 0),
+                            srcSize = IntSize(1, imageBitmap.height),
+                            dstOffset = IntOffset(leftInt + destWidthInt, topInt),
+                            dstSize = IntSize(rightStripeWidth, destHeightInt),
+                            filterQuality = FilterQuality.Low
+                        )
+                    }
+                }
+            }
         }
     }
 }

@@ -374,17 +374,6 @@ void PokeWalker::SetupAddressHandlers() const
 
         return Continue;
     });
-
-    // Uncap the main event loop timing by skipping a sleep-related
-    // instruction at 0x788A. This improves button responsiveness and
-    // ensures the accel sampling loop runs at a higher effective rate.
-    board->cpu->OnAddress(0x788A, [](Cpu* cpu)
-    {
-        cpu->registers->pc += 4;
-
-        return SkipInstruction;
-    });
-
     // factory tests
     board->cpu->OnAddress(0x336, [](Cpu* cpu)
     {
@@ -397,6 +386,13 @@ void PokeWalker::SetupAddressHandlers() const
     board->cpu->OnAddress(0x7700, [](Cpu* cpu)
     {
         cpu->registers->pc += 2;
+
+        return SkipInstruction;
+    });
+
+    board->cpu->OnAddress(0x788A, [](Cpu* cpu)
+    {
+        cpu->registers->pc += 4;
 
         return SkipInstruction;
     });
