@@ -17,7 +17,7 @@ import kotlin.math.sqrt
  * - If they are active, use them to filter out obvious false positives.
  */
 class StepFusionFilter(
-    private val minFusedIntervalNanos: Long = 300_000_000L, // 300 ms
+    private val minFusedIntervalNanos: Long = 250_000_000L, // 250 ms
     private val linearActivationThreshold: Float = 0.04f,    // g, to mark sensor as active
     private val linearStepThreshold: Float = 0.06f,          // g, minimum envelope for a valid step
     private val gyroActivationThreshold: Float = 0.5f,       // rad/s, to mark gyro as active
@@ -73,6 +73,7 @@ class StepFusionFilter(
      */
     fun onBaselineStep(timestampNanos: Long) {
         val dtFromLastFused = timestampNanos - lastFusedStepTimestamp
+        val longIdle = lastFusedStepTimestamp == 0L || dtFromLastFused > idleThresholdNanos
 
         // If linear sensor is active, require some minimum envelope
         if (linearActive && linearEnv < linearStepThreshold) {
@@ -93,9 +94,16 @@ class StepFusionFilter(
             return
         }
 
+        if (!longIdle && dtFromLastFused < minFusedIntervalNanos) {
+            Log.d(
+                "StepFusionFilter",
+                "REJECT (too soon after fused): dt=${dtFromLastFused / 1_000_000}ms, min=${minFusedIntervalNanos / 1_000_000}ms"
+            )
+            return
+        }
+
         // Idle/start gate: after a long idle (or at app start), do not emit fused
         // steps until we see at least two baseline steps with a plausible stride.
-        val longIdle = lastFusedStepTimestamp == 0L || dtFromLastFused > idleThresholdNanos
         if (longIdle) {
             val pending = pendingStartStepTimestamp
             if (pending == null) {
