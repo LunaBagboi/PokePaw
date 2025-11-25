@@ -1,0 +1,3400 @@
+{
+    "6_000": {
+        "name": "Bulbasaur",
+        "dex": "001",
+        "gender": "all"
+    },
+    "6_001": {
+        "name": "Ivysaur",
+        "dex": "002",
+        "gender": "all"
+    },
+    "6_002": {
+        "name": "Venusaur",
+        "dex": "003",
+        "gender": "male"
+    },
+    "6_003": {
+        "name": "Charmander",
+        "dex": "004",
+        "gender": "all"
+    },
+    "6_004": {
+        "name": "Charmeleon",
+        "dex": "005",
+        "gender": "all"
+    },
+    "6_005": {
+        "name": "Charizard",
+        "dex": "006",
+        "gender": "all"
+    },
+    "6_006": {
+        "name": "Squirtle",
+        "dex": "007",
+        "gender": "all"
+    },
+    "6_007": {
+        "name": "Wartortle",
+        "dex": "008",
+        "gender": "all"
+    },
+    "6_008": {
+        "name": "Blastoise",
+        "dex": "009",
+        "gender": "all"
+    },
+    "6_009": {
+        "name": "Caterpie",
+        "dex": "010",
+        "gender": "all"
+    },
+    "6_010": {
+        "name": "Metapod",
+        "dex": "011",
+        "gender": "all"
+    },
+    "6_011": {
+        "name": "Butterfree",
+        "dex": "012",
+        "gender": "male"
+    },
+    "6_012": {
+        "name": "Weedle",
+        "dex": "013",
+        "gender": "all"
+    },
+    "6_013": {
+        "name": "Kakuna",
+        "dex": "014",
+        "gender": "all"
+    },
+    "6_014": {
+        "name": "Beedrill",
+        "dex": "015",
+        "gender": "all"
+    },
+    "6_015": {
+        "name": "Pidgey",
+        "dex": "016",
+        "gender": "all"
+    },
+    "6_016": {
+        "name": "Pidgeotto",
+        "dex": "017",
+        "gender": "all"
+    },
+    "6_017": {
+        "name": "Pidgeot",
+        "dex": "018",
+        "gender": "all"
+    },
+    "6_018": {
+        "name": "Rattata",
+        "dex": "019",
+        "gender": "male"
+    },
+    "6_019": {
+        "name": "Raticate",
+        "dex": "020",
+        "gender": "male"
+    },
+    "6_020": {
+        "name": "Spearow",
+        "dex": "021",
+        "gender": "all"
+    },
+    "6_021": {
+        "name": "Fearow",
+        "dex": "022",
+        "gender": "all"
+    },
+    "6_022": {
+        "name": "Ekans",
+        "dex": "023",
+        "gender": "all"
+    },
+    "6_023": {
+        "name": "Arbok",
+        "dex": "024",
+        "gender": "all"
+    },
+    "6_024": {
+        "name": "Pikachu",
+        "dex": "025",
+        "gender": "male"
+    },
+    "6_025": {
+        "name": "Raichu",
+        "dex": "026",
+        "gender": "male"
+    },
+    "6_026": {
+        "name": "Sandshrew",
+        "dex": "027",
+        "gender": "all"
+    },
+    "6_027": {
+        "name": "Sandslash",
+        "dex": "028",
+        "gender": "all"
+    },
+    "6_028": {
+        "name": "Nidoran♀",
+        "dex": "029",
+        "gender": "all"
+    },
+    "6_029": {
+        "name": "Nidorina",
+        "dex": "030",
+        "gender": "all"
+    },
+    "6_030": {
+        "name": "Nidoqueen",
+        "dex": "031",
+        "gender": "all"
+    },
+    "6_031": {
+        "name": "Nidoran♂",
+        "dex": "032",
+        "gender": "all"
+    },
+    "6_032": {
+        "name": "Nidorino",
+        "dex": "033",
+        "gender": "all"
+    },
+    "6_033": {
+        "name": "Nidoking",
+        "dex": "034",
+        "gender": "all"
+    },
+    "6_034": {
+        "name": "Clefairy",
+        "dex": "035",
+        "gender": "all"
+    },
+    "6_035": {
+        "name": "Clefable",
+        "dex": "036",
+        "gender": "all"
+    },
+    "6_036": {
+        "name": "Vulpix",
+        "dex": "037",
+        "gender": "all"
+    },
+    "6_037": {
+        "name": "Ninetales",
+        "dex": "038",
+        "gender": "all"
+    },
+    "6_038": {
+        "name": "Jigglypuff",
+        "dex": "039",
+        "gender": "all"
+    },
+    "6_039": {
+        "name": "Wigglytuff",
+        "dex": "040",
+        "gender": "all"
+    },
+    "6_040": {
+        "name": "Zubat",
+        "dex": "041",
+        "gender": "male"
+    },
+    "6_041": {
+        "name": "Golbat",
+        "dex": "042",
+        "gender": "male"
+    },
+    "6_042": {
+        "name": "Oddish",
+        "dex": "043",
+        "gender": "all"
+    },
+    "6_043": {
+        "name": "Gloom",
+        "dex": "044",
+        "gender": "male"
+    },
+    "6_044": {
+        "name": "Vileplume",
+        "dex": "045",
+        "gender": "male"
+    },
+    "6_045": {
+        "name": "Paras",
+        "dex": "046",
+        "gender": "all"
+    },
+    "6_046": {
+        "name": "Parasect",
+        "dex": "047",
+        "gender": "all"
+    },
+    "6_047": {
+        "name": "Venonat",
+        "dex": "048",
+        "gender": "all"
+    },
+    "6_048": {
+        "name": "Venomoth",
+        "dex": "049",
+        "gender": "all"
+    },
+    "6_049": {
+        "name": "Diglett",
+        "dex": "050",
+        "gender": "all"
+    },
+    "6_050": {
+        "name": "Dugtrio",
+        "dex": "051",
+        "gender": "all"
+    },
+    "6_051": {
+        "name": "Meowth",
+        "dex": "052",
+        "gender": "all"
+    },
+    "6_052": {
+        "name": "Persian",
+        "dex": "053",
+        "gender": "all"
+    },
+    "6_053": {
+        "name": "Psyduck",
+        "dex": "054",
+        "gender": "all"
+    },
+    "6_054": {
+        "name": "Golduck",
+        "dex": "055",
+        "gender": "all"
+    },
+    "6_055": {
+        "name": "Mankey",
+        "dex": "056",
+        "gender": "all"
+    },
+    "6_056": {
+        "name": "Primeape",
+        "dex": "057",
+        "gender": "all"
+    },
+    "6_057": {
+        "name": "Growlithe",
+        "dex": "058",
+        "gender": "all"
+    },
+    "6_058": {
+        "name": "Arcanine",
+        "dex": "059",
+        "gender": "all"
+    },
+    "6_059": {
+        "name": "Poliwag",
+        "dex": "060",
+        "gender": "all"
+    },
+    "6_060": {
+        "name": "Poliwhirl",
+        "dex": "061",
+        "gender": "all"
+    },
+    "6_061": {
+        "name": "Poliwrath",
+        "dex": "062",
+        "gender": "all"
+    },
+    "6_062": {
+        "name": "Abra",
+        "dex": "063",
+        "gender": "all"
+    },
+    "6_063": {
+        "name": "Kadabra",
+        "dex": "064",
+        "gender": "male"
+    },
+    "6_064": {
+        "name": "Alakazam",
+        "dex": "065",
+        "gender": "male"
+    },
+    "6_065": {
+        "name": "Machop",
+        "dex": "066",
+        "gender": "all"
+    },
+    "6_066": {
+        "name": "Machoke",
+        "dex": "067",
+        "gender": "all"
+    },
+    "6_067": {
+        "name": "Machamp",
+        "dex": "068",
+        "gender": "all"
+    },
+    "6_068": {
+        "name": "Bellsprout",
+        "dex": "069",
+        "gender": "all"
+    },
+    "6_069": {
+        "name": "Weepinbell",
+        "dex": "070",
+        "gender": "all"
+    },
+    "6_070": {
+        "name": "Victreebel",
+        "dex": "071",
+        "gender": "all"
+    },
+    "6_071": {
+        "name": "Tentacool",
+        "dex": "072",
+        "gender": "all"
+    },
+    "6_072": {
+        "name": "Tentacruel",
+        "dex": "073",
+        "gender": "all"
+    },
+    "6_073": {
+        "name": "Geodude",
+        "dex": "074",
+        "gender": "all"
+    },
+    "6_074": {
+        "name": "Graveler",
+        "dex": "075",
+        "gender": "all"
+    },
+    "6_075": {
+        "name": "Golem",
+        "dex": "076",
+        "gender": "all"
+    },
+    "6_076": {
+        "name": "Ponyta",
+        "dex": "077",
+        "gender": "all"
+    },
+    "6_077": {
+        "name": "Rapidash",
+        "dex": "078",
+        "gender": "all"
+    },
+    "6_078": {
+        "name": "Slowpoke",
+        "dex": "079",
+        "gender": "all"
+    },
+    "6_079": {
+        "name": "Slowbro",
+        "dex": "080",
+        "gender": "all"
+    },
+    "6_080": {
+        "name": "Magnemite",
+        "dex": "081",
+        "gender": "all"
+    },
+    "6_081": {
+        "name": "Magneton",
+        "dex": "082",
+        "gender": "all"
+    },
+    "6_082": {
+        "name": "Farfetch'd",
+        "dex": "083",
+        "gender": "all"
+    },
+    "6_083": {
+        "name": "Doduo",
+        "dex": "084",
+        "gender": "male"
+    },
+    "6_084": {
+        "name": "Dodrio",
+        "dex": "085",
+        "gender": "male"
+    },
+    "6_085": {
+        "name": "Seel",
+        "dex": "086",
+        "gender": "all"
+    },
+    "6_086": {
+        "name": "Dewgong",
+        "dex": "087",
+        "gender": "all"
+    },
+    "6_087": {
+        "name": "Grimer",
+        "dex": "088",
+        "gender": "all"
+    },
+    "6_088": {
+        "name": "Muk",
+        "dex": "089",
+        "gender": "all"
+    },
+    "6_089": {
+        "name": "Shellder",
+        "dex": "090",
+        "gender": "all"
+    },
+    "6_090": {
+        "name": "Cloyster",
+        "dex": "091",
+        "gender": "all"
+    },
+    "6_091": {
+        "name": "Gastly",
+        "dex": "092",
+        "gender": "all"
+    },
+    "6_092": {
+        "name": "Haunter",
+        "dex": "093",
+        "gender": "all"
+    },
+    "6_093": {
+        "name": "Gengar",
+        "dex": "094",
+        "gender": "all"
+    },
+    "6_094": {
+        "name": "Onix",
+        "dex": "095",
+        "gender": "all"
+    },
+    "6_095": {
+        "name": "Drowzee",
+        "dex": "096",
+        "gender": "all"
+    },
+    "6_096": {
+        "name": "Hypno",
+        "dex": "097",
+        "gender": "male"
+    },
+    "6_097": {
+        "name": "Krabby",
+        "dex": "098",
+        "gender": "all"
+    },
+    "6_098": {
+        "name": "Kingler",
+        "dex": "099",
+        "gender": "all"
+    },
+    "6_099": {
+        "name": "Voltorb",
+        "dex": "100",
+        "gender": "all"
+    },
+    "6_100": {
+        "name": "Electrode",
+        "dex": "101",
+        "gender": "all"
+    },
+    "6_101": {
+        "name": "Exeggcute",
+        "dex": "102",
+        "gender": "all"
+    },
+    "6_102": {
+        "name": "Exeggutor",
+        "dex": "103",
+        "gender": "all"
+    },
+    "6_103": {
+        "name": "Cubone",
+        "dex": "104",
+        "gender": "all"
+    },
+    "6_104": {
+        "name": "Marowak",
+        "dex": "105",
+        "gender": "all"
+    },
+    "6_105": {
+        "name": "Hitmonlee",
+        "dex": "106",
+        "gender": "all"
+    },
+    "6_106": {
+        "name": "Hitmonchan",
+        "dex": "107",
+        "gender": "all"
+    },
+    "6_107": {
+        "name": "Lickitung",
+        "dex": "108",
+        "gender": "all"
+    },
+    "6_108": {
+        "name": "Koffing",
+        "dex": "109",
+        "gender": "all"
+    },
+    "6_109": {
+        "name": "Weezing",
+        "dex": "110",
+        "gender": "all"
+    },
+    "6_110": {
+        "name": "Rhyhorn",
+        "dex": "111",
+        "gender": "male"
+    },
+    "6_111": {
+        "name": "Rhydon",
+        "dex": "112",
+        "gender": "male"
+    },
+    "6_112": {
+        "name": "Chansey",
+        "dex": "113",
+        "gender": "all"
+    },
+    "6_113": {
+        "name": "Tangela",
+        "dex": "114",
+        "gender": "all"
+    },
+    "6_114": {
+        "name": "Kangaskhan",
+        "dex": "115",
+        "gender": "all"
+    },
+    "6_115": {
+        "name": "Horsea",
+        "dex": "116",
+        "gender": "all"
+    },
+    "6_116": {
+        "name": "Seadra",
+        "dex": "117",
+        "gender": "all"
+    },
+    "6_117": {
+        "name": "Goldeen",
+        "dex": "118",
+        "gender": "male"
+    },
+    "6_118": {
+        "name": "Seaking",
+        "dex": "119",
+        "gender": "male"
+    },
+    "6_119": {
+        "name": "Staryu",
+        "dex": "120",
+        "gender": "all"
+    },
+    "6_120": {
+        "name": "Starmie",
+        "dex": "121",
+        "gender": "all"
+    },
+    "6_121": {
+        "name": "Mr. Mime",
+        "dex": "122",
+        "gender": "all"
+    },
+    "6_122": {
+        "name": "Scyther",
+        "dex": "123",
+        "gender": "male"
+    },
+    "6_123": {
+        "name": "Jynx",
+        "dex": "124",
+        "gender": "all"
+    },
+    "6_124": {
+        "name": "Electabuzz",
+        "dex": "125",
+        "gender": "all"
+    },
+    "6_125": {
+        "name": "Magmar",
+        "dex": "126",
+        "gender": "all"
+    },
+    "6_126": {
+        "name": "Pinsir",
+        "dex": "127",
+        "gender": "all"
+    },
+    "6_127": {
+        "name": "Tauros",
+        "dex": "128",
+        "gender": "all"
+    },
+    "6_128": {
+        "name": "Magikarp",
+        "dex": "129",
+        "gender": "male"
+    },
+    "6_129": {
+        "name": "Gyarados",
+        "dex": "130",
+        "gender": "male"
+    },
+    "6_130": {
+        "name": "Lapras",
+        "dex": "131",
+        "gender": "all"
+    },
+    "6_131": {
+        "name": "Ditto",
+        "dex": "132",
+        "gender": "all"
+    },
+    "6_132": {
+        "name": "Eevee",
+        "dex": "133",
+        "gender": "all"
+    },
+    "6_133": {
+        "name": "Vaporeon",
+        "dex": "134",
+        "gender": "all"
+    },
+    "6_134": {
+        "name": "Jolteon",
+        "dex": "135",
+        "gender": "all"
+    },
+    "6_135": {
+        "name": "Flareon",
+        "dex": "136",
+        "gender": "all"
+    },
+    "6_136": {
+        "name": "Porygon",
+        "dex": "137",
+        "gender": "all"
+    },
+    "6_137": {
+        "name": "Omanyte",
+        "dex": "138",
+        "gender": "all"
+    },
+    "6_138": {
+        "name": "Omastar",
+        "dex": "139",
+        "gender": "all"
+    },
+    "6_139": {
+        "name": "Kabuto",
+        "dex": "140",
+        "gender": "all"
+    },
+    "6_140": {
+        "name": "Kabutops",
+        "dex": "141",
+        "gender": "all"
+    },
+    "6_141": {
+        "name": "Aerodactyl",
+        "dex": "142",
+        "gender": "all"
+    },
+    "6_142": {
+        "name": "Snorlax",
+        "dex": "143",
+        "gender": "all"
+    },
+    "6_143": {
+        "name": "Articuno",
+        "dex": "144",
+        "gender": "all"
+    },
+    "6_144": {
+        "name": "Zapdos",
+        "dex": "145",
+        "gender": "all"
+    },
+    "6_145": {
+        "name": "Moltres",
+        "dex": "146",
+        "gender": "all"
+    },
+    "6_146": {
+        "name": "Dratini",
+        "dex": "147",
+        "gender": "all"
+    },
+    "6_147": {
+        "name": "Dragonair",
+        "dex": "148",
+        "gender": "all"
+    },
+    "6_148": {
+        "name": "Dragonite",
+        "dex": "149",
+        "gender": "all"
+    },
+    "6_149": {
+        "name": "Mewtwo",
+        "dex": "150",
+        "gender": "all"
+    },
+    "6_150": {
+        "name": "Mew",
+        "dex": "151",
+        "gender": "all"
+    },
+    "6_151": {
+        "name": "Chikorita",
+        "dex": "152",
+        "gender": "all"
+    },
+    "6_152": {
+        "name": "Bayleef",
+        "dex": "153",
+        "gender": "all"
+    },
+    "6_153": {
+        "name": "Meganium",
+        "dex": "154",
+        "gender": "male"
+    },
+    "6_154": {
+        "name": "Cyndaquil",
+        "dex": "155",
+        "gender": "all"
+    },
+    "6_155": {
+        "name": "Quilava",
+        "dex": "156",
+        "gender": "all"
+    },
+    "6_156": {
+        "name": "Typhlosion",
+        "dex": "157",
+        "gender": "all"
+    },
+    "6_157": {
+        "name": "Totodile",
+        "dex": "158",
+        "gender": "all"
+    },
+    "6_158": {
+        "name": "Croconaw",
+        "dex": "159",
+        "gender": "all"
+    },
+    "6_159": {
+        "name": "Feraligatr",
+        "dex": "160",
+        "gender": "all"
+    },
+    "6_160": {
+        "name": "Sentret",
+        "dex": "161",
+        "gender": "all"
+    },
+    "6_161": {
+        "name": "Furret",
+        "dex": "162",
+        "gender": "all"
+    },
+    "6_162": {
+        "name": "Hoothoot",
+        "dex": "163",
+        "gender": "all"
+    },
+    "6_163": {
+        "name": "Noctowl",
+        "dex": "164",
+        "gender": "all"
+    },
+    "6_164": {
+        "name": "Ledyba",
+        "dex": "165",
+        "gender": "male"
+    },
+    "6_165": {
+        "name": "Ledian",
+        "dex": "166",
+        "gender": "male"
+    },
+    "6_166": {
+        "name": "Spinarak",
+        "dex": "167",
+        "gender": "all"
+    },
+    "6_167": {
+        "name": "Ariados",
+        "dex": "168",
+        "gender": "all"
+    },
+    "6_168": {
+        "name": "Crobat",
+        "dex": "169",
+        "gender": "all"
+    },
+    "6_169": {
+        "name": "Chinchou",
+        "dex": "170",
+        "gender": "all"
+    },
+    "6_170": {
+        "name": "Lanturn",
+        "dex": "171",
+        "gender": "all"
+    },
+    "6_171": {
+        "name": "Pichu",
+        "dex": "172",
+        "gender": "all"
+    },
+    "6_172": {
+        "name": "Cleffa",
+        "dex": "173",
+        "gender": "all"
+    },
+    "6_173": {
+        "name": "Igglybuff",
+        "dex": "174",
+        "gender": "all"
+    },
+    "6_174": {
+        "name": "Togepi",
+        "dex": "175",
+        "gender": "all"
+    },
+    "6_175": {
+        "name": "Togetic",
+        "dex": "176",
+        "gender": "all"
+    },
+    "6_176": {
+        "name": "Natu",
+        "dex": "177",
+        "gender": "all"
+    },
+    "6_177": {
+        "name": "Xatu",
+        "dex": "178",
+        "gender": "male"
+    },
+    "6_178": {
+        "name": "Mareep",
+        "dex": "179",
+        "gender": "all"
+    },
+    "6_179": {
+        "name": "Flaaffy",
+        "dex": "180",
+        "gender": "all"
+    },
+    "6_180": {
+        "name": "Ampharos",
+        "dex": "181",
+        "gender": "all"
+    },
+    "6_181": {
+        "name": "Bellossom",
+        "dex": "182",
+        "gender": "all"
+    },
+    "6_182": {
+        "name": "Marill",
+        "dex": "183",
+        "gender": "all"
+    },
+    "6_183": {
+        "name": "Azumarill",
+        "dex": "184",
+        "gender": "all"
+    },
+    "6_184": {
+        "name": "Sudowoodo",
+        "dex": "185",
+        "gender": "male"
+    },
+    "6_185": {
+        "name": "Politoed",
+        "dex": "186",
+        "gender": "male"
+    },
+    "6_186": {
+        "name": "Hoppip",
+        "dex": "187",
+        "gender": "all"
+    },
+    "6_187": {
+        "name": "Skiploom",
+        "dex": "188",
+        "gender": "all"
+    },
+    "6_188": {
+        "name": "Jumpluff",
+        "dex": "189",
+        "gender": "all"
+    },
+    "6_189": {
+        "name": "Aipom",
+        "dex": "190",
+        "gender": "male"
+    },
+    "6_190": {
+        "name": "Sunkern",
+        "dex": "191",
+        "gender": "all"
+    },
+    "6_191": {
+        "name": "Sunflora",
+        "dex": "192",
+        "gender": "all"
+    },
+    "6_192": {
+        "name": "Yanma",
+        "dex": "193",
+        "gender": "all"
+    },
+    "6_193": {
+        "name": "Wooper",
+        "dex": "194",
+        "gender": "male"
+    },
+    "6_194": {
+        "name": "Quagsire",
+        "dex": "195",
+        "gender": "male"
+    },
+    "6_195": {
+        "name": "Espeon",
+        "dex": "196",
+        "gender": "all"
+    },
+    "6_196": {
+        "name": "Umbreon",
+        "dex": "197",
+        "gender": "all"
+    },
+    "6_197": {
+        "name": "Murkrow",
+        "dex": "198",
+        "gender": "male"
+    },
+    "6_198": {
+        "name": "Slowking",
+        "dex": "199",
+        "gender": "all"
+    },
+    "6_199": {
+        "name": "Misdreavus",
+        "dex": "200",
+        "gender": "all"
+    },
+    "6_200": {
+        "name": "Unown",
+        "dex": "201",
+        "gender": "all"
+    },
+    "6_201": {
+        "name": "Wobbuffet",
+        "dex": "202",
+        "gender": "male"
+    },
+    "6_202": {
+        "name": "Girafarig",
+        "dex": "203",
+        "gender": "male"
+    },
+    "6_203": {
+        "name": "Pineco",
+        "dex": "204",
+        "gender": "all"
+    },
+    "6_204": {
+        "name": "Forretress",
+        "dex": "205",
+        "gender": "all"
+    },
+    "6_205": {
+        "name": "Dunsparce",
+        "dex": "206",
+        "gender": "all"
+    },
+    "6_206": {
+        "name": "Gligar",
+        "dex": "207",
+        "gender": "male"
+    },
+    "6_207": {
+        "name": "Steelix",
+        "dex": "208",
+        "gender": "male"
+    },
+    "6_208": {
+        "name": "Snubbull",
+        "dex": "209",
+        "gender": "all"
+    },
+    "6_209": {
+        "name": "Granbull",
+        "dex": "210",
+        "gender": "all"
+    },
+    "6_210": {
+        "name": "Qwilfish",
+        "dex": "211",
+        "gender": "all"
+    },
+    "6_211": {
+        "name": "Scizor",
+        "dex": "212",
+        "gender": "male"
+    },
+    "6_212": {
+        "name": "Shuckle",
+        "dex": "213",
+        "gender": "all"
+    },
+    "6_213": {
+        "name": "Heracross",
+        "dex": "214",
+        "gender": "male"
+    },
+    "6_214": {
+        "name": "Sneasel",
+        "dex": "215",
+        "gender": "male"
+    },
+    "6_215": {
+        "name": "Teddiursa",
+        "dex": "216",
+        "gender": "all"
+    },
+    "6_216": {
+        "name": "Ursaring",
+        "dex": "217",
+        "gender": "male"
+    },
+    "6_217": {
+        "name": "Slugma",
+        "dex": "218",
+        "gender": "all"
+    },
+    "6_218": {
+        "name": "Magcargo",
+        "dex": "219",
+        "gender": "all"
+    },
+    "6_219": {
+        "name": "Swinub",
+        "dex": "220",
+        "gender": "all"
+    },
+    "6_220": {
+        "name": "Piloswine",
+        "dex": "221",
+        "gender": "male"
+    },
+    "6_221": {
+        "name": "Corsola",
+        "dex": "222",
+        "gender": "all"
+    },
+    "6_222": {
+        "name": "Remoraid",
+        "dex": "223",
+        "gender": "all"
+    },
+    "6_223": {
+        "name": "Octillery",
+        "dex": "224",
+        "gender": "male"
+    },
+    "6_224": {
+        "name": "Delibird",
+        "dex": "225",
+        "gender": "all"
+    },
+    "6_225": {
+        "name": "Mantine",
+        "dex": "226",
+        "gender": "all"
+    },
+    "6_226": {
+        "name": "Skarmory",
+        "dex": "227",
+        "gender": "all"
+    },
+    "6_227": {
+        "name": "Houndour",
+        "dex": "228",
+        "gender": "all"
+    },
+    "6_228": {
+        "name": "Houndoom",
+        "dex": "229",
+        "gender": "male"
+    },
+    "6_229": {
+        "name": "Kingdra",
+        "dex": "230",
+        "gender": "all"
+    },
+    "6_230": {
+        "name": "Phanpy",
+        "dex": "231",
+        "gender": "all"
+    },
+    "6_231": {
+        "name": "Donphan",
+        "dex": "232",
+        "gender": "male"
+    },
+    "6_232": {
+        "name": "Porygon2",
+        "dex": "233",
+        "gender": "all"
+    },
+    "6_233": {
+        "name": "Stantler",
+        "dex": "234",
+        "gender": "all"
+    },
+    "6_234": {
+        "name": "Smeargle",
+        "dex": "235",
+        "gender": "all"
+    },
+    "6_235": {
+        "name": "Tyrogue",
+        "dex": "236",
+        "gender": "all"
+    },
+    "6_236": {
+        "name": "Hitmontop",
+        "dex": "237",
+        "gender": "all"
+    },
+    "6_237": {
+        "name": "Smoochum",
+        "dex": "238",
+        "gender": "all"
+    },
+    "6_238": {
+        "name": "Elekid",
+        "dex": "239",
+        "gender": "all"
+    },
+    "6_239": {
+        "name": "Magby",
+        "dex": "240",
+        "gender": "all"
+    },
+    "6_240": {
+        "name": "Miltank",
+        "dex": "241",
+        "gender": "all"
+    },
+    "6_241": {
+        "name": "Blissey",
+        "dex": "242",
+        "gender": "all"
+    },
+    "6_242": {
+        "name": "Raikou",
+        "dex": "243",
+        "gender": "all"
+    },
+    "6_243": {
+        "name": "Entei",
+        "dex": "244",
+        "gender": "all"
+    },
+    "6_244": {
+        "name": "Suicune",
+        "dex": "245",
+        "gender": "all"
+    },
+    "6_245": {
+        "name": "Larvitar",
+        "dex": "246",
+        "gender": "all"
+    },
+    "6_246": {
+        "name": "Pupitar",
+        "dex": "247",
+        "gender": "all"
+    },
+    "6_247": {
+        "name": "Tyranitar",
+        "dex": "248",
+        "gender": "all"
+    },
+    "6_248": {
+        "name": "Lugia",
+        "dex": "249",
+        "gender": "all"
+    },
+    "6_249": {
+        "name": "Ho-Oh",
+        "dex": "250",
+        "gender": "all"
+    },
+    "6_250": {
+        "name": "Celebi",
+        "dex": "251",
+        "gender": "all"
+    },
+    "6_251": {
+        "name": "Treecko",
+        "dex": "252",
+        "gender": "all"
+    },
+    "6_252": {
+        "name": "Grovyle",
+        "dex": "253",
+        "gender": "all"
+    },
+    "6_253": {
+        "name": "Sceptile",
+        "dex": "254",
+        "gender": "all"
+    },
+    "6_254": {
+        "name": "Torchic",
+        "dex": "255",
+        "gender": "male"
+    },
+    "6_255": {
+        "name": "Combusken",
+        "dex": "256",
+        "gender": "male"
+    },
+    "6_256": {
+        "name": "Blaziken",
+        "dex": "257",
+        "gender": "male"
+    },
+    "6_257": {
+        "name": "Mudkip",
+        "dex": "258",
+        "gender": "all"
+    },
+    "6_258": {
+        "name": "Marshtomp",
+        "dex": "259",
+        "gender": "all"
+    },
+    "6_259": {
+        "name": "Swampert",
+        "dex": "260",
+        "gender": "all"
+    },
+    "6_260": {
+        "name": "Poochyena",
+        "dex": "261",
+        "gender": "all"
+    },
+    "6_261": {
+        "name": "Mightyena",
+        "dex": "262",
+        "gender": "all"
+    },
+    "6_262": {
+        "name": "Zigzagoon",
+        "dex": "263",
+        "gender": "all"
+    },
+    "6_263": {
+        "name": "Linoone",
+        "dex": "264",
+        "gender": "all"
+    },
+    "6_264": {
+        "name": "Wurmple",
+        "dex": "265",
+        "gender": "all"
+    },
+    "6_265": {
+        "name": "Silcoon",
+        "dex": "266",
+        "gender": "all"
+    },
+    "6_266": {
+        "name": "Beautifly",
+        "dex": "267",
+        "gender": "male"
+    },
+    "6_267": {
+        "name": "Cascoon",
+        "dex": "268",
+        "gender": "all"
+    },
+    "6_268": {
+        "name": "Dustox",
+        "dex": "269",
+        "gender": "male"
+    },
+    "6_269": {
+        "name": "Lotad",
+        "dex": "270",
+        "gender": "all"
+    },
+    "6_270": {
+        "name": "Lombre",
+        "dex": "271",
+        "gender": "all"
+    },
+    "6_271": {
+        "name": "Ludicolo",
+        "dex": "272",
+        "gender": "male"
+    },
+    "6_272": {
+        "name": "Seedot",
+        "dex": "273",
+        "gender": "all"
+    },
+    "6_273": {
+        "name": "Nuzleaf",
+        "dex": "274",
+        "gender": "male"
+    },
+    "6_274": {
+        "name": "Shiftry",
+        "dex": "275",
+        "gender": "male"
+    },
+    "6_275": {
+        "name": "Taillow",
+        "dex": "276",
+        "gender": "all"
+    },
+    "6_276": {
+        "name": "Swellow",
+        "dex": "277",
+        "gender": "all"
+    },
+    "6_277": {
+        "name": "Wingull",
+        "dex": "278",
+        "gender": "all"
+    },
+    "6_278": {
+        "name": "Pelipper",
+        "dex": "279",
+        "gender": "all"
+    },
+    "6_279": {
+        "name": "Ralts",
+        "dex": "280",
+        "gender": "all"
+    },
+    "6_280": {
+        "name": "Kirlia",
+        "dex": "281",
+        "gender": "all"
+    },
+    "6_281": {
+        "name": "Gardevoir",
+        "dex": "282",
+        "gender": "all"
+    },
+    "6_282": {
+        "name": "Surskit",
+        "dex": "283",
+        "gender": "all"
+    },
+    "6_283": {
+        "name": "Masquerain",
+        "dex": "284",
+        "gender": "all"
+    },
+    "6_284": {
+        "name": "Shroomish",
+        "dex": "285",
+        "gender": "all"
+    },
+    "6_285": {
+        "name": "Breloom",
+        "dex": "286",
+        "gender": "all"
+    },
+    "6_286": {
+        "name": "Slakoth",
+        "dex": "287",
+        "gender": "all"
+    },
+    "6_287": {
+        "name": "Vigoroth",
+        "dex": "288",
+        "gender": "all"
+    },
+    "6_288": {
+        "name": "Slaking",
+        "dex": "289",
+        "gender": "all"
+    },
+    "6_289": {
+        "name": "Nincada",
+        "dex": "290",
+        "gender": "all"
+    },
+    "6_290": {
+        "name": "Ninjask",
+        "dex": "291",
+        "gender": "all"
+    },
+    "6_291": {
+        "name": "Shedinja",
+        "dex": "292",
+        "gender": "all"
+    },
+    "6_292": {
+        "name": "Whismur",
+        "dex": "293",
+        "gender": "all"
+    },
+    "6_293": {
+        "name": "Loudred",
+        "dex": "294",
+        "gender": "all"
+    },
+    "6_294": {
+        "name": "Exploud",
+        "dex": "295",
+        "gender": "all"
+    },
+    "6_295": {
+        "name": "Makuhita",
+        "dex": "296",
+        "gender": "all"
+    },
+    "6_296": {
+        "name": "Hariyama",
+        "dex": "297",
+        "gender": "all"
+    },
+    "6_297": {
+        "name": "Azurill",
+        "dex": "298",
+        "gender": "all"
+    },
+    "6_298": {
+        "name": "Nosepass",
+        "dex": "299",
+        "gender": "all"
+    },
+    "6_299": {
+        "name": "Skitty",
+        "dex": "300",
+        "gender": "all"
+    },
+    "6_300": {
+        "name": "Delcatty",
+        "dex": "301",
+        "gender": "all"
+    },
+    "6_301": {
+        "name": "Sableye",
+        "dex": "302",
+        "gender": "all"
+    },
+    "6_302": {
+        "name": "Mawile",
+        "dex": "303",
+        "gender": "all"
+    },
+    "6_303": {
+        "name": "Aron",
+        "dex": "304",
+        "gender": "all"
+    },
+    "6_304": {
+        "name": "Lairon",
+        "dex": "305",
+        "gender": "all"
+    },
+    "6_305": {
+        "name": "Aggron",
+        "dex": "306",
+        "gender": "all"
+    },
+    "6_306": {
+        "name": "Meditite",
+        "dex": "307",
+        "gender": "male"
+    },
+    "6_307": {
+        "name": "Medicham",
+        "dex": "308",
+        "gender": "male"
+    },
+    "6_308": {
+        "name": "Electrike",
+        "dex": "309",
+        "gender": "all"
+    },
+    "6_309": {
+        "name": "Manectric",
+        "dex": "310",
+        "gender": "all"
+    },
+    "6_310": {
+        "name": "Plusle",
+        "dex": "311",
+        "gender": "all"
+    },
+    "6_311": {
+        "name": "Minun",
+        "dex": "312",
+        "gender": "all"
+    },
+    "6_312": {
+        "name": "Volbeat",
+        "dex": "313",
+        "gender": "all"
+    },
+    "6_313": {
+        "name": "Illumise",
+        "dex": "314",
+        "gender": "all"
+    },
+    "6_314": {
+        "name": "Roselia",
+        "dex": "315",
+        "gender": "male"
+    },
+    "6_315": {
+        "name": "Gulpin",
+        "dex": "316",
+        "gender": "male"
+    },
+    "6_316": {
+        "name": "Swalot",
+        "dex": "317",
+        "gender": "male"
+    },
+    "6_317": {
+        "name": "Carvanha",
+        "dex": "318",
+        "gender": "all"
+    },
+    "6_318": {
+        "name": "Sharpedo",
+        "dex": "319",
+        "gender": "all"
+    },
+    "6_319": {
+        "name": "Wailmer",
+        "dex": "320",
+        "gender": "all"
+    },
+    "6_320": {
+        "name": "Wailord",
+        "dex": "321",
+        "gender": "all"
+    },
+    "6_321": {
+        "name": "Numel",
+        "dex": "322",
+        "gender": "male"
+    },
+    "6_322": {
+        "name": "Camerupt",
+        "dex": "323",
+        "gender": "male"
+    },
+    "6_323": {
+        "name": "Torkoal",
+        "dex": "324",
+        "gender": "all"
+    },
+    "6_324": {
+        "name": "Spoink",
+        "dex": "325",
+        "gender": "all"
+    },
+    "6_325": {
+        "name": "Grumpig",
+        "dex": "326",
+        "gender": "all"
+    },
+    "6_326": {
+        "name": "Spinda",
+        "dex": "327",
+        "gender": "all"
+    },
+    "6_327": {
+        "name": "Trapinch",
+        "dex": "328",
+        "gender": "all"
+    },
+    "6_328": {
+        "name": "Vibrava",
+        "dex": "329",
+        "gender": "all"
+    },
+    "6_329": {
+        "name": "Flygon",
+        "dex": "330",
+        "gender": "all"
+    },
+    "6_330": {
+        "name": "Cacnea",
+        "dex": "331",
+        "gender": "all"
+    },
+    "6_331": {
+        "name": "Cacturne",
+        "dex": "332",
+        "gender": "male"
+    },
+    "6_332": {
+        "name": "Swablu",
+        "dex": "333",
+        "gender": "all"
+    },
+    "6_333": {
+        "name": "Altaria",
+        "dex": "334",
+        "gender": "all"
+    },
+    "6_334": {
+        "name": "Zangoose",
+        "dex": "335",
+        "gender": "all"
+    },
+    "6_335": {
+        "name": "Seviper",
+        "dex": "336",
+        "gender": "all"
+    },
+    "6_336": {
+        "name": "Lunatone",
+        "dex": "337",
+        "gender": "all"
+    },
+    "6_337": {
+        "name": "Solrock",
+        "dex": "338",
+        "gender": "all"
+    },
+    "6_338": {
+        "name": "Barboach",
+        "dex": "339",
+        "gender": "all"
+    },
+    "6_339": {
+        "name": "Whiscash",
+        "dex": "340",
+        "gender": "all"
+    },
+    "6_340": {
+        "name": "Corphish",
+        "dex": "341",
+        "gender": "all"
+    },
+    "6_341": {
+        "name": "Crawdaunt",
+        "dex": "342",
+        "gender": "all"
+    },
+    "6_342": {
+        "name": "Baltoy",
+        "dex": "343",
+        "gender": "all"
+    },
+    "6_343": {
+        "name": "Claydol",
+        "dex": "344",
+        "gender": "all"
+    },
+    "6_344": {
+        "name": "Lileep",
+        "dex": "345",
+        "gender": "all"
+    },
+    "6_345": {
+        "name": "Cradily",
+        "dex": "346",
+        "gender": "all"
+    },
+    "6_346": {
+        "name": "Anorith",
+        "dex": "347",
+        "gender": "all"
+    },
+    "6_347": {
+        "name": "Armaldo",
+        "dex": "348",
+        "gender": "all"
+    },
+    "6_348": {
+        "name": "Feebas",
+        "dex": "349",
+        "gender": "all"
+    },
+    "6_349": {
+        "name": "Milotic",
+        "dex": "350",
+        "gender": "male"
+    },
+    "6_350": {
+        "name": "Castform",
+        "dex": "351",
+        "gender": "all"
+    },
+    "6_351": {
+        "name": "Kecleon",
+        "dex": "352",
+        "gender": "all"
+    },
+    "6_352": {
+        "name": "Shuppet",
+        "dex": "353",
+        "gender": "all"
+    },
+    "6_353": {
+        "name": "Banette",
+        "dex": "354",
+        "gender": "all"
+    },
+    "6_354": {
+        "name": "Duskull",
+        "dex": "355",
+        "gender": "all"
+    },
+    "6_355": {
+        "name": "Dusclops",
+        "dex": "356",
+        "gender": "all"
+    },
+    "6_356": {
+        "name": "Tropius",
+        "dex": "357",
+        "gender": "all"
+    },
+    "6_357": {
+        "name": "Chimecho",
+        "dex": "358",
+        "gender": "all"
+    },
+    "6_358": {
+        "name": "Absol",
+        "dex": "359",
+        "gender": "all"
+    },
+    "6_359": {
+        "name": "Wynaut",
+        "dex": "360",
+        "gender": "all"
+    },
+    "6_360": {
+        "name": "Snorunt",
+        "dex": "361",
+        "gender": "all"
+    },
+    "6_361": {
+        "name": "Glalie",
+        "dex": "362",
+        "gender": "all"
+    },
+    "6_362": {
+        "name": "Spheal",
+        "dex": "363",
+        "gender": "all"
+    },
+    "6_363": {
+        "name": "Sealeo",
+        "dex": "364",
+        "gender": "all"
+    },
+    "6_364": {
+        "name": "Walrein",
+        "dex": "365",
+        "gender": "all"
+    },
+    "6_365": {
+        "name": "Clamperl",
+        "dex": "366",
+        "gender": "all"
+    },
+    "6_366": {
+        "name": "Huntail",
+        "dex": "367",
+        "gender": "all"
+    },
+    "6_367": {
+        "name": "Gorebyss",
+        "dex": "368",
+        "gender": "all"
+    },
+    "6_368": {
+        "name": "Relicanth",
+        "dex": "369",
+        "gender": "male"
+    },
+    "6_369": {
+        "name": "Luvdisc",
+        "dex": "370",
+        "gender": "all"
+    },
+    "6_370": {
+        "name": "Bagon",
+        "dex": "371",
+        "gender": "all"
+    },
+    "6_371": {
+        "name": "Shelgon",
+        "dex": "372",
+        "gender": "all"
+    },
+    "6_372": {
+        "name": "Salamence",
+        "dex": "373",
+        "gender": "all"
+    },
+    "6_373": {
+        "name": "Beldum",
+        "dex": "374",
+        "gender": "all"
+    },
+    "6_374": {
+        "name": "Metang",
+        "dex": "375",
+        "gender": "all"
+    },
+    "6_375": {
+        "name": "Metagross",
+        "dex": "376",
+        "gender": "all"
+    },
+    "6_376": {
+        "name": "Regirock",
+        "dex": "377",
+        "gender": "all"
+    },
+    "6_377": {
+        "name": "Regice",
+        "dex": "378",
+        "gender": "all"
+    },
+    "6_378": {
+        "name": "Registeel",
+        "dex": "379",
+        "gender": "all"
+    },
+    "6_379": {
+        "name": "Latias",
+        "dex": "380",
+        "gender": "all"
+    },
+    "6_380": {
+        "name": "Latios",
+        "dex": "381",
+        "gender": "all"
+    },
+    "6_381": {
+        "name": "Kyogre",
+        "dex": "382",
+        "gender": "all"
+    },
+    "6_382": {
+        "name": "Groudon",
+        "dex": "383",
+        "gender": "all"
+    },
+    "6_383": {
+        "name": "Rayquaza",
+        "dex": "384",
+        "gender": "all"
+    },
+    "6_384": {
+        "name": "Jirachi",
+        "dex": "385",
+        "gender": "all"
+    },
+    "6_385": {
+        "name": "Deoxys",
+        "dex": "386",
+        "gender": "all"
+    },
+    "6_386": {
+        "name": "Turtwig",
+        "dex": "387",
+        "gender": "all"
+    },
+    "6_387": {
+        "name": "Grotle",
+        "dex": "388",
+        "gender": "all"
+    },
+    "6_388": {
+        "name": "Torterra",
+        "dex": "389",
+        "gender": "all"
+    },
+    "6_389": {
+        "name": "Chimchar",
+        "dex": "390",
+        "gender": "all"
+    },
+    "6_390": {
+        "name": "Monferno",
+        "dex": "391",
+        "gender": "all"
+    },
+    "6_391": {
+        "name": "Infernape",
+        "dex": "392",
+        "gender": "all"
+    },
+    "6_392": {
+        "name": "Piplup",
+        "dex": "393",
+        "gender": "all"
+    },
+    "6_393": {
+        "name": "Prinplup",
+        "dex": "394",
+        "gender": "all"
+    },
+    "6_394": {
+        "name": "Empoleon",
+        "dex": "395",
+        "gender": "all"
+    },
+    "6_395": {
+        "name": "Starly",
+        "dex": "396",
+        "gender": "male"
+    },
+    "6_396": {
+        "name": "Staravia",
+        "dex": "397",
+        "gender": "male"
+    },
+    "6_397": {
+        "name": "Staraptor",
+        "dex": "398",
+        "gender": "male"
+    },
+    "6_398": {
+        "name": "Bidoof",
+        "dex": "399",
+        "gender": "male"
+    },
+    "6_399": {
+        "name": "Bibarel",
+        "dex": "400",
+        "gender": "male"
+    },
+    "6_400": {
+        "name": "Kricketot",
+        "dex": "401",
+        "gender": "male"
+    },
+    "6_401": {
+        "name": "Kricketune",
+        "dex": "402",
+        "gender": "male"
+    },
+    "6_402": {
+        "name": "Shinx",
+        "dex": "403",
+        "gender": "male"
+    },
+    "6_403": {
+        "name": "Luxio",
+        "dex": "404",
+        "gender": "male"
+    },
+    "6_404": {
+        "name": "Luxray",
+        "dex": "405",
+        "gender": "male"
+    },
+    "6_405": {
+        "name": "Budew",
+        "dex": "406",
+        "gender": "all"
+    },
+    "6_406": {
+        "name": "Roserade",
+        "dex": "407",
+        "gender": "male"
+    },
+    "6_407": {
+        "name": "Cranidos",
+        "dex": "408",
+        "gender": "all"
+    },
+    "6_408": {
+        "name": "Rampardos",
+        "dex": "409",
+        "gender": "all"
+    },
+    "6_409": {
+        "name": "Shieldon",
+        "dex": "410",
+        "gender": "all"
+    },
+    "6_410": {
+        "name": "Bastiodon",
+        "dex": "411",
+        "gender": "all"
+    },
+    "6_411": {
+        "name": "Burmy",
+        "dex": "412",
+        "gender": "all"
+    },
+    "6_412": {
+        "name": "Wormadam",
+        "dex": "413",
+        "gender": "all"
+    },
+    "6_413": {
+        "name": "Mothim",
+        "dex": "414",
+        "gender": "all"
+    },
+    "6_414": {
+        "name": "Combee",
+        "dex": "415",
+        "gender": "male"
+    },
+    "6_415": {
+        "name": "Vespiquen",
+        "dex": "416",
+        "gender": "all"
+    },
+    "6_416": {
+        "name": "Pachirisu",
+        "dex": "417",
+        "gender": "male"
+    },
+    "6_417": {
+        "name": "Buizel",
+        "dex": "418",
+        "gender": "male"
+    },
+    "6_418": {
+        "name": "Floatzel",
+        "dex": "419",
+        "gender": "male"
+    },
+    "6_419": {
+        "name": "Cherubi",
+        "dex": "420",
+        "gender": "all"
+    },
+    "6_420": {
+        "name": "Cherrim",
+        "dex": "421",
+        "gender": "all"
+    },
+    "6_421": {
+        "name": "Shellos",
+        "dex": "422",
+        "gender": "all"
+    },
+    "6_422": {
+        "name": "Gastrodon",
+        "dex": "423",
+        "gender": "all"
+    },
+    "6_423": {
+        "name": "Ambipom",
+        "dex": "424",
+        "gender": "male"
+    },
+    "6_424": {
+        "name": "Drifloon",
+        "dex": "425",
+        "gender": "all"
+    },
+    "6_425": {
+        "name": "Drifblim",
+        "dex": "426",
+        "gender": "all"
+    },
+    "6_426": {
+        "name": "Buneary",
+        "dex": "427",
+        "gender": "all"
+    },
+    "6_427": {
+        "name": "Lopunny",
+        "dex": "428",
+        "gender": "all"
+    },
+    "6_428": {
+        "name": "Mismagius",
+        "dex": "429",
+        "gender": "all"
+    },
+    "6_429": {
+        "name": "Honchkrow",
+        "dex": "430",
+        "gender": "all"
+    },
+    "6_430": {
+        "name": "Glameow",
+        "dex": "431",
+        "gender": "all"
+    },
+    "6_431": {
+        "name": "Purugly",
+        "dex": "432",
+        "gender": "all"
+    },
+    "6_432": {
+        "name": "Chingling",
+        "dex": "433",
+        "gender": "all"
+    },
+    "6_433": {
+        "name": "Stunky",
+        "dex": "434",
+        "gender": "all"
+    },
+    "6_434": {
+        "name": "Skuntank",
+        "dex": "435",
+        "gender": "all"
+    },
+    "6_435": {
+        "name": "Bronzor",
+        "dex": "436",
+        "gender": "all"
+    },
+    "6_436": {
+        "name": "Bronzong",
+        "dex": "437",
+        "gender": "all"
+    },
+    "6_437": {
+        "name": "Bonsly",
+        "dex": "438",
+        "gender": "all"
+    },
+    "6_438": {
+        "name": "Mime Jr.",
+        "dex": "439",
+        "gender": "all"
+    },
+    "6_439": {
+        "name": "Happiny",
+        "dex": "440",
+        "gender": "all"
+    },
+    "6_440": {
+        "name": "Chatot",
+        "dex": "441",
+        "gender": "all"
+    },
+    "6_441": {
+        "name": "Spiritomb",
+        "dex": "442",
+        "gender": "all"
+    },
+    "6_442": {
+        "name": "Gible",
+        "dex": "443",
+        "gender": "male"
+    },
+    "6_443": {
+        "name": "Gabite",
+        "dex": "444",
+        "gender": "male"
+    },
+    "6_444": {
+        "name": "Garchomp",
+        "dex": "445",
+        "gender": "male"
+    },
+    "6_445": {
+        "name": "Munchlax",
+        "dex": "446",
+        "gender": "all"
+    },
+    "6_446": {
+        "name": "Riolu",
+        "dex": "447",
+        "gender": "all"
+    },
+    "6_447": {
+        "name": "Lucario",
+        "dex": "448",
+        "gender": "all"
+    },
+    "6_448": {
+        "name": "Hippopotas",
+        "dex": "449",
+        "gender": "male"
+    },
+    "6_449": {
+        "name": "Hippowdon",
+        "dex": "450",
+        "gender": "male"
+    },
+    "6_450": {
+        "name": "Skorupi",
+        "dex": "451",
+        "gender": "all"
+    },
+    "6_451": {
+        "name": "Drapion",
+        "dex": "452",
+        "gender": "all"
+    },
+    "6_452": {
+        "name": "Croagunk",
+        "dex": "453",
+        "gender": "male"
+    },
+    "6_453": {
+        "name": "Toxicroak",
+        "dex": "454",
+        "gender": "male"
+    },
+    "6_454": {
+        "name": "Carnivine",
+        "dex": "455",
+        "gender": "all"
+    },
+    "6_455": {
+        "name": "Finneon",
+        "dex": "456",
+        "gender": "male"
+    },
+    "6_456": {
+        "name": "Lumineon",
+        "dex": "457",
+        "gender": "male"
+    },
+    "6_457": {
+        "name": "Mantyke",
+        "dex": "458",
+        "gender": "all"
+    },
+    "6_458": {
+        "name": "Snover",
+        "dex": "459",
+        "gender": "male"
+    },
+    "6_459": {
+        "name": "Abomasnow",
+        "dex": "460",
+        "gender": "male"
+    },
+    "6_460": {
+        "name": "Weavile",
+        "dex": "461",
+        "gender": "male"
+    },
+    "6_461": {
+        "name": "Magnezone",
+        "dex": "462",
+        "gender": "all"
+    },
+    "6_462": {
+        "name": "Lickilicky",
+        "dex": "463",
+        "gender": "all"
+    },
+    "6_463": {
+        "name": "Rhyperior",
+        "dex": "464",
+        "gender": "male"
+    },
+    "6_464": {
+        "name": "Tangrowth",
+        "dex": "465",
+        "gender": "male"
+    },
+    "6_465": {
+        "name": "Electivire",
+        "dex": "466",
+        "gender": "all"
+    },
+    "6_466": {
+        "name": "Magmortar",
+        "dex": "467",
+        "gender": "all"
+    },
+    "6_467": {
+        "name": "Togekiss",
+        "dex": "468",
+        "gender": "all"
+    },
+    "6_468": {
+        "name": "Yanmega",
+        "dex": "469",
+        "gender": "all"
+    },
+    "6_469": {
+        "name": "Leafeon",
+        "dex": "470",
+        "gender": "all"
+    },
+    "6_470": {
+        "name": "Glaceon",
+        "dex": "471",
+        "gender": "all"
+    },
+    "6_471": {
+        "name": "Gliscor",
+        "dex": "472",
+        "gender": "all"
+    },
+    "6_472": {
+        "name": "Mamoswine",
+        "dex": "473",
+        "gender": "male"
+    },
+    "6_473": {
+        "name": "Porygon-Z",
+        "dex": "474",
+        "gender": "all"
+    },
+    "6_474": {
+        "name": "Gallade",
+        "dex": "475",
+        "gender": "all"
+    },
+    "6_475": {
+        "name": "Probopass",
+        "dex": "476",
+        "gender": "all"
+    },
+    "6_476": {
+        "name": "Dusknoir",
+        "dex": "477",
+        "gender": "all"
+    },
+    "6_477": {
+        "name": "Froslass",
+        "dex": "478",
+        "gender": "all"
+    },
+    "6_478": {
+        "name": "Rotom",
+        "dex": "479",
+        "gender": "all"
+    },
+    "6_479": {
+        "name": "Uxie",
+        "dex": "480",
+        "gender": "all"
+    },
+    "6_480": {
+        "name": "Mesprit",
+        "dex": "481",
+        "gender": "all"
+    },
+    "6_481": {
+        "name": "Azelf",
+        "dex": "482",
+        "gender": "all"
+    },
+    "6_482": {
+        "name": "Dialga",
+        "dex": "483",
+        "gender": "all"
+    },
+    "6_483": {
+        "name": "Palkia",
+        "dex": "484",
+        "gender": "all"
+    },
+    "6_484": {
+        "name": "Heatran",
+        "dex": "485",
+        "gender": "all"
+    },
+    "6_485": {
+        "name": "Regigigas",
+        "dex": "486",
+        "gender": "all"
+    },
+    "6_486": {
+        "name": "Giratina",
+        "dex": "487",
+        "gender": "all"
+    },
+    "6_487": {
+        "name": "Cresselia",
+        "dex": "488",
+        "gender": "all"
+    },
+    "6_488": {
+        "name": "Phione",
+        "dex": "489",
+        "gender": "all"
+    },
+    "6_489": {
+        "name": "Manaphy",
+        "dex": "490",
+        "gender": "all"
+    },
+    "6_490": {
+        "name": "Darkrai",
+        "dex": "491",
+        "gender": "all"
+    },
+    "6_491": {
+        "name": "Shaymin",
+        "dex": "492",
+        "gender": "all"
+    },
+    "6_492": {
+        "name": "Arceus",
+        "dex": "493",
+        "gender": "all"
+    },
+    "6_493": {
+        "name": "Venusaur",
+        "dex": "003",
+        "gender": "female"
+    },
+    "6_494": {
+        "name": "Butterfree",
+        "dex": "012",
+        "gender": "female"
+    },
+    "6_495": {
+        "name": "Rattata",
+        "dex": "019",
+        "gender": "female"
+    },
+    "6_496": {
+        "name": "Raticate",
+        "dex": "020",
+        "gender": "female"
+    },
+    "6_497": {
+        "name": "Pikachu",
+        "dex": "025",
+        "gender": "female"
+    },
+    "6_498": {
+        "name": "Raichu",
+        "dex": "026",
+        "gender": "female"
+    },
+    "6_499": {
+        "name": "Zubat",
+        "dex": "041",
+        "gender": "female"
+    },
+    "6_500": {
+        "name": "Golbat",
+        "dex": "042",
+        "gender": "female"
+    },
+    "6_501": {
+        "name": "Gloom",
+        "dex": "044",
+        "gender": "female"
+    },
+    "6_502": {
+        "name": "Vileplume",
+        "dex": "045",
+        "gender": "female"
+    },
+    "6_503": {
+        "name": "Kadabra",
+        "dex": "064",
+        "gender": "female"
+    },
+    "6_504": {
+        "name": "Alakazam",
+        "dex": "065",
+        "gender": "female"
+    },
+    "6_505": {
+        "name": "Doduo",
+        "dex": "084",
+        "gender": "female"
+    },
+    "6_506": {
+        "name": "Dodrio",
+        "dex": "085",
+        "gender": "female"
+    },
+    "6_507": {
+        "name": "Hypno",
+        "dex": "097",
+        "gender": "female"
+    },
+    "6_508": {
+        "name": "Rhyhorn",
+        "dex": "111",
+        "gender": "female"
+    },
+    "6_509": {
+        "name": "Rhydon",
+        "dex": "112",
+        "gender": "female"
+    },
+    "6_510": {
+        "name": "Goldeen",
+        "dex": "118",
+        "gender": "female"
+    },
+    "6_511": {
+        "name": "Seaking",
+        "dex": "119",
+        "gender": "female"
+    },
+    "6_512": {
+        "name": "Scyther",
+        "dex": "123",
+        "gender": "female"
+    },
+    "6_513": {
+        "name": "Magikarp",
+        "dex": "129",
+        "gender": "female"
+    },
+    "6_514": {
+        "name": "Gyarados",
+        "dex": "130",
+        "gender": "female"
+    },
+    "6_515": {
+        "name": "Meganium",
+        "dex": "154",
+        "gender": "female"
+    },
+    "6_516": {
+        "name": "Ledyba",
+        "dex": "165",
+        "gender": "female"
+    },
+    "6_517": {
+        "name": "Ledian",
+        "dex": "166",
+        "gender": "female"
+    },
+    "6_518": {
+        "name": "Xatu",
+        "dex": "178",
+        "gender": "female"
+    },
+    "6_519": {
+        "name": "Sudowoodo",
+        "dex": "185",
+        "gender": "female"
+    },
+    "6_520": {
+        "name": "Politoed",
+        "dex": "186",
+        "gender": "female"
+    },
+    "6_521": {
+        "name": "Aipom",
+        "dex": "190",
+        "gender": "female"
+    },
+    "6_522": {
+        "name": "Wooper",
+        "dex": "194",
+        "gender": "female"
+    },
+    "6_523": {
+        "name": "Quagsire",
+        "dex": "195",
+        "gender": "female"
+    },
+    "6_524": {
+        "name": "Murkrow",
+        "dex": "198",
+        "gender": "female"
+    },
+    "6_525": {
+        "name": "Wobbuffet",
+        "dex": "202",
+        "gender": "female"
+    },
+    "6_526": {
+        "name": "Girafarig",
+        "dex": "203",
+        "gender": "female"
+    },
+    "6_527": {
+        "name": "Gligar",
+        "dex": "207",
+        "gender": "female"
+    },
+    "6_528": {
+        "name": "Steelix",
+        "dex": "208",
+        "gender": "female"
+    },
+    "6_529": {
+        "name": "Scizor",
+        "dex": "212",
+        "gender": "female"
+    },
+    "6_530": {
+        "name": "Heracross",
+        "dex": "214",
+        "gender": "female"
+    },
+    "6_531": {
+        "name": "Sneasel",
+        "dex": "215",
+        "gender": "female"
+    },
+    "6_532": {
+        "name": "Ursaring",
+        "dex": "217",
+        "gender": "female"
+    },
+    "6_533": {
+        "name": "Piloswine",
+        "dex": "221",
+        "gender": "female"
+    },
+    "6_534": {
+        "name": "Octillery",
+        "dex": "224",
+        "gender": "female"
+    },
+    "6_535": {
+        "name": "Houndoom",
+        "dex": "229",
+        "gender": "female"
+    },
+    "6_536": {
+        "name": "Donphan",
+        "dex": "232",
+        "gender": "female"
+    },
+    "6_537": {
+        "name": "Torchic",
+        "dex": "255",
+        "gender": "female"
+    },
+    "6_538": {
+        "name": "Combusken",
+        "dex": "256",
+        "gender": "female"
+    },
+    "6_539": {
+        "name": "Blaziken",
+        "dex": "257",
+        "gender": "female"
+    },
+    "6_540": {
+        "name": "Beautifly",
+        "dex": "267",
+        "gender": "female"
+    },
+    "6_541": {
+        "name": "Dustox",
+        "dex": "269",
+        "gender": "female"
+    },
+    "6_542": {
+        "name": "Ludicolo",
+        "dex": "272",
+        "gender": "female"
+    },
+    "6_543": {
+        "name": "Nuzleaf",
+        "dex": "274",
+        "gender": "female"
+    },
+    "6_544": {
+        "name": "Shiftry",
+        "dex": "275",
+        "gender": "female"
+    },
+    "6_545": {
+        "name": "Meditite",
+        "dex": "307",
+        "gender": "female"
+    },
+    "6_546": {
+        "name": "Medicham",
+        "dex": "308",
+        "gender": "female"
+    },
+    "6_547": {
+        "name": "Roselia",
+        "dex": "315",
+        "gender": "female"
+    },
+    "6_548": {
+        "name": "Gulpin",
+        "dex": "316",
+        "gender": "female"
+    },
+    "6_549": {
+        "name": "Swalot",
+        "dex": "317",
+        "gender": "female"
+    },
+    "6_550": {
+        "name": "Numel",
+        "dex": "322",
+        "gender": "female"
+    },
+    "6_551": {
+        "name": "Camerupt",
+        "dex": "323",
+        "gender": "female"
+    },
+    "6_552": {
+        "name": "Cacturne",
+        "dex": "332",
+        "gender": "female"
+    },
+    "6_553": {
+        "name": "Milotic",
+        "dex": "350",
+        "gender": "female"
+    },
+    "6_554": {
+        "name": "Relicanth",
+        "dex": "369",
+        "gender": "female"
+    },
+    "6_555": {
+        "name": "Weavile",
+        "dex": "461",
+        "gender": "female"
+    },
+    "6_556": {
+        "name": "Buizel",
+        "dex": "418",
+        "gender": "female"
+    },
+    "6_557": {
+        "name": "Roserade",
+        "dex": "407",
+        "gender": "female"
+    },
+    "6_558": {
+        "name": "Tangrowth",
+        "dex": "465",
+        "gender": "female"
+    },
+    "6_559": {
+        "name": "Mamoswine",
+        "dex": "473",
+        "gender": "female"
+    },
+    "6_560": {
+        "name": "Starly",
+        "dex": "396",
+        "gender": "female"
+    },
+    "6_561": {
+        "name": "Floatzel",
+        "dex": "419",
+        "gender": "female"
+    },
+    "6_562": {
+        "name": "Rhyperior",
+        "dex": "464",
+        "gender": "female"
+    },
+    "6_563": {
+        "name": "Staravia",
+        "dex": "397",
+        "gender": "female"
+    },
+    "6_564": {
+        "name": "Staraptor",
+        "dex": "398",
+        "gender": "female"
+    },
+    "6_565": {
+        "name": "Croagunk",
+        "dex": "453",
+        "gender": "female"
+    },
+    "6_566": {
+        "name": "Toxicroak",
+        "dex": "454",
+        "gender": "female"
+    },
+    "6_567": {
+        "name": "Bidoof",
+        "dex": "399",
+        "gender": "female"
+    },
+    "6_568": {
+        "name": "Bibarel",
+        "dex": "400",
+        "gender": "female"
+    },
+    "6_569": {
+        "name": "Hippopotas",
+        "dex": "449",
+        "gender": "female"
+    },
+    "6_570": {
+        "name": "Hippowdon",
+        "dex": "450",
+        "gender": "female"
+    },
+    "6_571": {
+        "name": "Finneon",
+        "dex": "456",
+        "gender": "female"
+    },
+    "6_572": {
+        "name": "Lumineon",
+        "dex": "457",
+        "gender": "female"
+    },
+    "6_573": {
+        "name": "Combee",
+        "dex": "415",
+        "gender": "female"
+    },
+    "6_574": {
+        "name": "Shinx",
+        "dex": "403",
+        "gender": "female"
+    },
+    "6_575": {
+        "name": "Luxio",
+        "dex": "404",
+        "gender": "female"
+    },
+    "6_576": {
+        "name": "Luxray",
+        "dex": "405",
+        "gender": "female"
+    },
+    "6_577": {
+        "name": "Snover",
+        "dex": "459",
+        "gender": "female"
+    },
+    "6_578": {
+        "name": "Abomasnow",
+        "dex": "460",
+        "gender": "female"
+    },
+    "6_579": {
+        "name": "Pachirisu",
+        "dex": "417",
+        "gender": "female"
+    },
+    "6_580": {
+        "name": "Kricketot",
+        "dex": "401",
+        "gender": "female"
+    },
+    "6_581": {
+        "name": "Kricketune",
+        "dex": "402",
+        "gender": "female"
+    },
+    "6_582": {
+        "name": "Gible",
+        "dex": "443",
+        "gender": "female"
+    },
+    "6_583": {
+        "name": "Gabite",
+        "dex": "444",
+        "gender": "female"
+    },
+    "6_584": {
+        "name": "Garchomp",
+        "dex": "445",
+        "gender": "female"
+    },
+    "6_585": {
+        "name": "Ambipom",
+        "dex": "424",
+        "gender": "female"
+    },
+    "6_586": {
+        "name": "Deoxys",
+        "form": "Normal",
+        "gender": "all",
+        "dex": "386"
+    },
+    "6_587": {
+        "name": "Deoxys",
+        "form": "Attack",
+        "gender": "all",
+        "dex": "386"
+    },
+    "6_588": {
+        "name": "Deoxys",
+        "form": "Defense",
+        "gender": "all",
+        "dex": "386"
+    },
+    "6_589": {
+        "name": "Deoxys",
+        "form": "Speed",
+        "gender": "all",
+        "dex": "386"
+    },
+    "6_590": {
+        "name": "Unown",
+        "form": "A",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_591": {
+        "name": "Unown",
+        "form": "B",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_592": {
+        "name": "Unown",
+        "form": "C",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_593": {
+        "name": "Unown",
+        "form": "D",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_594": {
+        "name": "Unown",
+        "form": "E",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_595": {
+        "name": "Unown",
+        "form": "F",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_596": {
+        "name": "Unown",
+        "form": "G",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_597": {
+        "name": "Unown",
+        "form": "H",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_598": {
+        "name": "Unown",
+        "form": "I",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_599": {
+        "name": "Unown",
+        "form": "J",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_600": {
+        "name": "Unown",
+        "form": "K",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_601": {
+        "name": "Unown",
+        "form": "L",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_602": {
+        "name": "Unown",
+        "form": "M",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_603": {
+        "name": "Unown",
+        "form": "N",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_604": {
+        "name": "Unown",
+        "form": "O",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_605": {
+        "name": "Unown",
+        "form": "P",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_606": {
+        "name": "Unown",
+        "form": "Q",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_607": {
+        "name": "Unown",
+        "form": "R",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_608": {
+        "name": "Unown",
+        "form": "S",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_609": {
+        "name": "Unown",
+        "form": "T",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_610": {
+        "name": "Unown",
+        "form": "U",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_611": {
+        "name": "Unown",
+        "form": "V",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_612": {
+        "name": "Unown",
+        "form": "W",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_613": {
+        "name": "Unown",
+        "form": "X",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_614": {
+        "name": "Unown",
+        "form": "Y",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_615": {
+        "name": "Unown",
+        "form": "Z",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_616": {
+        "name": "Unown",
+        "form": "Exclamation Mark",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_617": {
+        "name": "Unown",
+        "form": "Question Mark",
+        "gender": "all",
+        "dex": "201"
+    },
+    "6_618": {
+        "name": "Castform",
+        "form": "Normal",
+        "gender": "all",
+        "dex": "351"
+    },
+    "6_619": {
+        "name": "Castform",
+        "form": "Sunny",
+        "gender": "all",
+        "dex": "351"
+    },
+    "6_620": {
+        "name": "Castform",
+        "form": "Rainy",
+        "gender": "all",
+        "dex": "351"
+    },
+    "6_621": {
+        "name": "Castform",
+        "form": "Snowy",
+        "gender": "all",
+        "dex": "351"
+    },
+    "6_622": {
+        "name": "Burmy",
+        "form": "Plant",
+        "gender": "all",
+        "dex": "412"
+    },
+    "6_623": {
+        "name": "Burmy",
+        "form": "Sandy",
+        "gender": "all",
+        "dex": "412"
+    },
+    "6_624": {
+        "name": "Burmy",
+        "form": "Trash",
+        "gender": "all",
+        "dex": "412"
+    },
+    "6_625": {
+        "name": "Wormadam",
+        "form": "Plant",
+        "gender": "all",
+        "dex": "413"
+    },
+    "6_626": {
+        "name": "Wormadam",
+        "form": "Sandy",
+        "gender": "all",
+        "dex": "413"
+    },
+    "6_627": {
+        "name": "Wormadam",
+        "form": "Trash",
+        "gender": "all",
+        "dex": "413"
+    },
+    "6_628": {
+        "name": "Shellos",
+        "form": "West",
+        "gender": "all",
+        "dex": "422"
+    },
+    "6_629": {
+        "name": "Shellos",
+        "form": "East",
+        "gender": "all",
+        "dex": "422"
+    },
+    "6_630": {
+        "name": "Gastrodon",
+        "form": "West",
+        "gender": "all",
+        "dex": "423"
+    },
+    "6_631": {
+        "name": "Gastrodon",
+        "form": "East",
+        "gender": "all",
+        "dex": "423"
+    },
+    "6_632": {
+        "name": "Cherrim",
+        "form": "Overcast",
+        "gender": "all",
+        "dex": "421"
+    },
+    "6_633": {
+        "name": "Cherrim",
+        "form": "Sunshine",
+        "gender": "all",
+        "dex": "421"
+    },
+    "6_634": {
+        "name": "Arceus",
+        "form": "Normal",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_635": {
+        "name": "Arceus",
+        "form": "Fighting",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_636": {
+        "name": "Arceus",
+        "form": "Flying",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_637": {
+        "name": "Arceus",
+        "form": "Poison",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_638": {
+        "name": "Arceus",
+        "form": "Ground",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_639": {
+        "name": "Arceus",
+        "form": "Rock",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_640": {
+        "name": "Arceus",
+        "form": "Bug",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_641": {
+        "name": "Arceus",
+        "form": "Ghost",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_642": {
+        "name": "Arceus",
+        "form": "Steel",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_643": {
+        "name": "Arceus",
+        "form": "Mystery",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_644": {
+        "name": "Arceus",
+        "form": "Fire",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_645": {
+        "name": "Arceus",
+        "form": "Water",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_646": {
+        "name": "Arceus",
+        "form": "Grass",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_647": {
+        "name": "Arceus",
+        "form": "Electric",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_648": {
+        "name": "Arceus",
+        "form": "Psychic",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_649": {
+        "name": "Arceus",
+        "form": "Ice",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_650": {
+        "name": "Arceus",
+        "form": "Dragon",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_651": {
+        "name": "Arceus",
+        "form": "Dark",
+        "gender": "all",
+        "dex": "493"
+    },
+    "6_652": {
+        "name": "Shaymin",
+        "form": "Land",
+        "gender": "all",
+        "dex": "492"
+    },
+    "6_653": {
+        "name": "Shaymin",
+        "form": "Sky",
+        "gender": "all",
+        "dex": "492"
+    },
+    "6_654": {
+        "name": "Rotom",
+        "form": "Normal",
+        "gender": "all",
+        "dex": "479"
+    },
+    "6_655": {
+        "name": "Rotom",
+        "form": "Heat",
+        "gender": "all",
+        "dex": "479"
+    },
+    "6_656": {
+        "name": "Rotom",
+        "form": "Wash",
+        "gender": "all",
+        "dex": "479"
+    },
+    "6_657": {
+        "name": "Rotom",
+        "form": "Frost",
+        "gender": "all",
+        "dex": "479"
+    },
+    "6_658": {
+        "name": "Rotom",
+        "form": "Fan",
+        "gender": "all",
+        "dex": "479"
+    },
+    "6_659": {
+        "name": "Rotom",
+        "form": "Mow",
+        "gender": "all",
+        "dex": "479"
+    },
+    "6_660": {
+        "name": "Giratina",
+        "form": "Altered",
+        "gender": "all",
+        "dex": "487"
+    },
+    "6_661": {
+        "name": "Giratina",
+        "form": "Origin",
+        "gender": "all",
+        "dex": "487"
+    },
+    "6_662": {
+        "name": "Pichu",
+        "form": "Normal",
+        "gender": "all",
+        "dex": "172"
+    },
+    "6_663": {
+        "name": "Pichu",
+        "form": "Spiky-eared",
+        "gender": "all",
+        "dex": "172"
+    }
+}

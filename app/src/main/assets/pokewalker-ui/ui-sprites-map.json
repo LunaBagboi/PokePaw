@@ -1,0 +1,415 @@
+{
+  "arrows/namebannerarrow_left.png": {
+    "eeprom_start": "0x05B8",
+    "eeprom_end": "0x05D7",
+    "width": 8,
+    "height": 16,
+    "description": "Left arrow for menu name banner"
+  },
+  "arrows/namebannerarrow_right.png": {
+    "eeprom_start": "0x05D8",
+    "eeprom_end": "0x05F7",
+    "width": 8,
+    "height": 16,
+    "description": "Right arrow for menu name banner"
+  },
+  "icon_menu_back.png": {
+    "eeprom_start": "0x05F8",
+    "eeprom_end": "0x0617",
+    "width": 8,
+    "height": 16,
+    "description": "Menu back / return symbol"
+  },
+  "arrows/arrow_up.png": {
+    "eeprom_start": "0x04F8",
+    "eeprom_end": "0x0507",
+    "width": 8,
+    "height": 8,
+    "description": "Up arrow, normal"
+  },
+  "arrows/arrow_offset_up.png": {
+    "eeprom_start": "0x0508",
+    "eeprom_end": "0x0517",
+    "width": 8,
+    "height": 8,
+    "description": "Up arrow, offset variant"
+  },
+  "arrows/inverted_up.png": {
+    "eeprom_start": "0x0518",
+    "eeprom_end": "0x0527",
+    "width": 8,
+    "height": 8,
+    "description": "Up arrow, inverted"
+  },
+  "arrows/arrow_down.png": {
+    "eeprom_start": "0x0528",
+    "eeprom_end": "0x0537",
+    "width": 8,
+    "height": 8,
+    "description": "Down arrow, normal"
+  },
+  "arrows/arrow_offset_down.png": {
+    "eeprom_start": "0x0538",
+    "eeprom_end": "0x0547",
+    "width": 8,
+    "height": 8,
+    "description": "Down arrow, offset variant"
+  },
+  "arrows/inverted_down.png": {
+    "eeprom_start": "0x0548",
+    "eeprom_end": "0x0557",
+    "width": 8,
+    "height": 8,
+    "description": "Down arrow, inverted"
+  },
+  "arrows/arrow_left.png": {
+    "eeprom_start": "0x0558",
+    "eeprom_end": "0x0567",
+    "width": 8,
+    "height": 8,
+    "description": "Left arrow, normal"
+  },
+  "arrows/arrow_offset_left.png": {
+    "eeprom_start": "0x0568",
+    "eeprom_end": "0x0577",
+    "width": 8,
+    "height": 8,
+    "description": "Left arrow, offset variant"
+  },
+  "arrows/inverted_left.png": {
+    "eeprom_start": "0x0578",
+    "eeprom_end": "0x0587",
+    "width": 8,
+    "height": 8,
+    "description": "Left arrow, inverted"
+  },
+  "arrows/arrow_right.png": {
+    "eeprom_start": "0x0588",
+    "eeprom_end": "0x0597",
+    "width": 8,
+    "height": 8,
+    "description": "Right arrow, normal"
+  },
+  "arrows/arrow_offset_right.png": {
+    "eeprom_start": "0x0598",
+    "eeprom_end": "0x05A7",
+    "width": 8,
+    "height": 8,
+    "description": "Right arrow, offset variant"
+  },
+  "arrows/inverted_right.png": {
+    "eeprom_start": "0x05A8",
+    "eeprom_end": "0x05B7",
+    "width": 8,
+    "height": 8,
+    "description": "Right arrow, inverted"
+  },
+  "icon_menu_pokeradar.png": {
+    "eeprom_start": "0x1090",
+    "eeprom_end": "0x10CF",
+    "width": 16,
+    "height": 16,
+    "description": "Main menu PokeRadar icon"
+  },
+  "icon_menu_dowsing.png": {
+    "eeprom_start": "0x10D0",
+    "eeprom_end": "0x110F",
+    "width": 16,
+    "height": 16,
+    "description": "Main menu Dowsing icon"
+  },
+  "icon_menu_connect.png": {
+    "eeprom_start": "0x1110",
+    "eeprom_end": "0x114F",
+    "width": 16,
+    "height": 16,
+    "description": "Main menu Connect icon"
+  },
+  "icon_menu_trainercard.png": {
+    "eeprom_start": "0x1150",
+    "eeprom_end": "0x118F",
+    "width": 16,
+    "height": 16,
+    "description": "Main menu Trainer Card icon"
+  },
+  "icon_menu_pokemon_items.png": {
+    "eeprom_start": "0x1190",
+    "eeprom_end": "0x11CF",
+    "width": 16,
+    "height": 16,
+    "description": "Main menu Pokemon & Items icon"
+  },
+  "icon_menu_settings.png": {
+    "eeprom_start": "0x11D0",
+    "eeprom_end": "0x120F",
+    "width": 16,
+    "height": 16,
+    "description": "Main menu Settings icon"
+  },
+  "icon_bottombar_pokeball.png": {
+    "eeprom_start": "0x0460",
+    "eeprom_end": "0x046F",
+    "width": 8,
+    "height": 8,
+    "description": "Bottom bar Pokeball icon"
+  },
+  "icon_gift_small.png": {
+    "eeprom_start": "0x0650",
+    "eeprom_end": "0x065F",
+    "width": 8,
+    "height": 8,
+    "description": "Tiny gift box icon"
+  },
+  "icon_status_low_battery.png": {
+    "eeprom_start": "0x0660",
+    "eeprom_end": "0x066F",
+    "width": 8,
+    "height": 8,
+    "description": "Low battery / status icon"
+  },
+  "icon_item_event_small.png": {
+    "eeprom_start": "0x0498",
+    "eeprom_end": "0x04A7",
+    "width": 8,
+    "height": 8,
+    "description": "Small event item icon"
+  },
+  "icon_map_scroll_small.png": {
+    "eeprom_start": "0x04A8",
+    "eeprom_end": "0x04B7",
+    "width": 8,
+    "height": 8,
+    "description": "Small map scroll icon"
+  },
+  "icon_item_pokeball_small.png": {
+    "eeprom_start": "0x0470",
+    "eeprom_end": "0x047F",
+    "width": 8,
+    "height": 8,
+    "description": "Small Pokeball item icon"
+  },
+  "icon_star_small.png": {
+    "eeprom_start": "0x2040",
+    "eeprom_end": "0x204F",
+    "width": 8,
+    "height": 8,
+    "description": "Small star icon"
+  },
+  "icon_hp_bar_small.png": {
+    "eeprom_start": "0x2030",
+    "eeprom_end": "0x203F",
+    "width": 8,
+    "height": 8,
+    "description": "Small HP bar icon"
+  },
+  "icon_item_small.png": {
+    "eeprom_start": "0x0488",
+    "eeprom_end": "0x0497",
+    "width": 8,
+    "height": 8,
+    "description": "Generic small item icon"
+  },
+  "tile_dowsing_field_dark.png": {
+    "eeprom_start": "0x1B50",
+    "eeprom_end": "0x1B8F",
+    "width": 16,
+    "height": 16,
+    "description": "Dark dowsing field tile"
+  },
+  "tile_grass_bright.png": {
+    "eeprom_start": "0x1B90",
+    "eeprom_end": "0x1BCF",
+    "width": 16,
+    "height": 16,
+    "description": "Bright grass bush tile"
+  },
+  "bubble_exclaim_left_large.png": {
+    "eeprom_start": "0x08B0",
+    "eeprom_end": "0x090F",
+    "width": 24,
+    "height": 16,
+    "description": "Large left exclaim bubble"
+  },
+  "icon_music_note_small.png": {
+    "eeprom_start": "0x2470",
+    "eeprom_end": "0x247F",
+    "width": 8,
+    "height": 8,
+    "description": "Small music note icon"
+  },
+  "ui_shade_bar.png": {
+    "eeprom_start": "0x18F0",
+    "eeprom_end": "0x190F",
+    "width": 8,
+    "height": 16,
+    "description": "Shade bar"
+  },
+  "icon_ir_signal.png": {
+    "eeprom_start": "0x2450",
+    "eeprom_end": "0x246F",
+    "width": 8,
+    "height": 16,
+    "description": "IR signal icon"
+  },
+  "bubble_exclaim_left_small.png": {
+    "eeprom_start": "0x1D70",
+    "eeprom_end": "0x1DAF",
+    "width": 16,
+    "height": 16,
+    "description": "Small left exclaim bubble"
+  },
+  "bubble_exclaim2_left_small.png": {
+    "eeprom_start": "0x1DB0",
+    "eeprom_end": "0x1DEF",
+    "width": 16,
+    "height": 16,
+    "description": "Small left double exclaim bubble"
+  },
+  "bubble_exclaim3_left_small.png": {
+    "eeprom_start": "0x1DF0",
+    "eeprom_end": "0x1E20",
+    "width": 16,
+    "height": 16,
+    "description": "Small left triple exclaim bubble"
+  },
+  "effect_emote_lines_left.png": {
+    "eeprom_start": "0x1E30",
+    "eeprom_end": "0x1E6F",
+    "width": 16,
+    "height": 16,
+    "description": "Emote lines effect (left)"
+  },
+  "icon_trainercard_route_small.png": {
+    "eeprom_start": "0x1390",
+    "eeprom_end": "0x13CF",
+    "width": 16,
+    "height": 16,
+    "description": "Trainer card route icon"
+  },
+  "icon_trainercard_person.png": {
+    "eeprom_start": "0x1210",
+    "eeprom_end": "0x124F",
+    "width": 16,
+    "height": 16,
+    "description": "Trainer card person icon"
+  },
+  "icon_speaker_mute.png": {
+    "eeprom_start": "0x17D0",
+    "eeprom_end": "0x182F",
+    "width": 24,
+    "height": 16,
+    "description": "Speaker mute icon"
+  },
+  "icon_speaker_low.png": {
+    "eeprom_start": "0x1830",
+    "eeprom_end": "0x188F",
+    "width": 24,
+    "height": 16,
+    "description": "Speaker low icon"
+  },
+  "icon_speaker_high.png": {
+    "eeprom_start": "0x1890",
+    "eeprom_end": "0x18EF",
+    "width": 24,
+    "height": 16,
+    "description": "Speaker high icon"
+  },
+  "bubble_exclaim_right.png": {
+    "eeprom_start": "0x0670",
+    "eeprom_end": "0x06CF",
+    "width": 24,
+    "height": 16,
+    "description": "Right exclaim bubble"
+  },
+  "bubble_heart_right.png": {
+    "eeprom_start": "0x06D0",
+    "eeprom_end": "0x072F",
+    "width": 24,
+    "height": 16,
+    "description": "Right heart bubble"
+  },
+  "bubble_music_right.png": {
+    "eeprom_start": "0x0730",
+    "eeprom_end": "0x078F",
+    "width": 24,
+    "height": 16,
+    "description": "Right music bubble"
+  },
+  "bubble_smile_right.png": {
+    "eeprom_start": "0x0790",
+    "eeprom_end": "0x07EF",
+    "width": 24,
+    "height": 16,
+    "description": "Right smile bubble"
+  },
+  "bubble_neutral_right.png": {
+    "eeprom_start": "0x07F0",
+    "eeprom_end": "0x084F",
+    "width": 24,
+    "height": 16,
+    "description": "Right neutral bubble"
+  },
+  "bubble_ellipsis_right.png": {
+    "eeprom_start": "0x0850",
+    "eeprom_end": "0x08AF",
+    "width": 24,
+    "height": 16,
+    "description": "Right ellipsis bubble"
+  },
+  "effect_star_attack_small.png": {
+    "eeprom_start": "0x1E70",
+    "eeprom_end": "0x1EEF",
+    "width": 16,
+    "height": 32,
+    "description": "Small star attack effect"
+  },
+  "effect_star_attack_large.png": {
+    "eeprom_start": "0x1EF0",
+    "eeprom_end": "0x1F6F",
+    "width": 16,
+    "height": 32,
+    "description": "Large star attack effect"
+  },
+  "effect_cloud_appearance.png": {
+    "eeprom_start": "0x1F70",
+    "eeprom_end": "0x202F",
+    "width": 32,
+    "height": 24,
+    "description": "Appearance cloud effect"
+  },
+  "tile_radar_field_bush.png": {
+    "eeprom_start": "0x1CB0",
+    "eeprom_end": "0x1D6F",
+    "width": 32,
+    "height": 24,
+    "description": "Radar field bush tile"
+  },
+  "icon_item_chest_large.png": {
+    "eeprom_start": "0x1910",
+    "eeprom_end": "0x19CF",
+    "width": 32,
+    "height": 24,
+    "description": "Large item chest icon"
+  },
+  "icon_map_scroll_large.png": {
+    "eeprom_start": "0x19D0",
+    "eeprom_end": "0x1A8F",
+    "width": 32,
+    "height": 24,
+    "description": "Large map scroll icon"
+  },
+  "icon_gift_large.png": {
+    "eeprom_start": "0x1A90",
+    "eeprom_end": "0x1B4F",
+    "width": 32,
+    "height": 24,
+    "description": "Large gift icon"
+  },
+  "icon_pokewalker_large.png": {
+    "eeprom_start": "0x2350",
+    "eeprom_end": "0x244F",
+    "width": 32,
+    "height": 32,
+    "description": "Large Pokewalker icon"
+  }
+}

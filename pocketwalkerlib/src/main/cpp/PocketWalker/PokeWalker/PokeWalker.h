@@ -78,8 +78,26 @@ public:
     // memory for debugging (e.g. to verify what the firmware sees).
     void ReadAccelerometerWindow(uint8_t start, uint8_t length, uint8_t* out) const;
 
+    // Debug/cheat helper: force the current walking Pokemon to be shiny or not
+    // by toggling the shiny bit in the cached PokemonSummary at EEPROM base
+    // 0x8F00 (moreFlags at +0x0E, bit 0x02).
+    void SetWalkerShinyCheat(bool shiny) const;
+
 private:
     void SetupAddressHandlers() const;
+
+    struct EepromLoadRecord
+    {
+        uint16_t eepromAddr;
+        uint16_t ramDst;
+        uint16_t length;
+    };
+
+    static constexpr size_t kEepromLoadHistorySize = 32;
+    mutable std::array<EepromLoadRecord, kEepromLoadHistorySize> eepromLoadHistory{};
+    mutable size_t eepromLoadHistoryCount = 0;
+
+    uint16_t ResolveEepromAddress(uint16_t ramAddr) const;
 
     // Pending fused steps that have been accepted on the Android
     // side but not yet consumed by the firmware's step pipeline.

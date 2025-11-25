@@ -141,7 +141,6 @@ class AppActivity : ComponentActivity()  {
         val id: String,
         val dex: Int,
         val gender: String,
-        val file: String,
         val form: String?,
         val name: String
     )
@@ -149,7 +148,7 @@ class AppActivity : ComponentActivity()  {
     private val walkerSpriteMeta by lazy {
         val list = mutableListOf<WalkerSpriteMeta>()
         try {
-            assets.open("mapped-sprite-data.json").use { input ->
+            assets.open("pokemon-sprites-map.json").use { input ->
                 val text = input.bufferedReader().use { it.readText() }
                 val root = JSONObject(text)
                 val keys = root.keys()
@@ -159,12 +158,9 @@ class AppActivity : ComponentActivity()  {
                     val dexStr = obj.optString("dex", "0")
                     val dex = dexStr.toIntOrNull() ?: continue
                     val gender = obj.optString("gender", "all")
-                    val file = obj.optString("file", "")
                     val form = if (obj.has("form")) obj.optString("form", null) else null
                     val name = obj.optString("name", "")
-                    if (file.isNotEmpty()) {
-                        list += WalkerSpriteMeta(key, dex, gender, file, form, name)
-                    }
+                    list += WalkerSpriteMeta(key, dex, gender, form, name)
                 }
             }
         } catch (_: Exception) {
@@ -226,6 +222,57 @@ class AppActivity : ComponentActivity()  {
         return meta.name.ifEmpty { "Dex ${meta.dex}" }
     }
 
+    private var didLoadUiColorSprites: Boolean = false
+
+    private fun loadUiColorSpritesIfNeeded() {
+        if (didLoadUiColorSprites || !::pokeWalker.isInitialized) return
+
+        try {
+            Log.d("UiColorSprites", "Starting loadUiColorSpritesIfNeeded")
+            assets.open("pokewalker-ui/ui-sprites-map.json").use { input ->
+                val text = input.bufferedReader().use { it.readText() }
+                val root = JSONObject(text)
+                val keys = root.keys()
+                var loadedCount = 0
+                var failedCount = 0
+                while (keys.hasNext()) {
+                    val key = keys.next()
+                    val assetPath = "pokewalker-ui/$key"
+
+                    try {
+                        assets.open(assetPath).use { pngStream ->
+                            val bitmap = BitmapFactory.decodeStream(pngStream) ?: return@use
+                            val width = bitmap.width
+                            val height = bitmap.height
+                            if (width <= 0 || height <= 0) return@use
+
+                            val pixels = IntArray(width * height)
+                            bitmap.getPixels(pixels, 0, width, 0, 0, width, height)
+
+                            pokeWalker.setColorSprite(key, pixels, width, height)
+                            loadedCount++
+                        }
+                    } catch (e: Exception) {
+                        failedCount++
+                        Log.d(
+                            "UiColorSprites",
+                            "Failed to load color sprite for key=$key assetPath=$assetPath: ${e.message}"
+                        )
+                    }
+                }
+                Log.d(
+                    "UiColorSprites",
+                    "Finished loading UI color sprites: loaded=$loadedCount failed=$failedCount"
+                )
+            }
+            didLoadUiColorSprites = true
+            Log.d("UiColorSprites", "Marked didLoadUiColorSprites=true")
+        } catch (t: Exception) {
+            didLoadUiColorSprites = false
+            Log.d("UiColorSprites", "Error loading UI color sprites map: ${t.message}")
+        }
+    }
+
     fun initializePokeWalkerIfReady() {
         val rom = romBytes
         val eeprom = eepromBytes
@@ -241,8 +288,7 @@ class AppActivity : ComponentActivity()  {
         pokeWalker.setColorMode(initialColorMode)
 
         pokeWalker.onDraw { bytes ->
-            val prefColor = preferences.getBoolean("colorization_enabled", false)
-            val useColor = prefColor && hasWalkerColorSprite
+            val useColor = preferences.getBoolean("colorization_enabled", false)
             if (useColor) {
                 val colorFrame = pokeWalker.getColorFrame()
                 val colorBitmap = createHybridColorBitmap(bytes, colorFrame)
@@ -273,6 +319,7 @@ class AppActivity : ComponentActivity()  {
         }
 
         didInitialize = true
+        loadUiColorSpritesIfNeeded()
         startWalkerSpriteWatcher()
         startRouteWatcher()
     }
@@ -427,6 +474,7 @@ class AppActivity : ComponentActivity()  {
                     val walkerHasForm = lastWalkerHasForm
                     val walkerName = lastWalkerName
                     val walkerFormName = lastWalkerFormName
+                    val walkerGenderKey = lastWalkerGenderKey
 
                     val routePart = when {
                         routeId == null -> "No route selected"
@@ -443,15 +491,18 @@ class AppActivity : ComponentActivity()  {
                             } else {
                                 append("Dex $walkerDex")
                             }
-                            if (walkerVariant != null) {
-                                append(" – variant $walkerVariant")
-                                if (walkerHasForm && walkerFormName != null && walkerFormName.isNotEmpty()) {
-                                    append(" ($walkerFormName)")
-                                }
+
+                            if (walkerHasForm && walkerFormName != null && walkerFormName.isNotEmpty()) {
+                                append(" ($walkerFormName)")
                             }
 
-                            append(", ")
-                            append(if (walkerFemale) "female" else "male")
+                            if (walkerVariant != null && walkerVariant > 0) {
+                                append(" – variant $walkerVariant")
+                            }
+
+                            if (walkerFemale && walkerGenderKey != "all") {
+                                append(", female")
+                            }
                             if (walkerShiny) append(" – shiny ✨")
                         }
                     } else {
@@ -581,6 +632,7 @@ class AppActivity : ComponentActivity()  {
     private var lastWalkerIsFemale: Boolean = false
     private var lastWalkerHasForm: Boolean = false
     private var lastWalkerFormName: String? = null
+    private var lastWalkerGenderKey: String? = null
 
     private var hasWalkerColorSprite: Boolean = false
 
@@ -669,12 +721,6 @@ class AppActivity : ComponentActivity()  {
         lifecycleScope.launch {
             while (didInitialize) {
                 try {
-                    val useColor = preferences.getBoolean("colorization_enabled", false)
-                    if (!useColor) {
-                        delay(1000L)
-                        continue
-                    }
-
                     val info = pokeWalker.getWalkerVariantInfo()
                     if (info.size >= 5) {
                         val species = info[0]
@@ -682,37 +728,61 @@ class AppActivity : ComponentActivity()  {
                         val isFemale = info[2] != 0
                         val isShiny = info[3] != 0
                         val hasForm = info[4] != 0
+                        val hasWalker = species > 0
 
-                        if (species != lastWalkerDex || variant != (lastWalkerVariant ?: -1) || isShiny != lastWalkerIsShiny || isFemale != lastWalkerIsFemale || hasForm != lastWalkerHasForm) {
-                            val meta = findWalkerSpriteMeta(species, isFemale, hasForm, variant)
-                            if (meta != null) {
-                                val baseDir = if (isShiny) "pokemon-shiny-sprites" else "pokemon-sprites"
-                                val filename = "$baseDir/${meta.id}.png"
+                        val newDex: Int? = if (hasWalker) species else null
+                        val newVariant: Int? = if (hasWalker) variant else null
+                        val newIsFemale = if (hasWalker) isFemale else false
+                        val newIsShiny = if (hasWalker) isShiny else false
+                        val newHasForm = if (hasWalker) hasForm else false
 
-                                try {
-                                    assets.open(filename).use { inputStream ->
-                                        val fullBitmap = BitmapFactory.decodeStream(inputStream) ?: return@use
-                                        val width = fullBitmap.width
-                                        val height = fullBitmap.height
+                        val changed =
+                            newDex != lastWalkerDex ||
+                                newVariant != lastWalkerVariant ||
+                                newIsShiny != lastWalkerIsShiny ||
+                                newIsFemale != lastWalkerIsFemale ||
+                                newHasForm != lastWalkerHasForm
 
-                                        val pixels = IntArray(width * height)
-                                        fullBitmap.getPixels(pixels, 0, width, 0, 0, width, height)
+                        val meta = if (hasWalker) {
+                            findWalkerSpriteMeta(species, isFemale, hasForm, variant)
+                        } else {
+                            null
+                        }
 
-                                        pokeWalker.setColorSprite("walker", pixels, width, height)
-                                        lastWalkerDex = species
-                                        lastWalkerVariant = variant
-                                        lastWalkerIsShiny = isShiny
-                                        lastWalkerIsFemale = isFemale
-                                        lastWalkerHasForm = hasForm
-                                        lastWalkerName = formatWalkerName(meta)
-                                        lastWalkerFormName = meta.form
+                        if (changed) {
+                            lastWalkerDex = newDex
+                            lastWalkerVariant = newVariant
+                            lastWalkerIsShiny = newIsShiny
+                            lastWalkerIsFemale = newIsFemale
+                            lastWalkerHasForm = newHasForm
 
-                                        hasWalkerColorSprite = true
-                                    }
-                                } catch (_: Exception) {
-                                    hasWalkerColorSprite = false
+                            lastWalkerName = meta?.let { formatWalkerName(it) }
+                            lastWalkerFormName = meta?.form
+                            lastWalkerGenderKey = meta?.gender
+
+                            // Force reloading the color sprite for the new walker
+                            // the next time colorization is enabled.
+                            hasWalkerColorSprite = false
+                        }
+
+                        val useColor = preferences.getBoolean("colorization_enabled", false)
+                        if (useColor && meta != null && !hasWalkerColorSprite && hasWalker) {
+                            val baseDir = if (isShiny) "shiny-pokemon-sprites" else "pokemon-sprites"
+                            val filename = "$baseDir/${meta.id}.png"
+
+                            try {
+                                assets.open(filename).use { inputStream ->
+                                    val fullBitmap = BitmapFactory.decodeStream(inputStream) ?: return@use
+                                    val width = fullBitmap.width
+                                    val height = fullBitmap.height
+
+                                    val pixels = IntArray(width * height)
+                                    fullBitmap.getPixels(pixels, 0, width, 0, 0, width, height)
+
+                                    pokeWalker.setColorSprite("walker", pixels, width, height)
+                                    hasWalkerColorSprite = true
                                 }
-                            } else {
+                            } catch (_: Exception) {
                                 hasWalkerColorSprite = false
                             }
                         }
@@ -883,6 +953,9 @@ fun PWApp(
     var disableSleepCheatEnabled by remember {
         mutableStateOf(preferences.getBoolean("cheat_disable_sleep", false))
     }
+    var forceShinyWalkerEnabled by remember {
+        mutableStateOf(preferences.getBoolean("cheat_force_shiny_walker", false))
+    }
     var irEnabled by remember {
         mutableStateOf(preferences.getBoolean("ir_enabled", false))
     }
@@ -922,6 +995,7 @@ fun PWApp(
     LaunchedEffect(pokeWalker) {
         if (pokeWalker != null) {
             pokeWalker.setDisableSleep(disableSleepCheatEnabled)
+            pokeWalker.setWalkerShinyCheat(forceShinyWalkerEnabled)
         }
     }
 
@@ -1106,6 +1180,12 @@ fun PWApp(
                         disableSleepCheatEnabled = checked
                         preferences.edit().putBoolean("cheat_disable_sleep", checked).apply()
                         pokeWalker?.setDisableSleep(checked)
+                    },
+                    forceShinyWalkerEnabled = forceShinyWalkerEnabled,
+                    onForceShinyWalkerChange = { checked ->
+                        forceShinyWalkerEnabled = checked
+                        preferences.edit().putBoolean("cheat_force_shiny_walker", checked).apply()
+                        pokeWalker?.setWalkerShinyCheat(checked)
                     },
                     onAdjustWatts = { delta ->
                         pokeWalker?.adjustWatts(delta)

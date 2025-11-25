@@ -39,6 +39,8 @@ fun TweaksSection(
     onDebugExpandedChange: () -> Unit,
     disableSleepCheatEnabled: Boolean,
     onDisableSleepCheatChange: (Boolean) -> Unit,
+    forceShinyWalkerEnabled: Boolean,
+    onForceShinyWalkerChange: (Boolean) -> Unit,
     onAdjustWatts: (Int) -> Unit,
     irEnabled: Boolean,
     onIrEnabledChange: (Boolean) -> Unit,
@@ -136,6 +138,42 @@ fun TweaksSection(
                                     fontSize = 12.sp
                                 )
                             }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.padding(top = 6.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column(
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(
+                                text = "Force shiny walker",
+                                color = Color(0xFFB0B0C8),
+                                fontSize = 12.sp
+                            )
+                            Text(
+                                text = "Debug cheat: toggles shiny flag for the current walker.",
+                                color = Color(0xFF8080A0),
+                                fontSize = 11.sp
+                            )
+                        }
+
+                        Box(
+                            modifier = Modifier
+                                .size(22.dp)
+                                .background(Color(0xFF15152A), RoundedCornerShape(6.dp))
+                                .border(1.dp, Color(0xFF505070), RoundedCornerShape(6.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Checkbox(
+                                checked = forceShinyWalkerEnabled,
+                                onCheckedChange = onForceShinyWalkerChange,
+                                modifier = Modifier.size(18.dp)
+                            )
                         }
                     }
 

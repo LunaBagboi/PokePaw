@@ -24,12 +24,13 @@ class PocketWalkerNative {
     external fun getEepromBuffer(): ByteArray
     external fun getContrast(): Byte
 
-
     external fun setAccelerationData(x: Float, y: Float, z: Float)
 
     external fun addFusedSteps(count: Int)
 
     external fun setDisableSleep(disable: Boolean)
+
+    external fun setWalkerShinyCheat(shiny: Boolean)
 
     external fun setColorMode(enabled: Boolean)
 

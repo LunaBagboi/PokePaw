@@ -1,6 +1,8 @@
- #include "PokeWalker.h"
+#include "PokeWalker.h"
 #include "../H8/Ssu/Ssu.h"
 #include "../../SleepConfig.h"
+#include <unordered_map>
+#include <string>
 
 #ifdef __ANDROID__
 #include <android/log.h>
@@ -20,6 +22,92 @@ static uint32_t fnv1a_32(const uint8_t* data, size_t size)
     }
     return hash;
 }
+
+// Helper to queue a color sprite draw command.
+static void QueueColorSprite(Lcd* lcd, const Lcd::FirmwareDrawEventArgs& args, const std::string& spriteId)
+{
+    if (!lcd) return;
+    Lcd::ColorDrawCommand cmd{ spriteId, args.x, args.y, args.width, args.height, 0, args.sourceAddr };
+    lcd->QueueColorDraw(cmd);
+}
+
+// Map of EEPROM source addresses to color sprite IDs.
+static const std::unordered_map<uint16_t, std::string> kSpriteMap = {
+    // 8x8 UI icons
+    { 0x0460, "icon_bottombar_pokeball.png" },
+    { 0x0470, "icon_item_pokeball_small.png" },
+    { 0x0488, "icon_item_small.png" },
+    { 0x0498, "icon_item_event_small.png" },
+    { 0x04A8, "icon_map_scroll_small.png" },
+    { 0x0650, "icon_gift_small.png" },
+    { 0x0660, "icon_status_low_battery.png" },
+    { 0x2030, "icon_hp_bar_small.png" },
+    { 0x2040, "icon_star_small.png" },
+    { 0x2470, "icon_music_note_small.png" },
+
+    // 8x8 Arrows
+    { 0x04F8, "arrows/arrow_up.png" },
+    { 0x0508, "arrows/arrow_offset_up.png" },
+    { 0x0518, "arrows/inverted_up.png" },
+    { 0x0528, "arrows/arrow_down.png" },
+    { 0x0538, "arrows/arrow_offset_down.png" },
+    { 0x0548, "arrows/inverted_down.png" },
+    { 0x0558, "arrows/arrow_left.png" },
+    { 0x0568, "arrows/arrow_offset_left.png" },
+    { 0x0578, "arrows/inverted_left.png" },
+    { 0x0588, "arrows/arrow_right.png" },
+    { 0x0598, "arrows/arrow_offset_right.png" },
+    { 0x05A8, "arrows/inverted_right.png" },
+
+    // 8x16 UI icons
+    { 0x05B8, "arrows/namebannerarrow_left.png" },
+    { 0x05D8, "arrows/namebannerarrow_right.png" },
+    { 0x05F8, "icon_menu_back.png" },
+    { 0x18F0, "ui_shade_bar.png" },
+    { 0x2450, "icon_ir_signal.png" },
+
+    // 16x16 Main menu icons
+    { 0x1090, "icon_menu_pokeradar.png" },
+    { 0x10D0, "icon_menu_dowsing.png" },
+    { 0x1110, "icon_menu_connect.png" },
+    { 0x1150, "icon_menu_trainercard.png" },
+    { 0x1190, "icon_menu_pokemon_items.png" },
+    { 0x11D0, "icon_menu_settings.png" },
+    { 0x1210, "icon_trainercard_person.png" },
+    { 0x1390, "icon_trainercard_route_small.png" },
+    { 0x1D70, "bubble_exclaim_left_small.png" },
+    { 0x1DB0, "bubble_exclaim2_left_small.png" },
+    { 0x1DF0, "bubble_exclaim3_left_small.png" },
+    { 0x1E30, "effect_emote_lines_left.png" },
+    { 0x1B50, "tile_dowsing_field_dark.png" },
+    { 0x1B90, "tile_grass_bright.png" },
+
+    // 24x16 UI icons
+    { 0x0670, "bubble_exclaim_right.png" },
+    { 0x06D0, "bubble_heart_right.png" },
+    { 0x0730, "bubble_music_right.png" },
+    { 0x0790, "bubble_smile_right.png" },
+    { 0x07F0, "bubble_neutral_right.png" },
+    { 0x0850, "bubble_ellipsis_right.png" },
+    { 0x08B0, "bubble_exclaim_left_large.png" },
+    { 0x17D0, "icon_speaker_mute.png" },
+    { 0x1830, "icon_speaker_low.png" },
+    { 0x1890, "icon_speaker_high.png" },
+
+    // 16x32 UI icons
+    { 0x1E70, "effect_star_attack_small.png" },
+    { 0x1EF0, "effect_star_attack_large.png" },
+
+    // 32x24 UI icons
+    { 0x1910, "icon_item_chest_large.png" },
+    { 0x19D0, "icon_map_scroll_large.png" },
+    { 0x1A90, "icon_gift_large.png" },
+    { 0x1CB0, "tile_radar_field_bush.png" },
+    { 0x1F70, "effect_cloud_appearance.png" },
+
+    // 32x32 UI icons
+    { 0x2350, "icon_pokewalker_large.png" },
+};
 
 PokeWalker::PokeWalker(uint8_t* ramBuffer, uint8_t* eepromBuffer) : H8300H(ramBuffer)
 {
@@ -46,7 +134,7 @@ PokeWalker::PokeWalker(uint8_t* ramBuffer, uint8_t* eepromBuffer) : H8300H(ramBu
     // Attach a listener to the firmware draw event to queue color sprites
     lcd->OnFirmwareDraw += [this](const Lcd::FirmwareDrawEventArgs& args)
     {
-        // Only the main 64x48 walker sprite is mirrored in color.
+        // Main 64x48 walker sprite
         if (args.width == 64 && args.height == 48)
         {
             // The firmware provides a pointer into RAM where the 2bpp walker
@@ -61,13 +149,60 @@ PokeWalker::PokeWalker(uint8_t* ramBuffer, uint8_t* eepromBuffer) : H8300H(ramBu
             const uint32_t walkerHash = fnv1a_32(args.pixelPtr, dataSize);
             lcd->NotifyWalkerDrawn(walkerHash);
 
-            // Queue a generic color overlay for the walker sprite. The actual
+            // Queue a color overlay for the walker sprite. The actual
             // Pokémon species is determined by GetWalkerDexNumber() on the
             // Kotlin side, which selects the appropriate colored sprite.
-            Lcd::ColorDrawCommand cmd{ "walker", args.x, args.y, args.width, args.height, 0 };
-            lcd->QueueColorDraw(cmd);
+            // The walker sprite uses a fixed ID so the Kotlin layer can
+            // always upload it under "walker".
+            QueueColorSprite(lcd, args, "walker");
+            return;
+        }
+
+        // For other UI sprites, look up the sprite ID from the map.
+        auto it = kSpriteMap.find(args.sourceAddr);
+        if (it != kSpriteMap.end())
+        {
+            QueueColorSprite(lcd, args, it->second);
         }
     };
+}
+
+uint16_t PokeWalker::ResolveEepromAddress(const uint16_t ramAddr) const
+{
+    if (eepromLoadHistoryCount == 0)
+    {
+        return 0;
+    }
+
+    size_t count = eepromLoadHistoryCount;
+    if (count > kEepromLoadHistorySize)
+    {
+        count = kEepromLoadHistorySize;
+    }
+
+    // Walk most-recent-first so that overlapping loads resolve to the
+    // latest copy the firmware wrote into RAM.
+    for (size_t i = 0; i < count; ++i)
+    {
+        const size_t index = (eepromLoadHistoryCount - 1u - i) % kEepromLoadHistorySize;
+        const EepromLoadRecord& rec = eepromLoadHistory[index];
+
+        if (rec.length == 0)
+        {
+            continue;
+        }
+
+        const uint16_t start = rec.ramDst;
+        const uint16_t end = static_cast<uint16_t>(start + rec.length);
+
+        if (ramAddr >= start && ramAddr < end)
+        {
+            const uint16_t offset = static_cast<uint16_t>(ramAddr - rec.ramDst);
+            return static_cast<uint16_t>(rec.eepromAddr + offset);
+        }
+    }
+
+    return 0;
 }
 
 void PokeWalker::Tick(uint64_t cycles)
@@ -328,7 +463,7 @@ void PokeWalker::SetAccelerationData(const float x, const float y, const float z
     };
 
     // Store the latest normalized acceleration samples into the
-    // accelerometer registers that the Pok e9walker firmware actually
+    // accelerometer registers that the Pokéwalker firmware actually
     // reads for X/Y/Z. Empirically, the ROM uses 0x04/0x06/0x08 as its
     // sample bytes rather than the canonical datasheet MSB addresses.
     writeAxis(0x04, x); // X
@@ -360,6 +495,29 @@ void PokeWalker::ReadAccelerometerWindow(uint8_t start, uint8_t length, uint8_t*
     {
         out[idx] = accelerometer->memory->ReadByte(addr);
     }
+}
+
+void PokeWalker::SetWalkerShinyCheat(const bool shiny) const
+{
+    if (!eeprom || !eeprom->memory)
+    {
+        return;
+    }
+
+    const uint16_t base = 0x8F00;
+    const uint16_t moreFlagsAddr = static_cast<uint16_t>(base + 0x0E);
+
+    uint8_t flags = eeprom->memory->ReadByte(moreFlagsAddr);
+    if (shiny)
+    {
+        flags = static_cast<uint8_t>(flags | 0x02u);
+    }
+    else
+    {
+        flags = static_cast<uint8_t>(flags & static_cast<uint8_t>(~0x02u));
+    }
+
+    eeprom->memory->WriteByte(moreFlagsAddr, flags);
 }
 
 void PokeWalker::SetupAddressHandlers() const
@@ -405,6 +563,29 @@ void PokeWalker::SetupAddressHandlers() const
         return SkipInstruction;
     });
 
+    // Track EEPROM -> RAM loads via eepromReadToRamAlso so we can recover
+    // the originating EEPROM address for any given RAM-backed image.
+    //
+    // DISASSEMBLY notes show eepromReadToRamAlso at 0x5384 with
+    //   (r0 = eepromAddr, e0 = ramDstPtr, r1 = nbytes)
+    board->cpu->OnAddress(0x5384, [this](Cpu* cpu)
+    {
+        const uint32_t er0 = *cpu->registers->Register32(0x0);
+        const uint32_t er1 = *cpu->registers->Register32(0x1);
+
+        const uint16_t eepromAddr = static_cast<uint16_t>(er0 & 0xFFFFu);
+        const uint16_t ramDst     = static_cast<uint16_t>((er0 >> 16) & 0xFFFFu);
+        const uint16_t nbytes     = static_cast<uint16_t>(er1 & 0xFFFFu);
+
+        const size_t index = eepromLoadHistoryCount % kEepromLoadHistorySize;
+        eepromLoadHistory[index].eepromAddr = eepromAddr;
+        eepromLoadHistory[index].ramDst = ramDst;
+        eepromLoadHistory[index].length = nbytes;
+        ++eepromLoadHistoryCount;
+
+        return Continue;
+    });
+
     // Spy on drawImageToScreen (0x80AC)
     board->cpu->OnAddress(0x80AC, [this](Cpu* cpu)
     {
@@ -417,8 +598,13 @@ void PokeWalker::SetupAddressHandlers() const
         args.width = er1 & 0xFFu;
         args.height = (er1 >> 8) & 0xFFu;
 
-        const uint16_t imageDataPtr = (*cpu->registers->Register32(0x0) >> 16) & 0xFFFFu;
+        const uint16_t imageDataPtr = static_cast<uint16_t>((er0 >> 16) & 0xFFFFu);
         args.pixelPtr = cpu->ram->buffer + imageDataPtr;
+
+        // Resolve the backing EEPROM address for this RAM-backed image so
+        // higher layers can key off EEPROM ranges instead of fragile RAM
+        // pointers.
+        args.sourceAddr = ResolveEepromAddress(imageDataPtr);
 
         lcd->OnFirmwareDraw(args);
 

@@ -31,12 +31,14 @@ public:
         std::string spriteId;
         uint8_t x, y, width, height;
         uint8_t frameIndex; // The specific animation frame to draw
+        uint16_t sourceAddr;
     };
 
     struct FirmwareDrawEventArgs
     {
         uint8_t x, y, width, height;
         uint8_t* pixelPtr;
+        uint16_t sourceAddr;
     };
 
     EventHandler<FirmwareDrawEventArgs> OnFirmwareDraw;

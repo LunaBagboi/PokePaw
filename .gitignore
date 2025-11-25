@@ -41,9 +41,14 @@ $RECYCLE.BIN/
 /build
 /captures
 .externalNativeBuild
+reference-sprites
 .cxx
 local.properties
 Debug
+.zip
+.rar
+.7z
+.backup
 
 pokemon-shiny-icon-sprites
 pokemon-shiny-sprites

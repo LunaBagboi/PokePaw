@@ -458,3 +458,15 @@ Java_com_halfheart_pocketwalkerlib_PocketWalkerNative_setDisableSleep(JNIEnv *en
                                                                       jboolean disable) {
     g_disableSleep = (disable == JNI_TRUE);
 }
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_halfheart_pocketwalkerlib_PocketWalkerNative_setWalkerShinyCheat(JNIEnv *env, jobject thiz,
+                                                                          jboolean shiny) {
+    auto emulator = PocketWalkerState::Emulator();
+    if (!emulator) {
+        return;
+    }
+
+    emulator->SetWalkerShinyCheat(shiny == JNI_TRUE);
+}
